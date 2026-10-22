@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="مختبر تفاعلي للتطبيق العملي لمادتي CNN204 وANN202">
+<meta name="description" content="مختبر تفاعلي للتطبيق العملي لمواد CNN204 و ANN202 و RNN204 و NLP203">
 <meta name="theme-color" content="#0D7480">
-<title>مختبر CNN204 العملي</title>
+<title>مختبر التطبيق العملي</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@600;800&display=swap">
@@ -13,7 +13,7 @@
 /* Layout: one reading column (max 1080px) with a sticky section bar; each unit = intro → hands-on lab → code. */
 :root{
   --bg:#F2F5F6; --surface:#FFFFFF; --sunk:#E8EEF0; --ink:#13212C; --muted:#566874; --line:#D3DDE2;
-  --teal:#0D7480; --teal-soft:#D7EEF0; --violet:#5A3EA3; --violet-soft:#E9E3F7;
+  --teal:#0D7480; --teal-soft:#D7EEF0; --violet:#5A3EA3; --violet-soft:#E9E3F7; --rose:#A3336A; --rose-soft:#F8E1EC;
   --amber:#9A6212; --amber-soft:#F7ECD8; --bad:#B42318; --bad-soft:#FBE3E0; --good:#1D7448; --good-soft:#DDF1E5;
   --code-bg:#0F1A22; --code-fg:#D9E4EA; --code-kw:#7FD3DC; --code-str:#E8C17A; --code-com:#7C8F9B; --code-num:#C3A6FF;
   --f-display:"Noto Kufi Arabic","IBM Plex Sans Arabic",Tahoma,sans-serif;
@@ -23,12 +23,12 @@
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0D1317; --surface:#141D23; --sunk:#0F171C; --ink:#E1E9ED; --muted:#91A3AE; --line:#25333C;
-  --teal:#45B9C3; --teal-soft:#123238; --violet:#A991EE; --violet-soft:#241D3A;
+  --teal:#45B9C3; --teal-soft:#123238; --violet:#A991EE; --violet-soft:#241D3A; --rose:#EC86B5; --rose-soft:#3A1828;
   --amber:#E2AA4E; --amber-soft:#33270F; --bad:#F27A6E; --bad-soft:#3A1A17; --good:#55C78B; --good-soft:#12301F;
   --code-bg:#091015; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0D1317; --surface:#141D23; --sunk:#0F171C; --ink:#E1E9ED; --muted:#91A3AE; --line:#25333C;
-  --teal:#45B9C3; --teal-soft:#123238; --violet:#A991EE; --violet-soft:#241D3A;
+  --teal:#45B9C3; --teal-soft:#123238; --violet:#A991EE; --violet-soft:#241D3A; --rose:#EC86B5; --rose-soft:#3A1828;
   --amber:#E2AA4E; --amber-soft:#33270F; --bad:#F27A6E; --bad-soft:#3A1A17; --good:#55C78B; --good-soft:#12301F;
   --code-bg:#091015; color-scheme:dark}
 *{box-sizing:border-box}
@@ -307,6 +307,55 @@ nav.bar a.cl{padding:2px 4px;background:transparent}
 .quizgroup{margin-top:22px}
 .qg-h{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--cc)}
 .qg-h h3{font-size:1.05rem}
+.c-rnn{--cc:var(--violet);--cc-soft:var(--violet-soft)}
+.c-nlp{--cc:var(--rose);--cc-soft:var(--rose-soft)}
+.chip.rose{background:var(--rose-soft);border-color:transparent;color:var(--rose)}
+.chip.cc{background:var(--cc-soft);border-color:transparent;color:var(--cc)}
+.unitsec.c-rnn .steps button[aria-selected="true"],.unitsec.c-nlp .steps button[aria-selected="true"]{border-color:var(--cc);background:var(--cc-soft)}
+
+/* RNN204 */
+.wtab td,.wtab th{padding:5px 10px}
+.wtab tr.on td{background:var(--violet-soft);color:var(--violet);font-weight:600}
+.wtab td.mono{direction:ltr;unicode-bidi:isolate}
+.hgrid{display:grid;grid-template-columns:auto repeat(16,minmax(0,1fr));gap:3px;direction:ltr;align-items:center;font-family:var(--f-mono);font-size:.72rem;margin-top:8px}
+.hgrid i{display:block;height:24px;border-radius:3px;border:1px solid var(--line)}
+.hgrid span{padding-inline-end:8px;color:var(--muted)}
+.rsd{display:flex;gap:10px;direction:ltr;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.rsd .st{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--f-mono);font-size:.78rem}
+.rsd .st b{display:flex;align-items:center;justify-content:center;width:64px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--bg);font-weight:500}
+.rsd .st b.cellbox{background:var(--violet-soft);border-color:var(--violet);color:var(--violet)}
+.rsd .st b.outon{background:var(--teal-soft);border-color:var(--teal);color:var(--teal)}
+.rsd .st b.outoff{opacity:.35;border-style:dashed}
+.rsd .st i{font-style:normal;color:var(--muted)}
+.pick .btn[aria-pressed="true"]{background:var(--cc-soft);border-color:var(--cc);color:var(--cc)}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px;margin-top:10px}
+.mgrid h4{margin:0 0 4px;font-family:var(--f-display);font-size:.9rem}
+.mgrid ul{margin:0;padding-inline-start:18px;font-size:.9rem}
+.seqchip{display:inline-flex;gap:6px;direction:ltr;font-family:var(--f-mono);font-size:.95rem;background:var(--cc-soft);color:var(--cc);padding:4px 12px;border-radius:999px}
+
+/* NLP203 */
+.revs{display:flex;flex-direction:column;gap:8px}
+.rev{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--bg);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 14px}
+@media (max-width:720px){.rev{grid-template-columns:1fr}}
+.rev .t{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.92rem}
+.rev .raw{color:var(--muted)}
+.rev .lab{font-size:.72rem;color:var(--muted);display:block;margin-bottom:2px}
+.rev .rm{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px}
+.rev .rm span{font-size:.75rem;padding:0 8px;border-radius:999px;background:var(--rose-soft);color:var(--rose)}
+.rev .rm span b{font-weight:600}
+.rev.dropped{opacity:.55}
+.toks{display:flex;flex-wrap:wrap;gap:4px}
+.toks span{font-size:.88rem;padding:1px 8px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+.toks span.p{background:var(--amber-soft);border-color:transparent;color:var(--amber);font-family:var(--f-mono)}
+.nlp-in{width:100%;min-height:5.5em;font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;resize:vertical;line-height:1.7}
+.nlp-in:focus{outline:2px solid var(--rose);outline-offset:1px}
+.hbars{display:flex;flex-direction:column;gap:5px}
+.hbars div{display:grid;grid-template-columns:minmax(70px,9em) minmax(0,1fr) 3ch;gap:8px;align-items:center;font-size:.88rem}
+.hbars i{display:block;height:14px;border-radius:0 4px 4px 0;background:var(--rose)}
+.hbars em{font-style:normal;font-family:var(--f-mono);font-size:.8rem;color:var(--muted);text-align:end}
+.cm3 td{text-align:center;font-family:var(--f-mono)}
+.cm3 td.hit{background:var(--good-soft);color:var(--good);font-weight:600}
+.cm3 td.miss{background:var(--bad-soft);color:var(--bad)}
 
 /* ANN202 */
 .lifecycle{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
@@ -340,16 +389,15 @@ footer{padding-block:40px;color:var(--muted);font-size:.82rem;border-top:1px sol
 </style>
 </head>
 <body>
-
 <div dir="rtl" lang="ar">
 
 <header class="top wrap">
-  <div class="eyebrow">CNN204 · ANN202 · التطبيق العملي</div>
-  <h1>مختبر الشبكات العصبية العملي</h1>
-  <p>نسخة تفاعلية من التطبيق العملي لمادتين، لكل مادة قسمها ولونها: في <b>CNN204</b> ترسم رقمًا وتتابعه داخل شبكة كثيفة ثم تفحص صور القطط والكلاب وتنظّفها، وفي <b>ANN202</b> تنظّف بيانات الطلاب وتحلّلها وتبني منها مدخلات الشبكة. واختبر فهمك في النهاية.</p>
+  <div class="eyebrow">CNN204 · ANN202 · RNN204 · NLP203 · التطبيق العملي</div>
+  <h1>مختبر التطبيق العملي</h1>
+  <p>نسخة تفاعلية من التطبيق العملي لأربع مواد، لكل مادة قسمها ولونها: في <b>CNN204</b> ترسم رقمًا وتتابعه داخل شبكة كثيفة ثم تفحص صور القطط والكلاب وتنظّفها، وفي <b>ANN202</b> تنظّف بيانات الطلاب وتحلّلها، وفي <b>RNN204</b> تتنبأ من التسلسلات الزمنية، وفي <b>NLP203</b> تنظّف مراجعات عربية وتقطّعها. واختبر فهمك في النهاية.</p>
   <div class="courses">
     <div class="course c-cnn">
-      <a class="course-h" href="#cnn204"><span class="ctag">CNN204</span><b>الشبكات العصبية للصور</b></a>
+      <a class="course-h" href="#cnn204"><span class="ctag">CNN204</span><b>الشبكات العصبية التلافيفية</b></a>
       <div class="units">
         <a class="unit" href="#mnist"><small>الموضوع الثاني</small><b>مثال تطبيقي: MNIST</b><span>شبكة Fully Connected بطبقة Dense واحدة</span></a>
         <a class="unit" href="#case"><small>الموضوع الرابع</small><b>دراسة حالة: قطط أم كلاب؟</b><span>جمع البيانات، الترميز، الفحص</span></a>
@@ -357,7 +405,7 @@ footer{padding-block:40px;color:var(--muted);font-size:.82rem;border-top:1px sol
       </div>
     </div>
     <div class="course c-ann">
-      <a class="course-h" href="#ann202"><span class="ctag">ANN202</span><b>التنبؤ بنجاح الطالب</b></a>
+      <a class="course-h" href="#ann202"><span class="ctag">ANN202</span><b>الشبكات العصبية الاصطناعية</b></a>
       <div class="units">
         <a class="unit" href="#ann-setup"><small>الموضوعان الثاني والثالث</small><b>بيئة العمل وتحديد المشكلة</b><span>Colab، المكتبات، نوع المشكلة</span></a>
         <a class="unit" href="#ann-nb"><small>الموضوع الثالث</small><b>التنظيف والتهيئة</b><span>دفتر تفاعلي على بيانات 600 طالب</span></a>
@@ -365,8 +413,26 @@ footer{padding-block:40px;color:var(--muted);font-size:.82rem;border-top:1px sol
         <a class="unit" href="#ann-inputs"><small>الموضوع الخامس</small><b>بناء مدخلات النموذج</b><span>X و y، التقسيم، التوحيد</span></a>
       </div>
     </div>
+    <div class="course c-rnn">
+      <a class="course-h" href="#rnn204"><span class="ctag">RNN204</span><b>الشبكات العصبية المتكررة</b></a>
+      <div class="units">
+        <a class="unit" href="#rnn-temp"><small>الموضوع الثاني</small><b>التنبؤ بحرارة اليوم الثامن</b><span>النوافذ، SimpleRNN، تدريب حقيقي</span></a>
+        <a class="unit" href="#rnn-act"><small>الموضوع الثالث</small><b>نشاط تطبيقي</b><span>h_t، return_sequences، Backpropagation</span></a>
+        <a class="unit" href="#rnn-collect"><small>الموضوع الرابع</small><b>جمع بيانات متتابعة</b><span>درجات الطلاب وسبع طرق للجمع</span></a>
+        <a class="unit" href="#rnn-clean"><small>الموضوع الخامس</small><b>التنظيف والمعالجة</b><span>دفتر تفاعلي من 11 خلية</span></a>
+      </div>
+    </div>
+    <div class="course c-nlp">
+      <a class="course-h" href="#nlp203"><span class="ctag">NLP203</span><b>معالجة اللغة الطبيعية</b></a>
+      <div class="units">
+        <a class="unit" href="#nlp-data"><small>الموضوع الثالث</small><b>البيانات وعدم التوازن</b><span>HARD، الدقة المضلِّلة</span></a>
+        <a class="unit" href="#nlp-load"><small>الموضوع الثالث</small><b>قراءة الملف</b><span>UTF-16، الأسطر، الأعمدة</span></a>
+        <a class="unit" href="#nlp-clean"><small>الموضوع الثالث</small><b>تنظيف النص العربي</b><span>الروابط، الرموز، التوحيد</span></a>
+        <a class="unit" href="#nlp-tok"><small>الموضوع الرابع</small><b>التقطيع Tokenization</b><span>Regex مقابل NLTK، التكرار، الطول</span></a>
+      </div>
+    </div>
   </div>
-  <a class="unit quizlink" href="#quiz"><small>مراجعة</small><b>اختبر نفسك</b><span>عشرة أسئلة لـ CNN204 وستة لـ ANN202، بتصحيح فوري</span></a>
+  <a class="unit quizlink" href="#quiz"><small>مراجعة</small><b>اختبر نفسك</b><span>عشرة أسئلة لـ CNN204، وستة لكل من ANN202 و RNN204 و NLP203، بتصحيح فوري</span></a>
   <section class="pg" id="progress" aria-label="تقدمك">
     <div class="pg-head">
       <h2>تقدمك</h2>
@@ -377,6 +443,10 @@ footer{padding-block:40px;color:var(--muted);font-size:.82rem;border-top:1px sol
       <div class="pg-stat c-cnn"><span><span class="ctag">CNN204</span>الاختبار</span><b id="pgQuiz">لم يبدأ</b><div class="pg-bar"><i id="pgQuizBar"></i></div></div>
       <div class="pg-stat c-ann"><span><span class="ctag">ANN202</span>تمارين الكود</span><b id="pgExAnn">0 / 11</b><div class="pg-bar"><i id="pgExAnnBar"></i></div></div>
       <div class="pg-stat c-ann"><span><span class="ctag">ANN202</span>الاختبار</span><b id="pgQuizAnn">لم يبدأ</b><div class="pg-bar"><i id="pgQuizAnnBar"></i></div></div>
+      <div class="pg-stat c-rnn"><span><span class="ctag">RNN204</span>تمارين الكود</span><b id="pgExRnn">0 / 10</b><div class="pg-bar"><i id="pgExRnnBar"></i></div></div>
+      <div class="pg-stat c-rnn"><span><span class="ctag">RNN204</span>الاختبار</span><b id="pgQuizRnn">لم يبدأ</b><div class="pg-bar"><i id="pgQuizRnnBar"></i></div></div>
+      <div class="pg-stat c-nlp"><span><span class="ctag">NLP203</span>تمارين الكود</span><b id="pgExNlp">0 / 16</b><div class="pg-bar"><i id="pgExNlpBar"></i></div></div>
+      <div class="pg-stat c-nlp"><span><span class="ctag">NLP203</span>الاختبار</span><b id="pgQuizNlp">لم يبدأ</b><div class="pg-bar"><i id="pgQuizNlpBar"></i></div></div>
     </div>
     <p class="muted pg-note">يُحفظ تلقائيًا: التمارين المحلولة، والسطر الذي توقفت عنده في كل تمرين، وما كتبته من كود، وإجابات الاختبار.</p>
     <div class="row">
@@ -390,6 +460,8 @@ footer{padding-block:40px;color:var(--muted);font-size:.82rem;border-top:1px sol
   <a href="#progress">تقدمك</a>
   <span class="grp c-cnn"><a class="cl" href="#cnn204"><span class="ctag">CNN204</span></a><a href="#mnist">MNIST</a><a href="#mnist-lab">ارسم رقمًا</a><a href="#mnist-steps">خطوات الحل</a><a href="#mnist-train">التدريب</a><a href="#case">دراسة الحالة</a><a href="#case-inspect">فحص البيانات</a><a href="#clean">تنظيف البيانات</a><a href="#labels">مراجعة الترميز</a></span>
   <span class="grp c-ann"><a class="cl" href="#ann202"><span class="ctag">ANN202</span></a><a href="#ann-setup">بيئة العمل</a><a href="#ann-nb">دفتر البيانات</a><a href="#ann-eda">EDA</a><a href="#ann-inputs">مدخلات النموذج</a></span>
+  <span class="grp c-rnn"><a class="cl" href="#rnn204"><span class="ctag">RNN204</span></a><a href="#rnn-temp">حرارة اليوم الثامن</a><a href="#rnn-train">التدريب</a><a href="#rnn-act">النشاط</a><a href="#rnn-collect">جمع البيانات</a><a href="#rnn-clean">التنظيف والمعالجة</a></span>
+  <span class="grp c-nlp"><a class="cl" href="#nlp203"><span class="ctag">NLP203</span></a><a href="#nlp-data">البيانات</a><a href="#nlp-load">قراءة الملف</a><a href="#nlp-clean">تنظيف النص</a><a href="#nlp-tok">التقطيع</a><a href="#nlp-stats">التكرار والطول</a></span>
   <a href="#quiz">الاختبار</a>
 </div></nav>
 
@@ -398,7 +470,7 @@ footer{padding-block:40px;color:var(--muted);font-size:.82rem;border-top:1px sol
 <!-- ================================ COURSE: CNN204 ================================ -->
 <div class="course-banner c-cnn" id="cnn204">
   <span class="ctag">CNN204</span>
-  <h2>الشبكات العصبية للصور</h2>
+  <h2>الشبكات العصبية التلافيفية</h2>
   <p>ثلاثة مواضيع: مثال MNIST بشبكة كثيفة، ودراسة حالة القطط والكلاب، وتنظيف بيانات الصور. كل ما يلي حتى بداية قسم ANN202 يخص هذه المادة.</p>
 </div>
 
@@ -900,7 +972,514 @@ X_test_scaled = scaler.transform(X_test)</pre>
   </div>
 </section>
 
-<!-- ============ QUIZ (both courses) ============ -->
+<!-- ================================ COURSE: RNN204 ================================ -->
+<hr class="course-end">
+<div class="course-banner c-rnn" id="rnn204">
+  <span class="ctag">RNN204</span>
+  <h2>الشبكات العصبية المتكررة: التعلّم من التسلسل</h2>
+  <p>مادة مستقلة: نبني نموذج RNN يتنبأ بدرجة حرارة اليوم الثامن من الأيام السابقة، ثم نجمع درجات الطلاب كسلاسل زمنية، وننظّفها ونعالجها لتصبح جاهزة لنموذج RNN.</p>
+</div>
+
+<section class="unitsec c-rnn" id="rnn-temp">
+  <div class="sechead">
+    <span class="chip violet" style="align-self:flex-start">الموضوع الثاني · سؤال تطبيقي</span>
+    <h2>التنبؤ بدرجة حرارة اليوم الثامن</h2>
+    <p>درجات الحرارة خلال 7 أيام بالدرجة المئوية: 30، 32، 31، 33، 34، 32، 35. نريد نموذج RNN بسيطًا يتنبأ باليوم الثامن من آخر 3 أيام. المثال يربط بين تسلسل الزمن وأهمية RNN وتطبيق عملي بسيط.</p>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-bottom:8px">خطوة 1: هل هذه البيانات متتابعة (Sequential)؟</h3>
+      <p style="font-size:.92rem">نعم، لثلاثة أسباب:</p>
+      <ul style="margin:6px 0 0;padding-inline-start:20px;display:flex;flex-direction:column;gap:4px;font-size:.92rem">
+        <li>كل قيمة (درجة حرارة يوم معين) تعتمد على الأيام السابقة.</li>
+        <li>ترتيب الأيام مهم: <span class="ltr mono">(30, 32, 31)</span> ليست مثل <span class="ltr mono">(31, 32, 30)</span>.</li>
+        <li>نريد التنبؤ بالمستقبل من الماضي، وهذا جوهر البيانات المتتابعة.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:8px">المطلوب في السؤال</h3>
+      <ol style="margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:4px;font-size:.92rem">
+        <li>هل البيانات متتابعة؟ ولماذا؟</li>
+        <li>كيف نحوّلها إلى شكل مناسب لـ RNN؟</li>
+        <li>كيف نبني نموذج RNN بسيطًا في Keras؟</li>
+        <li>ما الخطوات العامة: تجهيز البيانات، بناء النموذج، التدريب، التنبؤ؟</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="block" id="rnn-win">
+    <h3>خطوة 2: النوافذ (Windows) تحوّل السلسلة إلى X و y</h3>
+    <p class="muted" style="margin-bottom:12px;max-width:72ch">النموذج يتعلم من عدد ثابت من الأيام السابقة ليتنبأ باليوم الذي يليها. حرّك النافذة على السلسلة أو غيّر طولها، وتابع كيف تتكوّن المدخلات والمخرجات وأشكالها.</p>
+    <div class="card">
+      <div class="ctl">
+        <label>window_size = <b class="mono" style="color:var(--ink)" id="rwV">3</b><input type="range" id="rwSize" min="2" max="5" value="3" aria-label="طول النافذة"></label>
+        <div class="row"><button class="btn small" id="rwPrev">النافذة السابقة</button><button class="btn small primary" id="rwNext">النافذة التالية</button></div>
+      </div>
+      <svg class="chart" id="rwChart" viewBox="0 0 640 230" role="img" aria-label="درجات الحرارة خلال 7 أيام مع النافذة الحالية"></svg>
+      <div class="legend" id="rwLegend"></div>
+      <div class="grid2" style="margin-top:12px">
+        <div class="tbl"><table class="wtab" id="rwTable"></table></div>
+        <div style="min-width:0"><div class="console" id="rwOut"></div><div class="shapes" id="rwShapes"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block grid2" id="rnn-code">
+    <div><h4 class="exh" style="margin-top:0">خطوة 3: كود تجهيز البيانات</h4>
+<pre class="code">import numpy as np
+# السلسلة الأصلية (درجات الحرارة خلال 7 أيام)
+data = np.array([30, 32, 31, 33, 34, 32, 35])
+X = []
+y = []
+# نستخدم 3 أيام للتنبؤ باليوم الرابع
+window_size = 3
+for i in range(len(data) - window_size):
+    X.append(data[i:i+window_size])  # ثلاثة أيام متتالية
+    y.append(data[i+window_size])    # اليوم الذي يليها
+X = np.array(X)
+y = np.array(y)
+print("X before reshape:\n", X)
+print("y:\n", y)
+# إعادة تشكيل X لتناسب RNN: (عينات، خطوات زمنية، خصائص)
+X = X.reshape((X.shape[0], X.shape[1], 1))
+print("X after reshape:", X.shape)</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="r-prep"></ol></div>
+    <div><h4 class="exh" style="margin-top:0">خطوة 4: بناء نموذج RNN بسيط</h4>
+<pre class="code">from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import SimpleRNN, Dense
+model = Sequential()
+# طبقة RNN بسيطة
+model.add(SimpleRNN(16, activation='tanh', input_shape=(3, 1)))
+# طبقة خرج (قيمة عددية واحدة: درجة الحرارة المتوقعة)
+model.add(Dense(1))
+# تجميع النموذج
+model.compile(optimizer='adam', loss='mse')
+model.summary()</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="r-model"></ol></div>
+    <div><h4 class="exh" style="margin-top:0">خطوة 5: تدريب النموذج</h4>
+<pre class="code">history = model.fit(X, y, epochs=200, verbose=0)</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="r-fit"></ol></div>
+    <div><h4 class="exh" style="margin-top:0">خطوة 6: التنبؤ باليوم الثامن</h4>
+<pre class="code">last_3_days = np.array([34, 32, 35])
+last_3_days = last_3_days.reshape((1, 3, 1))
+predicted_temp = model.predict(last_3_days)
+print("درجة الحرارة المتوقعة لليوم الثامن:", predicted_temp[0][0])</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="r-pred"></ol></div>
+  </div>
+
+  <div class="block" id="rnn-train">
+    <h3>درّب النموذج فعلًا داخل متصفحك</h3>
+    <p class="muted" style="margin-bottom:12px;max-width:72ch">شبكة SimpleRNN فيها 16 وحدة بدالة tanh ثم Dense(1)، بالمحسّن Adam والخسارة MSE، كما في الكود تمامًا. قارن تدريبها على الأرقام كما هي (كما في كود الدرس) بتدريبها بعد تحجيم الأرقام بـ MinMaxScaler، وهي الخطوة التي ستراها في الموضوع الخامس.</p>
+    <div class="card">
+      <div class="ctl">
+        <div class="seg" role="group" aria-label="طريقة تجهيز الأرقام"><button id="rtRaw" aria-pressed="true">الأرقام كما هي (كود الدرس)</button><button id="rtScaled" aria-pressed="false">مع MinMaxScaler</button></div>
+        <label>epochs<select class="btn small" id="rtEp"><option>50</option><option selected>200</option><option>500</option><option>1000</option><option>3000</option></select></label>
+        <button class="btn primary" id="rtGo">درّب النموذج</button>
+      </div>
+      <div class="grid2">
+        <div style="min-width:0"><svg class="chart" id="rtLoss" viewBox="0 0 600 260" role="img" aria-label="منحنى الخسارة أثناء التدريب"></svg></div>
+        <div style="min-width:0;display:flex;flex-direction:column;gap:8px">
+          <div class="kv"><span>التنبؤ لليوم الثامن</span><span id="rtPred">—</span></div>
+          <div class="kv"><span>الخسارة (MSE) في آخر epoch</span><span id="rtLossV">—</span></div>
+          <p class="lm-goal" id="rtMsg">اضغط «درّب النموذج».</p>
+          <div class="console" id="rtSummary"></div>
+        </div>
+      </div>
+      <h4 class="exh">الحالة الخفية h_t: ذاكرة الشبكة عبر الأيام</h4>
+      <p class="muted" style="font-size:.88rem;max-width:72ch">نُدخل آخر 3 أيام (34، 32، 35) في النموذج المدرَّب. كل صف هو الحالة الخفية بعد قراءة يوم، وكل خانة واحدة من الوحدات الـ 16 (الأزرق موجب والبني سالب، والقيم بين −1 و1 بسبب tanh). h3 تحمل خلاصة الأيام الثلاثة، ومنها تحسب طبقة Dense التنبؤ. مرّر المؤشر فوق أي خانة لترى قيمتها.</p>
+      <div class="hgrid" id="rtHidden"></div>
+    </div>
+  </div>
+</section>
+
+<section class="unitsec c-rnn" id="rnn-act">
+  <div class="sechead">
+    <span class="chip violet" style="align-self:flex-start">الموضوع الثالث · نشاط تطبيقي</span>
+    <h2>بناء نموذج RNN ومراجعة التعلم العميق</h2>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-bottom:6px">السؤال الأول: Build a Simple RNN Model</h3>
+      <p class="muted" style="font-size:.9rem;margin-bottom:10px">المدخلات بشكل <span class="ltr mono">(batch_size, timesteps, features)</span>، ثم طبقة SimpleRNN فيها 16 وحدة، ثم Dense بوحدة واحدة، مع الخسارة MSE والمحسّن Adam.</p>
+<pre class="code">from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import SimpleRNN, Dense
+timesteps, features = 10, 1
+model = Sequential([
+    SimpleRNN(16, input_shape=(timesteps, features)),
+    Dense(1)
+])
+model.compile(optimizer="adam", loss="mse")
+model.summary()</pre>
+      <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="r-q1"></ol>
+      <details class="exd" style="margin-top:12px"><summary>ما وظيفة الحالة الخفية h_t داخل RNN؟</summary>
+        <p style="font-size:.92rem">h_t هي ذاكرة الشبكة: في كل خطوة زمنية تجمع الشبكة المدخل الحالي x_t مع الحالة السابقة h_(t−1) لتنتج h_t الجديدة، فتحمل خلاصة ما رأته من التسلسل حتى الآن. بهذه الذاكرة تفهم RNN السياق والترتيب، ولهذا تختلف عن الشبكة الكثيفة التي ترى كل مدخل منفصلًا.</p></details>
+      <h4 class="exh">return_sequences: كل الخطوات أم آخرها؟</h4>
+      <div class="seg" role="group" aria-label="قيمة return_sequences"><button id="rsF" aria-pressed="true">return_sequences=False</button><button id="rsT" aria-pressed="false">return_sequences=True</button></div>
+      <div class="rsd" id="rsDiag"></div>
+      <p class="note" style="margin-top:10px" id="rsNote"></p>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:6px">السؤال الثاني: Forward &amp; Backpropagation</h3>
+      <p class="muted" style="font-size:.9rem;margin-bottom:10px">لدينا نموذج كثيف بسيط يستقبل 4 ميزات:</p>
+<pre class="code">model = Sequential([
+    Dense(8, activation='relu', input_shape=(4,)),
+    Dense(1, activation='sigmoid')
+])</pre>
+      <div class="tbl" style="margin-top:10px"><table>
+        <thead><tr><th>الطبقة</th><th>الحساب</th><th>عدد المعاملات</th></tr></thead>
+        <tbody>
+          <tr><td>Dense(8, relu)</td><td class="num">4 × 8 + 8</td><td class="num">40</td></tr>
+          <tr><td>Dense(1, sigmoid)</td><td class="num">8 × 1 + 1</td><td class="num">9</td></tr>
+          <tr><td><b>المجموع</b></td><td></td><td class="num"><b>49</b></td></tr>
+        </tbody>
+      </table></div>
+      <details class="exd" style="margin-top:12px"><summary>1. ماذا يحدث في Forward Propagation؟</summary>
+        <p style="font-size:.92rem">تمر الميزات الأربع إلى الطبقة الأولى: كل خلية من الثماني تضرب المدخلات في أوزانها وتضيف الانحياز ثم تطبّق relu. تنتقل المخرجات الثماني إلى الخلية الأخيرة التي تفعل الشيء نفسه ثم تطبّق sigmoid، فتعطي احتمالًا بين 0 و1.</p></details>
+      <details class="exd"><summary>2. ما دور Loss Function بعد التنبؤ؟</summary>
+        <p style="font-size:.92rem">تقيس الفرق بين تنبؤ النموذج والإجابة الصحيحة برقم واحد. كلما صغر الرقم كان النموذج أدق، وهذا الرقم هو ما يحاول التدريب تقليله.</p></details>
+      <details class="exd"><summary>3. كيف تساعد Backpropagation في تحسين الأداء؟</summary>
+        <p style="font-size:.92rem">تحسب كم ساهم كل وزن وكل انحياز في الخطأ (التدرّج)، بالرجوع من المخرج إلى المدخل. ثم يستخدم المحسّن هذه التدرّجات ليعدّل القيم في الاتجاه الذي يقلل الخسارة، وتتكرر الدورة حتى يتحسن النموذج.</p></details>
+      <h4 class="exh">4. ما الذي يُعدَّل أثناء التدريب؟ اختر كل ما ينطبق</h4>
+      <div class="row pick" id="upPick"><button class="btn" data-k="w" aria-pressed="false">Weights</button><button class="btn" data-k="b" aria-pressed="false">Bias</button><button class="btn" data-k="a" aria-pressed="false">Activation Functions</button><button class="btn primary" id="upCheck">تحقّق</button></div>
+      <p class="note" style="margin-top:10px" id="upFb">اختر ثم اضغط «تحقّق».</p>
+    </div>
+  </div>
+</section>
+
+<section class="unitsec c-rnn" id="rnn-collect">
+  <div class="sechead">
+    <span class="chip violet" style="align-self:flex-start">الموضوع الرابع · دراسة حالة</span>
+    <h2>التنبؤ بدرجة الطالب القادمة: جمع البيانات</h2>
+    <p>الكلية تريد التنبؤ بدرجة الطالب في الاختبار القادم من درجاته السابقة. فكرة RNN ببساطة: النموذج ينظر إلى تاريخ درجات الطالب ليتوقع الدرجة القادمة.</p>
+  </div>
+  <div class="ptype">
+    <div class="card"><small>نوع المهمة</small><b>تنبؤ عددي</b><div class="mono muted ltr" style="font-size:.8rem">Regression</div></div>
+    <div class="card"><small>البيانات التي نجمعها</small><b class="ltr" style="font-family:var(--f-mono);font-weight:500;font-size:.9rem">student_id · exam_number · score</b><div class="muted" style="font-size:.8rem">رقم الطالب، ترتيب الاختبار، الدرجة من 0 إلى 100</div></div>
+    <div class="card"><small>الحد الأدنى للبيانات</small><b>5 اختبارات لكل طالب</b><div class="muted" style="font-size:.8rem">والأفضل من 8 إلى 10 اختبارات</div></div>
+  </div>
+  <div class="block">
+    <h3>جمع البيانات للبيانات المتتابعة (Data Collection for RNN)</h3>
+    <p class="lm-goal" style="max-width:80ch">في أنظمة RNN لا يعني جمع البيانات تحميل ملف فقط، بل بناء تاريخ زمني منظّم يمثل تطور الظاهرة عبر الزمن. إذا فشلنا في جمع البيانات بالشكل الصحيح فلن تنجح أي مرحلة لاحقة في الـ ML Pipeline: الجمع هو نقطة البداية، ويحدد ما يستطيع النموذج تعلّمه، وحدود دقته المستقبلية.</p>
+  </div>
+  <div class="block">
+    <h3>سبع طرق لجمع البيانات</h3>
+    <div class="card">
+      <div class="steps" role="tablist" id="rmTabs"></div>
+      <div id="rmBody"></div>
+    </div>
+  </div>
+  <div class="block grid2">
+    <div class="card">
+      <h3 style="margin-bottom:8px">كيف نعرف أن هذه بيانات RNN؟</h3>
+      <p style="font-size:.92rem;margin-bottom:10px">كل طالب لديه سلسلة درجات، ونموذج RNN يتعلم من تسلسلها ليتوقع الدرجة القادمة. مثال تسلسل واحد:</p>
+      <span class="seqchip">[65, 70, 75] → 78</span>
+      <h4 class="exh">قواعد بسيطة لجمع البيانات</h4>
+      <ul style="margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:4px;font-size:.92rem">
+        <li><b>ترتيب زمني صحيح:</b> لا يجوز أن يأتي اختبار 3 قبل اختبار 2.</li>
+        <li><b>نفس المقياس:</b> كل الدرجات من 100.</li>
+        <li><b>ممنوع إدخال المستقبل:</b> لا نضع درجة الاختبار القادم داخل البيانات.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:8px">ناتج هذه المرحلة: ملف خام</h3>
+      <div class="kv"><span>اسم الملف</span><span>student_scores_raw.csv</span></div>
+      <div class="kv" style="margin-top:6px"><span>عدد الطلاب</span><span>50</span></div>
+      <div class="kv" style="margin-top:6px"><span>الاختبارات لكل طالب</span><span>6</span></div>
+      <div class="kv" style="margin-top:6px"><span>عدد الصفوف</span><span>300 تقريبًا</span></div>
+      <div class="kv" style="margin-top:6px"><span>الحالة</span><span>Raw Data</span></div>
+      <p class="note" style="margin-top:10px">المصدر: سجلات درجات الطلاب في النظام الأكاديمي، أو ملف CSV مصدَّر منه. الوحدة هي الطالب، والزمن هو ترتيب الاختبارات. الملف جاهز للانتقال إلى مرحلة التنظيف.</p>
+    </div>
+  </div>
+</section>
+
+<section class="unitsec c-rnn" id="rnn-clean">
+  <div class="sechead">
+    <span class="chip violet" style="align-self:flex-start">الموضوع الخامس · تطبيق عملي</span>
+    <h2>تنظيف بيانات الدرجات ومعالجتها لـ RNN</h2>
+    <p>الهدف تحويل الدرجات الخام إلى بيانات صحيحة ومتسقة ومرتبة زمنيًا. الملف هنا مولَّد داخل الصفحة وفيه مشكلات حقيقية: صفوف بترتيب عشوائي، ورقم اختبار مكتوب كنص، وتكرار، ودرجة «غائب»، واختبارات ناقصة، ودرجات خارج 0 إلى 100. شغّل الخلايا بالترتيب: الخطوات 1 إلى 6 تنظيف، و7 إلى 10 معالجة.</p>
+  </div>
+  <div class="card">
+    <div class="nbbar">
+      <div class="row"><button class="btn primary" id="rnbAll">شغّل الكل</button><button class="btn" id="rnbReset">إعادة تشغيل الجلسة</button></div>
+      <div class="vars" id="rnbVars"></div>
+    </div>
+    <div class="cells" id="rnbCells"></div>
+  </div>
+  <div class="block" id="rnn-seq">
+    <h3>من الجدول إلى نوافذ RNN</h3>
+    <p class="muted" style="margin-bottom:12px;max-width:72ch">بعد المعالجة تصبح درجات كل طالب سلسلة مرتبة، فنصنع منها نوافذ كما في مثال الحرارة: 3 اختبارات تتنبأ بالرابع. اختر طالبًا وتابع سلسلته ونوافذه بالقيم الأصلية والمحجَّمة.</p>
+    <div class="card">
+      <div class="ctl"><label>الطالب<select class="btn small" id="rsStu"></select></label><span class="chip cc" id="rsInfo"></span></div>
+      <svg class="chart" id="rsChart" viewBox="0 0 640 240" role="img" aria-label="درجات الطالب عبر الاختبارات"></svg>
+      <div class="legend" id="rsLegend"></div>
+      <div class="console" id="rsWins" style="margin-top:10px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ COURSE: NLP203 ================================ -->
+<hr class="course-end">
+<div class="course-banner c-nlp" id="nlp203">
+  <span class="ctag">NLP203</span>
+  <h2>معالجة اللغة الطبيعية: تحليل مشاعر المراجعات العربية</h2>
+  <p>مادة مستقلة على بيانات HARD لمراجعات الفنادق: نجهّز Colab، ونفهم البيانات وعدم توازنها، ونقرأ الملف خطوة بخطوة، وننظّف النص العربي، ثم نقطّعه إلى جمل وكلمات ونحلل تكرارها وأطوالها.</p>
+</div>
+
+<section class="unitsec c-nlp" id="nlp-setup">
+  <div class="sechead">
+    <span class="chip rose" style="align-self:flex-start">الموضوع الثالث · بيئة العمل</span>
+    <h2>تجهيز Colab والمكتبات</h2>
+    <p>نستخدم Google Colab لأنه لا يحتاج تثبيت أي برنامج ويعمل من الإنترنت ويدعم Python: افتح <span class="ltr mono">colab.google</span>، ثم سجّل الدخول بحساب Google، ثم اختر New Notebook. ولن نعتمد على Python وحدها، بل على أربع مكتبات جاهزة.</p>
+  </div>
+  <div class="ptype">
+    <div class="card"><small>للحسابات</small><b class="ltr" style="font-family:var(--f-mono)">NumPy</b><div class="muted" style="font-size:.82rem">الأرقام والمصفوفات، وسنحتاجها حين نمثّل النصوص كأرقام.</div></div>
+    <div class="card"><small>للتنظيم</small><b class="ltr" style="font-family:var(--f-mono)">Pandas</b><div class="muted" style="font-size:.82rem">قراءة CSV و Excel وعرض الجداول وتنظيفها وإضافة الأعمدة.</div></div>
+    <div class="card"><small>للعرض والرسم</small><b class="ltr" style="font-family:var(--f-mono)">Matplotlib</b><div class="muted" style="font-size:.82rem">كم تعليقًا إيجابيًا وكم سلبيًا؟ وما أطوال النصوص؟</div></div>
+    <div class="card"><small>لتنظيف النص</small><b class="ltr" style="font-family:var(--f-mono)">re</b><div class="muted" style="font-size:.82rem">Regular Expressions: حذف الرموز والأرقام والترقيم والتكرار.</div></div>
+  </div>
+  <div class="block grid2">
+    <div><h4 class="exh" style="margin-top:0">في أول خلية كود</h4>
+<pre class="code">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import re</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="n-libs"></ol></div>
+    <div class="card" style="align-self:start">
+      <h3 style="margin-bottom:8px">كيف أعرف أن التنفيذ نجح؟</h3>
+      <p style="font-size:.92rem">لا يظهر سطر أحمر أو رسالة خطأ، ويختفي الرمز <span class="ltr mono">[ ]</span> بجانب الخلية ويظهر رقم مثل <span class="ltr mono">[1]</span>. و <code>np</code> و <code>pd</code> و <code>plt</code> اختصارات فقط: نكتب <code>pd.read_csv()</code> بدل <code>pandas.read_csv()</code>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="unitsec c-nlp" id="nlp-data">
+  <div class="sechead">
+    <span class="chip rose" style="align-self:flex-start">الموضوع الثالث · البيانات</span>
+    <h2>بيانات HARD وعدم توازن الفئات</h2>
+    <p>HARD Arabic Dataset ملف فيه آلاف المراجعات العربية الحقيقية لفنادق من Booking.com، مع تقييم بالنجوم. التقييم يجعلها «موسومة جزئيًا»، فنحوّله إلى وسم (label) لمهمة تصنيف المشاعر: إيجابي أو سلبي أو محايد.</p>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-bottom:8px">نسختان من البيانات</h3>
+      <svg class="chart" id="niChart" viewBox="0 0 600 190" role="img" aria-label="توزيع الفئات في النسخة غير المتوازنة والمتوازنة"></svg>
+      <div class="legend" id="niLegend"></div>
+      <p class="note" style="margin-top:10px">في الواقع لا يعبّر الناس عن مشاعرهم بالتساوي، فالنسخة الأصلية <b>غير متوازنة</b> (Class Imbalance). في هذا الدرس نستخدم النسخة <b>المتوازنة</b> حتى نتعلم تحليل المشاعر بلا انحياز، ونعود للنسخة غير المتوازنة في دروس قادمة.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:8px">لماذا الدقة وحدها مضلِّلة؟</h3>
+      <p class="muted" style="font-size:.9rem;margin-bottom:10px">نموذج «كسول» لم يقرأ أي نص، يقول «إيجابي» لكل مراجعة. غيّر نسبة الإيجابي في بيانات الاختبار وراقب دقته:</p>
+      <label class="ctl" style="margin-bottom:6px">نسبة الإيجابي = <b class="mono" style="color:var(--ink)" id="nbPosV">68%</b><input type="range" id="nbPos" min="34" max="95" value="68" aria-label="نسبة المراجعات الإيجابية"></label>
+      <div class="tbl"><table class="cm3" id="nbCm"></table></div>
+      <div class="stats" id="nbStats" style="margin-top:10px"></div>
+      <p class="note" style="margin-top:10px">النموذج تعلّم «الأغلبية» لا اللغة (Bias Toward Majority Class)، وتجاهل الفئات الأقل مثل الشكاوى، مع أنها الأهم غالبًا.</p>
+    </div>
+  </div>
+  <div class="block grid2">
+    <div class="card">
+      <h3 style="margin-bottom:8px">الحل 1: تعديل البيانات نفسها (Data-level)</h3>
+      <ul style="margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:4px;font-size:.92rem">
+        <li><b>Under-sampling:</b> تقليص عينات الفئة الأكبر.</li>
+        <li><b>Over-sampling:</b> تكثيف عينات الفئات الأقل.</li>
+      </ul>
+      <p class="note" style="margin-top:10px">العيب: قد نفقد معلومات، أو نكرر بيانات.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:8px">الحل 2: نترك البيانات ونعدّل التعلم أو التقييم</h3>
+      <ul style="margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:4px;font-size:.92rem">
+        <li><b>Cost-sensitive learning:</b> وزن أكبر لأخطاء الفئات الأقل في دالة الخسارة.</li>
+        <li><b>مقاييس مناسبة:</b> Precision و Recall و F1-score و Confusion Matrix بدل Accuracy وحدها.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="unitsec c-nlp" id="nlp-load">
+  <div class="sechead">
+    <span class="chip rose" style="align-self:flex-start">الموضوع الثالث · قراءة البيانات</span>
+    <h2>قراءة ملف المراجعات خطوة بخطوة</h2>
+    <p>بعد تحميل <span class="ltr mono">balanced-reviews.zip</span> من GitHub وفك ضغطه، نرفع <span class="ltr mono">balanced-reviews.txt</span> من أيقونة Files ثم Upload. امتداده txt لكنه جدولي ومحفوظ بترميز UTF-16. الملف هنا مولَّد داخل الصفحة بنفس البنية (200 مراجعة)، وليس نصوص HARD الأصلية.</p>
+  </div>
+  <div class="card">
+    <div class="nbbar">
+      <div class="row"><button class="btn primary" id="nnbAll">شغّل الكل</button><button class="btn" id="nnbReset">إعادة تشغيل الجلسة</button></div>
+      <div class="vars" id="nnbVars"></div>
+    </div>
+    <div class="cells" id="nnbCells"></div>
+  </div>
+  <div class="block card">
+    <h3 style="margin-bottom:8px">ماذا لو فتحنا الملف بترميز خاطئ؟</h3>
+    <div class="seg" role="group" aria-label="الترميز"><button id="neU8" aria-pressed="true">encoding="utf-8"</button><button id="neU16" aria-pressed="false">encoding="utf-16"</button></div>
+    <div class="console" id="neOut" style="margin-top:10px"></div>
+  </div>
+</section>
+
+<section class="unitsec c-nlp" id="nlp-clean">
+  <div class="sechead">
+    <span class="chip rose" style="align-self:flex-start">الموضوع الثالث · تنظيف البيانات</span>
+    <h2>تنظيف النص العربي</h2>
+    <p>نصوص المستخدمين فيها فراغات زائدة وروابط ورموز ورموز تعبيرية وهاشتاقات وأشكال مختلفة للحرف نفسه. فعّل الخطوات أو عطّلها، وراقب ما تحذفه كل خطوة من أول عشر مراجعات. كل خطوة تنشئ نسخة جديدة من النص ولا تغيّر السابقة.</p>
+  </div>
+  <div class="card">
+    <div class="stages" id="ncSteps"></div>
+    <div class="ctl" style="margin-top:12px">
+      <span>ترتيب الخطوات:</span>
+      <div class="seg" role="group" aria-label="ترتيب الخطوات"><button id="ncOrdL" aria-pressed="true">ترتيب الدرس</button><button id="ncOrdM" aria-pressed="false">الهاشتاقات قبل الرموز</button></div>
+    </div>
+    <p class="lm-goal" id="ncNote"></p>
+    <div class="revs" id="ncRevs" style="margin-top:12px"></div>
+  </div>
+  <div class="block">
+    <h3>توحيد شكل الحروف العربية</h3>
+    <div class="grid2">
+      <div class="tbl"><table>
+        <thead><tr><th>الشكل</th><th>بعد التوحيد</th><th>ملاحظة</th></tr></thead>
+        <tbody>
+          <tr><td>أ، إ، آ</td><td>ا</td><td>نفس الكلمة بأشكال مختلفة</td></tr>
+          <tr><td>ى</td><td>ي</td><td>«مستشفى» و«مستشفي»</td></tr>
+          <tr><td>ة</td><td>لا تُوحَّد</td><td>تحويلها إلى ه قد يغيّر المعنى</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note" style="align-self:center">التوحيد يقلل عدد الكلمات المختلفة ويقلل التشتت، فيتعامل النموذج مع الكلمة الواحدة بصيغة واحدة. لكن نطبّقه بحذر، لأن الأدوات غير الدقيقة قد تُدخل أخطاء جديدة.</p>
+    </div>
+  </div>
+  <div class="block grid2" id="nlp-clean-code">
+    <div><h4 class="exh" style="margin-top:0">حذف الروابط</h4>
+<pre class="code">import re
+def remove_urls(text):
+    return re.sub(r"http\S+|www\S+", "", text)
+reviews_no_urls = reviews.apply(remove_urls)</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="n-urls"></ol></div>
+    <div><h4 class="exh" style="margin-top:0">إزالة الرموز</h4>
+<pre class="code">def remove_symbols(text):
+    text = str(text)
+    # أي رمز من هذه المجموعة: ! ? $ % وغيرها من علامات الترقيم
+    pattern = r"[!\"#$%&amp;'()*+,\-./:;&lt;=&gt;?@\[\]^_`{|}~؟،؛...]+"
+    # نستبدل أي مجموعة من هذه الرموز بمسافة
+    text = re.sub(pattern, " ", text)
+    return text
+reviews_no_symbols = reviews_no_urls.apply(remove_symbols)</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="n-sym"></ol></div>
+    <div><h4 class="exh" style="margin-top:0">إزالة الرموز التعبيرية</h4>
+<pre class="code">!pip install emoji
+import emoji
+def remove_emojis(text):
+    return emoji.replace_emoji(text, replace="")
+reviews_no_emojis = reviews_no_symbols.apply(remove_emojis)</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="n-emoji"></ol></div>
+    <div><h4 class="exh" style="margin-top:0">إزالة الهاشتاقات وأسماء المستخدمين</h4>
+<pre class="code">def remove_mentions_hashtags(text):
+    # إزالة @username
+    text = re.sub(r"@\w+", "", text)
+    # إزالة #hashtag
+    text = re.sub(r"#\w+", "", text)
+    return text
+reviews_no_mentions = reviews_no_emojis.apply(remove_mentions_hashtags)</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="n-ment"></ol></div>
+    <div><h4 class="exh" style="margin-top:0">توحيد الحروف</h4>
+<pre class="code">def normalize_arabic(text):
+    text = str(text)
+    text = text.replace("أ", "ا")
+    text = text.replace("إ", "ا")
+    text = text.replace("آ", "ا")
+    text = text.replace("ى", "ي")
+    return text
+reviews_normalized = reviews_no_mentions.apply(normalize_arabic)</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="n-norm"></ol></div>
+    <div class="card" style="align-self:start">
+      <h3 style="margin-bottom:8px">قبل / بعد في كل خطوة</h3>
+      <p style="font-size:.92rem">بعد كل خطوة نطبع المراجعة الأولى قبل التنظيف وبعده، مثل:</p>
+<pre class="code" style="margin-top:8px">print("قبل:\n", reviews_no_urls.iloc[0])
+print("\nبعد:\n", reviews_no_symbols.iloc[0])</pre>
+      <p class="note" style="margin-top:10px">حفظ كل خطوة في متغير جديد يحافظ على النسخ السابقة ويسمح بالمقارنة. الرموز التعبيرية قد تحمل دلالة شعورية، لذلك قرار حذفها أو إبقائها يعتمد على المهمة.</p>
+    </div>
+  </div>
+</section>
+
+<section class="unitsec c-nlp" id="nlp-tok">
+  <div class="sechead">
+    <span class="chip rose" style="align-self:flex-start">الموضوع الرابع · التقطيع</span>
+    <h2>تقطيع النص (Tokenization)</h2>
+    <p>نقرأ الملف هذه المرة بـ pandas مباشرة، ثم نقطّع المراجعة إلى جمل، ثم إلى كلمات بطريقتين: Regex و NLTK. اكتب أي مراجعة في المربع وقارن النتائج.</p>
+  </div>
+  <div class="grid2">
+    <div><h4 class="exh" style="margin-top:0">قراءة الملف بـ pandas واستخراج عمود النص</h4>
+<pre class="code">import pandas as pd
+df = pd.read_csv("balanced-reviews.txt", sep="\t", encoding="utf-16")
+df.head()
+reviews = df["review"].astype(str)</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="n-read"></ol></div>
+    <div class="card" style="align-self:start">
+      <h3 style="margin-bottom:8px">المراجعة التي نقطّعها</h3>
+      <textarea class="nlp-in" id="ntIn" dir="rtl" aria-label="نص المراجعة"></textarea>
+      <div class="row" style="margin-top:8px"><button class="btn small" id="ntReset">أعد المراجعة الأولى</button><span class="muted" style="font-size:.82rem">هذه <span class="ltr mono">sample_text = reviews.iloc[0]</span></span></div>
+    </div>
+  </div>
+  <div class="block card">
+    <h4 class="exh" style="margin-top:0">1. الجمل: <span class="ltr mono" style="font-size:.85rem">re.split(r"[\.!\?؟]+", sample_text)</span></h4>
+    <ol id="ntSent" style="margin:0;padding-inline-start:22px;display:flex;flex-direction:column;gap:4px"></ol>
+    <h4 class="exh">2. الكلمات بـ Regex: <span class="ltr mono" style="font-size:.85rem">re.findall(r"\w+", sample_text)</span> <span class="chip cc" id="ntReN"></span></h4>
+    <div class="toks" id="ntRe"></div>
+    <h4 class="exh">3. الكلمات بـ NLTK: <span class="ltr mono" style="font-size:.85rem">word_tokenize(sample_text)</span> <span class="chip cc" id="ntNlN"></span></h4>
+    <div class="toks" id="ntNl"></div>
+    <p class="note" style="margin-top:8px">الصفحة لا تشغّل NLTK، فهذا تقريب لسلوك word_tokenize: يفصل علامات الترقيم الإنجليزية مثل ! و ? و . كوحدات مستقلة (بالبرتقالي)، ويترك علامات عربية مثل «،» و«؟» ملتصقة بالكلمة لأنه ليس مخصصًا للعربية.</p>
+    <div class="tbl" style="margin-top:12px"><table>
+      <thead><tr><th>الطريقة</th><th>الميزة</th><th>العيب</th></tr></thead>
+      <tbody><tr><td class="mono ltr">Regex</td><td>بسيطة</td><td>غير لغوية، والواو الملتصقة لا تُفصل</td></tr><tr><td class="mono ltr">NLTK</td><td>لغوية وأدق من Regex</td><td>ليست مخصصة للعربية</td></tr></tbody>
+    </table></div>
+  </div>
+  <div class="block grid2">
+    <div><h4 class="exh" style="margin-top:0">تقسيم المراجعة إلى جمل</h4>
+<pre class="code">import re
+sample_text = reviews.iloc[0]
+sentences = re.split(r"[\.!\?؟]+", sample_text)
+sentences = [s.strip() for s in sentences if s.strip()]</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="n-sent"></ol></div>
+    <div><h4 class="exh" style="margin-top:0">التقطيع إلى كلمات بـ Regex</h4>
+<pre class="code">tokens_basic = re.findall(r"\w+", sample_text)
+tokens_basic[:30]</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="n-tok"></ol></div>
+    <div><h4 class="exh" style="margin-top:0">التقطيع اللغوي بـ NLTK</h4>
+<pre class="code">import nltk
+nltk.download("punkt")
+from nltk.tokenize import word_tokenize
+tokens_nltk = word_tokenize(sample_text)</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="n-nltk"></ol></div>
+  </div>
+</section>
+
+<section class="unitsec c-nlp" id="nlp-stats">
+  <div class="sechead">
+    <span class="chip rose" style="align-self:flex-start">الموضوع الرابع · ما بعد التقطيع</span>
+    <h2>أكثر الكلمات تكرارًا وطول النصوص</h2>
+    <p>بعد التقطيع نحلل النص إحصائيًا. هذا تحليل استكشافي لفهم البيانات، وليس قرارًا نمذجيًا مباشرًا.</p>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-bottom:8px">أكثر 10 كلمات تكرارًا</h3>
+      <div class="seg" role="group" aria-label="مصدر الكلمات" style="margin-bottom:10px"><button id="ncntS" aria-pressed="true">المراجعة أعلاه</button><button id="ncntC" aria-pressed="false">كل المراجعات (200)</button></div>
+      <pre class="code" id="ncntCode"></pre>
+      <div class="hbars" id="ncntBars" style="margin-top:10px"></div>
+      <p class="note" style="margin-top:10px">لماذا؟ لفهم طبيعة اللغة (رسمية أم عامية) وكلمات المجال (الفندق، الغرفة، السعر)، ولاكتشاف الكلمات العامة جدًا التي تدل على الحاجة لـ Stopwords Removal، ولتقييم جودة التقطيع.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:8px">طول المراجعات بعد التقطيع</h3>
+      <svg class="chart" id="nlChart" viewBox="0 0 600 250" role="img" aria-label="توزيع عدد الكلمات في المراجعات"></svg>
+      <div class="console" id="nlOut" style="margin-top:8px"></div>
+      <p class="note" style="margin-top:10px">mean متوسط عدد الكلمات، و max يكشف المراجعات الطويلة. النماذج لا تقبل نصوصًا بطول غير محدود، فهذه الأرقام تساعدنا لاحقًا على اختيار maximum length وقرار القص (Truncation) أو الحشو (Padding)، وكشف النصوص القصيرة أو الطويلة جدًا.</p>
+    </div>
+  </div>
+  <div class="block grid2">
+    <div><h4 class="exh" style="margin-top:0">حساب طول كل مراجعة</h4>
+<pre class="code">lengths = reviews.head(200).apply(lambda x: len(re.findall(r"\w+", x)))
+lengths.describe()</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="n-len"></ol></div>
+    <div><h4 class="exh" style="margin-top:0">عدّ تكرار الكلمات</h4>
+<pre class="code">from collections import Counter
+Counter(tokens_nltk).most_common(10)</pre>
+    <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="n-count"></ol></div>
+  </div>
+</section>
+
+<!-- ============ QUIZ (all courses) ============ -->
 <hr class="course-end">
 <section class="unitsec" id="quiz">
   <div class="sechead">
@@ -913,7 +1492,7 @@ X_test_scaled = scaler.transform(X_test)</pre>
 </section>
 
 </main>
-<footer><div class="wrap">مبني على ملفي «CNN204 - التطبيق العملي (مجمع)» و«ANN202 - التطبيق العملي (مجمع)». الصور وبيانات الطلاب في المختبر مولّدة داخل الصفحة لأغراض التوضيح.</div></footer>
+<footer><div class="wrap">مبني على ملفات التطبيق العملي لمواد CNN204 و ANN202 و RNN204 (الدروس 2-5) و NLP203 (الموضوعان 3-4). الصور وبيانات الطلاب والمراجعات في المختبر مولّدة داخل الصفحة لأغراض التوضيح.</div></footer>
 </div>
 
 <script>
@@ -1280,7 +1859,9 @@ const PRACTICE=[
   [/print\([^)]*predicted_class\)/,"طباعة predicted_class","print(\"Predicted digit:\", predicted_class)"],
   [/print\([^)]*y_test\[0\]\)/,"طباعة الرقم الحقيقي y_test[0]","print(\"True label:\", y_test[0])"]]}
 ];
-function normCode(s){return s.split("\n").map(l=>l.replace(/#.*$/,"")).join("\n").replace(/'/g,'"').replace(/[ \t]+/g," ").replace(/ *([()\[\]{}=,:.*\/+\-]) */g,"$1").trim();}
+// drop a # comment, but not a # inside a string such as r"#\w+"
+function stripComment(l){let q=null;for(let i=0;i<l.length;i++){const c=l[i];if(q){if(c==="\\")i++;else if(c===q)q=null;}else if(c==='"'||c==="'")q=c;else if(c==="#")return l.slice(0,i);}return l;}
+function normCode(s){return s.split("\n").map(stripComment).join("\n").replace(/'/g,'"').replace(/[ \t]+/g," ").replace(/ *([()\[\]{}=,:.*\/+\-]) */g,"$1").trim();}
 function bracketsOk(src){const s=src.split("\n").map(l=>l.replace(/#.*$/,"")).join("\n").replace(/"[^"\n]*"|'[^'\n]*'/g,"");const st=[],pair={")":"(","]":"[","}":"{"};
   for(const ch of s){if("([{".includes(ch))st.push(ch);else if(ch in pair){if(st.pop()!==pair[ch])return false;}}return !st.length;}
 function commonSlip(src){
@@ -1569,7 +2150,7 @@ function practiceWidget(pre,hideEls,getSpec){
   const api={refresh(){if(practicing)load();else mark();},check,ta,out,bShow,setP};WIDGETS.push(api);return api;
 }
 /* ---------- line-by-line mode: write one line, check it, then the next line opens ---------- */
-function codeLines(sol){return sol.split("\n").filter(l=>l.replace(/#.*$/,"").trim());}
+function codeLines(sol){return sol.split("\n").filter(l=>stripComment(l).trim());}
 function loose(s){return normCode(s).replace(/28\*28/g,"784").replace(/(\d+)\.0(?!\d)/g,"$1").replace(/(\d)\.(?![\w\d])/g,"$1").replace(/axis=/g,"");}
 function XLfor(id){if(id.startsWith("dl-"))return DLX[id.slice(3)];if(id.startsWith("s"))return XL[id];return XL[id]||[];}
 function lineGoal(line,items){const n=normCode(line);
@@ -1693,12 +2274,15 @@ function attachLineMode(panel,fullEls,getSolution,getItems,onDone,getKey){
   out.addEventListener("click",e=>{if(e.target.closest(".lm-retry")){reset(true);inp.focus();}});
   return {reset};
 }
-// exercises per course: ANN202 ids start with "a-", everything else (steps, EX, "fit") is CNN204
-function exCounts(){const ann=Object.keys(EX).filter(k=>k.startsWith("a-")),aD=[...solvedX].filter(k=>k.startsWith("a-")).length;
-  return {cT:PRACTICE.length+Object.keys(EX).length-ann.length+1,cD:solved.size+solvedX.size-aD,aT:ann.length,aD};}
-function setStat(id,d,t){const e=$("#"+id);if(e&&e.textContent!==d+" / "+t){e.textContent=d+" / "+t;$("#"+id+"Bar").style.width=(d/t*100)+"%";}}
-function updateProgress(){const x=exCounts(),c=$("#pracProgress");if(c)c.textContent="تمارين CNN204 المحلولة: "+x.cD+" / "+x.cT;
-  setStat("pgEx",x.cD,x.cT);setStat("pgExAnn",x.aD,x.aT);}
+// exercises per course, by id prefix; everything without a prefix (steps, EX, "fit") is CNN204
+const COURSE_PFX={ann:"a-",rnn:"r-",nlp:"n-"},STAT_ID={cnn:"pgEx",ann:"pgExAnn",rnn:"pgExRnn",nlp:"pgExNlp"};
+function exCounts(){const keys=Object.keys(EX),pf=Object.values(COURSE_PFX),out={};
+  for(const c in COURSE_PFX){const p=COURSE_PFX[c];out[c]=[[...solvedX].filter(k=>k.startsWith(p)).length,keys.filter(k=>k.startsWith(p)).length];}
+  out.cnn=[solved.size+[...solvedX].filter(k=>!pf.some(p=>k.startsWith(p))).length,PRACTICE.length+keys.filter(k=>!pf.some(p=>k.startsWith(p))).length+1];
+  return out;}
+function setStat(id,d,t,force){const e=$("#"+id);if(e&&(force||e.textContent!==d+" / "+t)){e.textContent=d+" / "+t;$("#"+id+"Bar").style.width=(t?d/t*100:0)+"%";}}
+function updateProgress(force){const x=exCounts(),c=$("#pracProgress");if(c)c.textContent="تمارين CNN204 المحلولة: "+x.cnn[0]+" / "+x.cnn[1];
+  for(const k in STAT_ID)setStat(STAT_ID[k],x[k][0],x[k][1],force);}
 const WIDGETS=[];
 function runCheck(){const P=PRACTICE[curStep],src=pIn.value,n=normCode(src);
   if(!src.trim()){pRes.innerHTML='<li class="hint">اكتب الكود أولًا ثم اضغط «تحقّق».</li>';return;}
@@ -2051,77 +2635,75 @@ function infoText(d){const L=["<class 'pandas.core.frame.DataFrame'>","RangeInde
 const naCounts=d=>A_COLS.map(c=>d[c].filter(x=>x==null).length);
 const naSum=d=>pySeries(A_COLS,naCounts(d).map(String),"dtype: int64");
 
-/* ---------- notebook ---------- */
-const A_DEF={pd:0,df:0,df_clean:10,X_train:11};
-function need(S,name){if(!S.vars.has(name))throw {py:"NameError: name '"+name+"' is not defined",hint:"المتغير "+name+" لم يُنشأ بعد في هذه الجلسة. شغّل الخلية "+(A_DEF[name]+1)+" «"+NB[A_DEF[name]].h+"» أولًا."};}
+/* ---------- notebook engine (shared by every course): cells run on one session S, like a Colab runtime ---------- */
+function makeNotebook(o){// o:{cells,box,vars,all,reset,defs:{varName:index of the cell that creates it}}
+  const outs=[],IDLE='<span class="muted"># اضغط «شغّل» لترى الناتج</span>';let S;
+  function need(name){if(!S.vars.has(name)){const i=o.defs[name];throw {py:"NameError: name '"+name+"' is not defined",hint:"المتغير "+name+" لم يُنشأ بعد في هذه الجلسة. شغّل الخلية "+(i+1)+" «"+o.cells[i].h+"» أولًا."};}}
+  function vars(){const v=[...S.vars];$(o.vars).innerHTML='<span class="muted" style="font-size:.8rem;font-family:var(--f-body)">في الذاكرة:</span>'+(v.length?v.map(x=>'<span class="chip">'+x+'</span>').join(""):'<span class="muted" style="font-size:.8rem;font-family:var(--f-body)">لا شيء بعد</span>');}
+  function reset(){S={vars:new Set(),count:0,need};outs.forEach(x=>{x.n.textContent="[ ]";x.out.innerHTML=IDLE;});vars();}
+  function run(i){const c=o.cells[i],x=outs[i];S.count++;x.n.textContent="["+S.count+"]";let r;
+    try{r=c.run(S);}catch(e){if(!e||!e.py)throw e;x.out.innerHTML='<span class="err">'+esc(e.py)+'</span>'+(e.hint?'<div class="nbhint">'+esc(e.hint)+'</div>':"");vars();return false;}
+    x.out.innerHTML=(r.text!=null?esc(r.text)+(r.html?"\n":""):"")+(r.html||"")+(r.text==null&&!r.html?'<span class="muted"># '+esc(r.note||"")+'</span>':"")+(r.hint?'<div class="nbhint">'+esc(r.hint)+'</div>':"");vars();return true;}
+  o.cells.forEach((c,i)=>{if(c.ex)XL[c.ex]=c.x;
+    const cell=el("div",{class:"cell"}),head=el("div",{class:"cell-h"},'<h4>'+(i+1)+'. '+esc(c.h)+'</h4>'),rn=el("div",{class:"cell-run"});
+    const n=el("span",{class:"cell-n"},"[ ]"),b=el("button",{class:"btn small primary"},"شغّل");rn.append(n,b);head.appendChild(rn);
+    const pre=el("pre",{class:"code"});setCode(pre,c.code);const out=el("div",{class:"console"},IDLE);
+    const dx=el("details",{class:"exd"},'<summary>شرح الكود سطرًا بسطر</summary><ol class="explain">'+explainHTML(c.x)+'</ol>');
+    cell.append(head,el("p",{class:"why"},esc(c.d)),pre,out,dx);$(o.box).appendChild(cell);
+    b.onclick=()=>run(i);outs.push({n,out});
+    if(c.ex)practiceWidget(pre,()=>[out,rn,dx],()=>({id:c.ex,task:EX[c.ex].task,checks:EX[c.ex].checks}));});
+  $(o.reset).onclick=reset;$(o.all).onclick=()=>{reset();for(let i=0;i<o.cells.length;i++)if(!run(i))break;};
+  reset();}
 const NB=[
  {h:"قراءة الملف",d:"بعد رفع الملف من الشريط الجانبي (Files ← Upload) نقرؤه في جدول اسمه df ونعرض أول 5 صفوف. القيم الحمراء NaN مفقودة.",ex:"a-read",
   code:'import pandas as pd\ndf = pd.read_csv("linear_student_pass.csv")\ndf.head()',
   x:[["import pandas as pd","نستورد pandas باسم مختصر pd."],['df = pd.read_csv("linear_student_pass.csv")',"نقرأ ملف CSV ونحوّله إلى جدول DataFrame نخزّنه في المتغير df."],["df.head()","نعرض أول 5 صفوف لنتأكد أن الملف قُرئ بشكل صحيح وأن أسماء الأعمدة كما نتوقع."]],
   run:S=>{S.vars.add("pd");S.df=aClone(A_RAW);S.vars.add("df");return {html:headTable(S.df)};}},
  {h:"كم صفًا وكم عمودًا؟",d:"shape يعطي (عدد الصفوف، عدد الأعمدة). لو توقعنا 600 سجل وظهر 60 فهناك مشكلة في الملف.",code:"df.shape",
-  x:[["df.shape","حجم الجدول: 600 طالب (صف) و4 أعمدة."]],run:S=>{need(S,"df");return {text:"(600, 4)"};}},
+  x:[["df.shape","حجم الجدول: 600 طالب (صف) و4 أعمدة."]],run:S=>{S.need("df");return {text:"(600, 4)"};}},
  {h:"أنواع الأعمدة والقيم غير المفقودة",d:"Non-Null Count أقل من 600 في الميزات الثلاث، إذن فيها قيم مفقودة NaN سنعالجها في التنظيف.",code:"df.info()",
-  x:[["df.info()","لكل عمود: اسمه (Column)، وعدد القيم غير المفقودة (Non-Null Count)، ونوعه (Dtype)."]],run:S=>{need(S,"df");return {text:infoText(S.df)};}},
+  x:[["df.info()","لكل عمود: اسمه (Column)، وعدد القيم غير المفقودة (Non-Null Count)، ونوعه (Dtype)."]],run:S=>{S.need("df");return {text:infoText(S.df)};}},
  {h:"الإحصاءات الوصفية",d:"describe يحسب الإحصاءات للقيم غير المفقودة فقط. لاحظ الأحمر: count أقل من 600 (قيم مفقودة)، و max لدرجة النصفي فوق 100 (قيمة غير منطقية).",code:"df.describe()",
-  x:[["df.describe()","يعرض count و mean و std و min والأرباع 25% و50% و75% و max لكل عمود رقمي."]],run:S=>{need(S,"df");return {html:describeTable(S.df)};}},
+  x:[["df.describe()","يعرض count و mean و std و min والأرباع 25% و50% و75% و max لكل عمود رقمي."]],run:S=>{S.need("df");return {html:describeTable(S.df)};}},
  {h:"فحص القيم المفقودة فعليًا",d:"isna يعطي True لكل قيمة مفقودة، و sum يجمعها في كل عمود. الهدف pass_final كامل، وهذا ممتاز.",code:"df.isna().sum()",
-  x:[["df.isna()","جدول بنفس الحجم: True مكان كل قيمة مفقودة و False غير ذلك."],[".sum()","يجمع قيم True في كل عمود، فنعرف عدد القيم المفقودة."]],run:S=>{need(S,"df");return {text:naSum(S.df)};}},
+  x:[["df.isna()","جدول بنفس الحجم: True مكان كل قيمة مفقودة و False غير ذلك."],[".sum()","يجمع قيم True في كل عمود، فنعرف عدد القيم المفقودة."]],run:S=>{S.need("df");return {text:naSum(S.df)};}},
  {h:"نسبة القيم المفقودة",d:"النسبة تساعد على تبرير القرار: 3% إلى 4% فقط، وهي نسبة منخفضة.",code:"(df.isna().mean() * 100).round(2)",
   x:[["df.isna().mean()","متوسط قيم True/False هو نسبة المفقود في كل عمود."],["* 100).round(2)","نحوّلها إلى نسبة مئوية ونقرّبها إلى منزلتين."]],
-  run:S=>{need(S,"df");return {text:pySeries(A_COLS,naCounts(S.df).map(n=>String(Math.round(n/A_N*10000)/100).replace(/^(\d+)$/,"$1.0")),"dtype: float64")};}},
+  run:S=>{S.need("df");return {text:pySeries(A_COLS,naCounts(S.df).map(n=>String(Math.round(n/A_N*10000)/100).replace(/^(\d+)$/,"$1.0")),"dtype: float64")};}},
  {h:"التعويض بالوسيط",d:"نعوّض كل قيمة مفقودة بوسيط عمودها لأنه أكثر مقاومة للقيم الشاذة من المتوسط، ثم نتأكد أن المفقود صار 0.",ex:"a-fill",
   code:'df["hours_studied"] = df["hours_studied"].fillna(df["hours_studied"].median())\ndf["midterm_score"] = df["midterm_score"].fillna(df["midterm_score"].median())\ndf["attendance_pct"] = df["attendance_pct"].fillna(df["attendance_pct"].median())\ndf.isna().sum()',
   x:[['df["hours_studied"] = df["hours_studied"].fillna(',"fillna تملأ الخانات الفارغة في عمود ساعات الدراسة بالقيمة التي بين القوسين."],['df["hours_studied"].median())',"الوسيط: القيمة التي في منتصف القيم بعد ترتيبها."],
      ['df["midterm_score"] = df["midterm_score"].fillna(',"نفس العملية لدرجة الاختبار النصفي بوسيطها."],['df["attendance_pct"] = df["attendance_pct"].fillna(',"ونفسها لنسبة الحضور."],["df.isna().sum()","نتأكد أن كل الأعمدة لديها 0 قيم مفقودة."]],
-  run:S=>{need(S,"df");aFillMedian(S.df);return {text:naSum(S.df)};}},
+  run:S=>{S.need("df");aFillMedian(S.df);return {text:naSum(S.df)};}},
  {h:"كم درجة نصفي تتجاوز 100؟",d:"ليس كل رقم كبير Outlier، والخطأ يُحدد بمنطق المتغير: درجة الاختبار لا يمكن أن تتجاوز 100، فهذه قيم غير منطقية (Invalid).",code:'(df["midterm_score"] > 100).sum()',
-  x:[['df["midterm_score"] > 100',"True لكل درجة أكبر من 100."],[".sum()","نعدّها."]],run:S=>{need(S,"df");return {text:String(S.df.midterm_score.filter(x=>x!=null&&x>100).length)};}},
+  x:[['df["midterm_score"] > 100',"True لكل درجة أكبر من 100."],[".sum()","نعدّها."]],run:S=>{S.need("df");return {text:String(S.df.midterm_score.filter(x=>x!=null&&x>100).length)};}},
  {h:"تصحيح القيم غير المنطقية بـ clip",d:"clip يقيّد القيم ضمن النطاق 0 إلى 100: ما فوق 100 يصبح 100. بعدها يجب أن يكون max = 100.",ex:"a-clip",
   code:'df["midterm_score"] = df["midterm_score"].clip(0, 100)\ndf["midterm_score"].describe()',
   x:[['df["midterm_score"].clip(0, 100)',"كل قيمة أقل من 0 تصبح 0، وكل قيمة أكبر من 100 تصبح 100، والباقي كما هو."],['df["midterm_score"].describe()',"نعرض إحصاءات العمود لنتأكد أن max صار 100."]],
-  run:S=>{need(S,"df");S.df.midterm_score=S.df.midterm_score.map(x=>x==null?null:Math.min(100,Math.max(0,x)));return {text:describeSeries(S.df.midterm_score,"midterm_score")};}},
+  run:S=>{S.need("df");S.df.midterm_score=S.df.midterm_score.map(x=>x==null?null:Math.min(100,Math.max(0,x)));return {text:describeSeries(S.df.midterm_score,"midterm_score")};}},
  {h:"فحص التكرارات",d:"عدم تطبيق خطوة لا يعني تجاهلها: نفحص التكرار لأنه يخدع النموذج ويجعل التقييم يبدو أفضل. في مثالنا لا توجد صفوف مكررة.",code:"df.duplicated().sum()",
   x:[["df.duplicated()","True لكل صف مطابق تمامًا لصف قبله."],[".sum()","عدد الصفوف المكررة."]],
-  run:S=>{need(S,"df");const seen=new Set();let k=0;for(let i=0;i<A_N;i++){const key=A_COLS.map(c=>S.df[c][i]).join("|");if(seen.has(key))k++;else seen.add(key);}return {text:String(k)};}},
+  run:S=>{S.need("df");const seen=new Set();let k=0;for(let i=0;i<A_N;i++){const key=A_COLS.map(c=>S.df[c][i]).join("|");if(seen.has(key))k++;else seen.add(key);}return {text:String(k)};}},
  {h:"حفظ النسخة النظيفة",d:"copy ينشئ نسخة في الذاكرة فقط تضيع عند إغلاق Colab، و to_csv يحفظ ملفًا دائمًا نعود إليه أو نشاركه دون إعادة التنظيف.",
   code:'df_clean = df.copy()\ndf_clean.to_csv("linear_student_pass_clean.csv", index=False)',
   x:[["df_clean = df.copy()","نسخة مستقلة داخل الذاكرة (RAM)، فلا نعدّل الأصل بالخطأ."],['df_clean.to_csv("linear_student_pass_clean.csv", index=False)',"نحفظ النسخة في ملف CSV فعلي. index=False حتى لا يُحفظ رقم الصف كعمود إضافي."]],
-  run:S=>{need(S,"df");S.dfc=aClone(S.df);S.vars.add("df_clean");const left=naCounts(S.dfc).reduce((a,b)=>a+b,0),bad=S.dfc.midterm_score.filter(x=>x>100).length;
+  run:S=>{S.need("df");S.dfc=aClone(S.df);S.vars.add("df_clean");const left=naCounts(S.dfc).reduce((a,b)=>a+b,0),bad=S.dfc.midterm_score.filter(x=>x>100).length;
     return {note:"لا يوجد ناتج يُطبع. أُنشئ df_clean وظهر الملف linear_student_pass_clean.csv في قائمة Files.",hint:left||bad?"تنبيه: النسخة المحفوظة ما زال فيها "+(left?left+" قيمة مفقودة":"")+(left&&bad?" و":"")+(bad?bad+" درجة فوق 100":"")+". هل نسيت خلية؟":""};}},
  {h:"تقسيم البيانات إلى تدريب واختبار",d:"نعلّم النموذج على جزء ونختبره على بيانات لم يرها، كما يحدث في الواقع. 20% من 600 = 120 للاختبار، والباقي 480 للتدريب.",ex:"a-split",
   code:'from sklearn.model_selection import train_test_split\nX = df_clean[["hours_studied", "midterm_score", "attendance_pct"]]\ny = df_clean["pass_final"]\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\nX_train.shape, X_test.shape',
   x:[["from sklearn.model_selection import train_test_split","دالة جاهزة من scikit-learn تقسم البيانات."],['X = df_clean[["hours_studied", "midterm_score", "attendance_pct"]]',"المدخلات: الأعمدة التي يتعلم منها النموذج."],
      ['y = df_clean["pass_final"]',"الهدف: الجواب الصحيح الذي نريد تعلّمه (1 ناجح، 0 غير ناجح)."],["train_test_split(X, y, test_size=0.2, random_state=42)","20% للاختبار، و random_state يثبّت التقسيم في كل تشغيل."],["X_train.shape, X_test.shape","نتحقق من النسبة: 480 للتدريب و120 للاختبار."]],
-  run:S=>{need(S,"df_clean");S.sp=A_SPLIT;S.spd=S.dfc;["X","y","X_train","X_test","y_train","y_test"].forEach(v=>S.vars.add(v));return {text:"((480, 3), (120, 3))"};}},
+  run:S=>{S.need("df_clean");S.sp=A_SPLIT;S.spd=S.dfc;["X","y","X_train","X_test","y_train","y_test"].forEach(v=>S.vars.add(v));return {text:"((480, 3), (120, 3))"};}},
  {h:"توحيد القيم Standardization",d:"fit على التدريب فقط ثم transform للاختبار. المتوسط يخرج قريبًا جدًا من 0 (قيم مثل e-16 سببها دقة الحسابات العشرية، وهي عمليًا صفر)، والانحراف 1.",ex:"a-scale",
   code:'from sklearn.preprocessing import StandardScaler\nscaler = StandardScaler()\nX_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled = scaler.transform(X_test)\nX_train_scaled.mean(axis=0), X_train_scaled.std(axis=0)',
   x:[["from sklearn.preprocessing import StandardScaler","أداة تحسب المتوسط والانحراف المعياري ثم تطبّق التحويل."],["scaler = StandardScaler()","ننشئ «آلة» ستتعلم كيف تحوّل البيانات، لكنها لم تتعلم شيئًا بعد."],
      ["X_train_scaled = scaler.fit_transform(X_train)","fit يحسب المتوسط والانحراف من التدريب فقط، و transform يحوّل X_train إلى قيم معيارية."],["X_test_scaled = scaler.transform(X_test)","نفس التحويل على الاختبار بدون fit، حتى لا يؤثر الاختبار على التعلم."],
      ["X_train_scaled.mean(axis=0), X_train_scaled.std(axis=0)","متوسط وانحراف كل عمود بعد التحويل: المتوقع [0, 0, 0] و[1, 1, 1]."]],
-  run:S=>{need(S,"X_train");const tr=aTransform(S.spd,S.sp.train,aFit(S.spd,S.sp.train));["scaler","X_train_scaled","X_test_scaled"].forEach(v=>S.vars.add(v));
+  run:S=>{S.need("X_train");const tr=aTransform(S.spd,S.sp.train,aFit(S.spd,S.sp.train));["scaler","X_train_scaled","X_test_scaled"].forEach(v=>S.vars.add(v));
     const mu=[0,1,2].map(j=>tr.reduce((s,r)=>s+r[j],0)/tr.length),sd=[0,1,2].map(j=>Math.sqrt(tr.reduce((s,r)=>s+(r[j]-mu[j])**2,0)/tr.length));
     return {text:"("+npArr(mu)+",\n "+npArr(sd)+")",hint:mu.some(Number.isNaN)?"ظهرت nan لأن df_clean حُفظ وفيه قيم مفقودة، و NaN تفسد أي حساب تدخل فيه. شغّل خلية التعويض ثم الحفظ ثم التقسيم من جديد.":""};}}
 ];
-NB.forEach(c=>{if(c.ex)XL[c.ex]=c.x;});
-let NBS;const nbOuts=[],NB_IDLE='<span class="muted"># اضغط «شغّل» لترى الناتج</span>';
-function nbVars(){const v=[...NBS.vars];$("#nbVars").innerHTML='<span class="muted" style="font-size:.8rem;font-family:var(--f-body)">في الذاكرة:</span>'+(v.length?v.map(x=>'<span class="chip">'+x+'</span>').join(""):'<span class="muted" style="font-size:.8rem;font-family:var(--f-body)">لا شيء بعد</span>');}
-function nbReset(){NBS={vars:new Set(),count:0};nbOuts.forEach(o=>{o.n.textContent="[ ]";o.out.innerHTML=NB_IDLE;});nbVars();}
-function nbRun(i){const c=NB[i],o=nbOuts[i];NBS.count++;o.n.textContent="["+NBS.count+"]";let r;
-  try{r=c.run(NBS);}catch(e){if(!e||!e.py)throw e;o.out.innerHTML='<span class="err">'+esc(e.py)+'</span><div class="nbhint">'+esc(e.hint)+'</div>';nbVars();return false;}
-  o.out.innerHTML=(r.html||(r.text!=null?esc(r.text):'<span class="muted"># '+esc(r.note||"")+'</span>'))+(r.hint?'<div class="nbhint">'+esc(r.hint)+'</div>':"");nbVars();return true;}
-NB.forEach((c,i)=>{
-  const cell=el("div",{class:"cell"}),head=el("div",{class:"cell-h"},'<h4>'+(i+1)+'. '+esc(c.h)+'</h4>'),run=el("div",{class:"cell-run"});
-  const n=el("span",{class:"cell-n"},"[ ]"),b=el("button",{class:"btn small primary"},"شغّل");run.append(n,b);head.appendChild(run);
-  const pre=el("pre",{class:"code"});setCode(pre,c.code);const out=el("div",{class:"console"},NB_IDLE);
-  const dx=el("details",{class:"exd"},'<summary>شرح الكود سطرًا بسطر</summary><ol class="explain">'+explainHTML(c.x)+'</ol>');
-  cell.append(head,el("p",{class:"why"},esc(c.d)),pre,out,dx);$("#nbCells").appendChild(cell);
-  b.onclick=()=>nbRun(i);nbOuts.push({n,out});
-  if(c.ex)practiceWidget(pre,()=>[out,run,dx],()=>({id:c.ex,task:EX[c.ex].task,checks:EX[c.ex].checks}));
-});
-$("#nbReset").onclick=nbReset;
-$("#nbAll").onclick=()=>{nbReset();for(let i=0;i<NB.length;i++)if(!nbRun(i))break;};
-nbReset();
+makeNotebook({cells:NB,box:"#nbCells",vars:"#nbVars",all:"#nbAll",reset:"#nbReset",defs:{pd:0,df:0,df_clean:10,X_train:11}});
 
 /* ---------- missing values: drop vs mean vs median ---------- */
 const MV={
@@ -2262,6 +2844,475 @@ $("#annReady").innerHTML=[["X_np","(600, 3)",0],["y_np","(600,)",0],["X_train_sc
   .map(r=>'<div class="'+(r[2]?"new":"")+'"><span>'+r[0]+'</span><span>'+r[1]+'</span></div>').join("");
 updateProgress();
 
+/* static code blocks of a course: fill the line-by-line explanation, then attach a practice widget */
+function wireBlocks(keys){keys.forEach(k=>{const o=$('ol[data-x="'+k+'"]');o.innerHTML=explainHTML(XL[k]);const h=o.previousElementSibling,pre=h.previousElementSibling;
+  practiceWidget(pre,()=>[o,h],()=>({id:k,task:EX[k].task,checks:EX[k].checks}));});}
+
+/* ================= RNN204 ================= */
+Object.assign(XL,{
+ "r-prep":[["data = np.array([30, 32, 31, 33, 34, 32, 35])","السلسلة الأصلية: درجات الحرارة السبع بالترتيب."],
+   ["X = []","قائمة فارغة نجمع فيها النوافذ (المدخلات)."],["y = []","قائمة فارغة نجمع فيها اليوم الذي يلي كل نافذة (المخرجات)."],
+   ["window_size = 3","طول النافذة: نستخدم 3 أيام لنتنبأ باليوم الرابع."],
+   ["for i in range(len(data) - window_size):","عدد النوافذ = 7 − 3 = 4، فيأخذ i القيم 0 و1 و2 و3."],
+   ["X.append(data[i:i+window_size])","نقطع 3 أيام متتالية تبدأ من i، مثل data[0:3] = [30, 32, 31]."],
+   ["y.append(data[i+window_size])","واليوم الذي يليها مباشرة، مثل data[3] = 33."],
+   ["X = np.array(X)","نحوّل القائمة إلى مصفوفة شكلها (4, 3)."],["y = np.array(y)","و y تصبح مصفوفة شكلها (4,)."],
+   ['print("X before reshape:\\n", X)',"نطبع النوافذ قبل إعادة التشكيل."],['print("y:\\n", y)',"ونطبع المخرجات."],
+   ["X = X.reshape((X.shape[0], X.shape[1], 1))","RNN تحتاج 3 أبعاد: (عدد العينات، الخطوات الزمنية، عدد الخصائص) = (4, 3, 1). الخاصية الواحدة هي درجة الحرارة."],
+   ['print("X after reshape:", X.shape)',"نتأكد من الشكل الجديد (4, 3, 1)."]],
+ "r-model":[["from tensorflow.keras.models import Sequential","Sequential: نموذج طبقاته مرتبة واحدة بعد الأخرى."],
+   ["from tensorflow.keras.layers import SimpleRNN, Dense","SimpleRNN طبقة متكررة بسيطة، و Dense طبقة كثيفة للمخرج."],
+   ["model = Sequential()","ننشئ نموذجًا فارغًا ثم نضيف إليه الطبقات بـ add."],
+   ["model.add(SimpleRNN(16, activation='tanh', input_shape=(3, 1)))","16 وحدة متكررة بدالة tanh. input_shape=(3, 1) تعني 3 خطوات زمنية وخاصية واحدة في كل خطوة."],
+   ["model.add(Dense(1))","خلية واحدة بدون دالة تنشيط تعطي رقمًا واحدًا: درجة الحرارة المتوقعة."],
+   ["model.compile(optimizer='adam', loss='mse')","Adam لتحديث الأوزان، و MSE (متوسط مربع الخطأ) لأن المخرج رقم مستمر وليس فئة."],
+   ["model.summary()","يعرض الطبقات وأشكال مخرجاتها وعدد المعاملات: 288 في SimpleRNN و17 في Dense."]],
+ "r-fit":[["history = model.fit(X, y, epochs=200, verbose=0)","يدرّب النموذج على النوافذ الأربع. epochs=200 يعني أنه يرى البيانات نفسها 200 مرة، وفي كل مرة يتنبأ ويحسب الخطأ ويعدّل الأوزان. verbose=0 يخفي سجل التدريب، و history تحفظ قيم الخسارة. زيادة epochs تساعد، لكن بحذر."]],
+ "r-pred":[["last_3_days = np.array([34, 32, 35])","آخر ثلاثة أيام: اليوم 5 = 34، واليوم 6 = 32، واليوم 7 = 35."],
+   ["last_3_days = last_3_days.reshape((1, 3, 1))","نفس الأبعاد الثلاثة التي تدرّب عليها النموذج: عينة واحدة، 3 خطوات، خاصية واحدة."],
+   ["predicted_temp = model.predict(last_3_days)","النموذج يتنبأ، والناتج مصفوفة شكلها (1, 1)."],
+   ["predicted_temp[0][0]","نأخذ الرقم نفسه من داخل المصفوفة ونطبعه."]],
+ "r-q1":[["from tensorflow.keras.models import Sequential","نستورد النموذج المتسلسل."],["from tensorflow.keras.layers import SimpleRNN, Dense","ونستورد الطبقتين."],
+   ["timesteps, features = 10, 1","مثال لشكل المدخلات: كل عينة فيها 10 خطوات زمنية وخاصية واحدة. batch_size لا نكتبه، فيحدده التدريب لاحقًا."],
+   ["model = Sequential([","نمرّر قائمة الطبقات مباشرة إلى Sequential."],
+   ["SimpleRNN(16, input_shape=(timesteps, features))","طبقة متكررة بـ 16 وحدة. input_shape لا تتضمن batch_size."],
+   ["Dense(1)","طبقة إخراج بوحدة واحدة لقيمة عددية."],
+   ['model.compile(optimizer="adam", loss="mse")',"الخسارة MSE والمحسّن Adam كما في المطلوب."],["model.summary()","نتأكد من البنية وعدد المعاملات."]]
+});
+Object.assign(EX,{
+ "r-prep":{task:"حوّل السلسلة [30, 32, 31, 33, 34, 32, 35] إلى نوافذ طولها 3 في X ومخرجاتها في y، ثم أعد تشكيل X إلى (عينات، خطوات، خصائص).",checks:[
+  R_(/data=np\.array\(\[30,32,31,33,34,32,35\]\)/,"data = np.array([30, 32, 31, 33, 34, 32, 35])"),R_(/window_size=3/,"window_size = 3"),
+  R_(/for i in range\(len\(data\)-window_size\):/,"for i in range(len(data) - window_size):"),R_(/X\.append\(data\[i:i\+window_size\]\)/,"X.append(data[i:i+window_size])"),
+  R_(/y\.append\(data\[i\+window_size\]\)/,"y.append(data[i+window_size])"),R_(/X=X\.reshape\(\(X\.shape\[0\],X\.shape\[1\],1\)\)/,"X = X.reshape((X.shape[0], X.shape[1], 1))")]},
+ "r-model":{task:"ابنِ نموذج Sequential فيه SimpleRNN بـ 16 وحدة و tanh ومدخل (3, 1)، ثم Dense(1)، وجمّعه بـ adam و mse واعرض ملخصه.",checks:[
+  R_(/from tensorflow\.keras\.layers import SimpleRNN,Dense/,"from tensorflow.keras.layers import SimpleRNN, Dense"),R_(/model=Sequential\(\)/,"model = Sequential()"),
+  R_(/model\.add\(SimpleRNN\(16,activation="tanh",input_shape=\(3,1\)\)\)/,"model.add(SimpleRNN(16, activation='tanh', input_shape=(3, 1)))"),
+  R_(/model\.add\(Dense\(1\)\)/,"model.add(Dense(1))"),R_(/model\.compile\(optimizer="adam",loss="mse"\)/,"model.compile(optimizer='adam', loss='mse')"),R_(/model\.summary\(\)/,"model.summary()")]},
+ "r-fit":{task:"درّب النموذج على X و y لمدة 200 epoch دون طباعة السجل، واحفظ النتيجة في history.",checks:[R_(/history=model\.fit\(X,y,epochs=200,verbose=0\)/,"history = model.fit(X, y, epochs=200, verbose=0)")]},
+ "r-pred":{task:"جهّز آخر ثلاثة أيام [34, 32, 35] بالشكل (1, 3, 1)، وتنبأ بها، واطبع الرقم المتوقع.",checks:[
+  R_(/last_3_days=np\.array\(\[34,32,35\]\)/,"last_3_days = np.array([34, 32, 35])"),R_(/last_3_days=last_3_days\.reshape\(\(1,3,1\)\)/,"last_3_days = last_3_days.reshape((1, 3, 1))"),
+  R_(/predicted_temp=model\.predict\(last_3_days\)/,"predicted_temp = model.predict(last_3_days)"),R_(/print\([^\n]*predicted_temp\[0\]\[0\]\)/,"طباعة predicted_temp[0][0]")]},
+ "r-q1":{task:"عرّف timesteps = 10 و features = 1، وابنِ Sequential بقائمة: SimpleRNN(16) بمدخل (timesteps, features) ثم Dense(1)، وجمّعه بـ adam و mse.",checks:[
+  R_(/from tensorflow\.keras\.layers import SimpleRNN,Dense/,"from tensorflow.keras.layers import SimpleRNN, Dense"),R_(/timesteps,features=10,1/,"timesteps, features = 10, 1"),
+  R_(/model=Sequential\(\[/,"model = Sequential(["),R_(/SimpleRNN\(16,input_shape=\(timesteps,features\)\)/,"SimpleRNN(16, input_shape=(timesteps, features))"),
+  R_(/Dense\(1\)/,"Dense(1)"),R_(/model\.compile\(optimizer="adam",loss="mse"\)/,'model.compile(optimizer="adam", loss="mse")')]},
+ "r-load":{task:"استورد pandas و numpy و MinMaxScaler و LabelEncoder، واقرأ student_scores_raw.csv في df_raw، واعمل منه نسخة df.",checks:[
+  R_(/import pandas as pd/,"import pandas as pd"),R_(/import numpy as np/,"import numpy as np"),R_(/from sklearn\.preprocessing import MinMaxScaler,LabelEncoder/,"from sklearn.preprocessing import MinMaxScaler, LabelEncoder"),
+  R_(/RAW_PATH="student_scores_raw\.csv"/,'RAW_PATH = "student_scores_raw.csv"'),R_(/df_raw=pd\.read_csv\(RAW_PATH\)/,"df_raw = pd.read_csv(RAW_PATH)"),R_(/df=df_raw\.copy\(\)/,"df = df_raw.copy()")]},
+ "r-sort":{task:"حوّل exam_number إلى أرقام (النصوص تصبح NaN)، ثم رتّب df حسب الطالب ثم الاختبار وأعد ترقيم الفهرس.",checks:[
+  R_(/df\["exam_number"\]=pd\.to_numeric\(df\["exam_number"\],errors="coerce"\)/,'df["exam_number"] = pd.to_numeric(df["exam_number"], errors="coerce")'),
+  R_(/df=df\.sort_values\(\["student_id","exam_number"\]\)\.reset_index\(drop=True\)/,'df = df.sort_values(["student_id", "exam_number"]).reset_index(drop=True)')]},
+ "r-dup":{task:"احذف أي صف مكرر لنفس الطالب ونفس رقم الاختبار، مع إبقاء أول ظهور، ثم اعرض عدد الصفوف.",checks:[
+  R_(/df=df\.drop_duplicates\(subset=\["student_id","exam_number"\],keep="first"\)/,'df = df.drop_duplicates(subset=["student_id", "exam_number"], keep="first")'),R_(/len\(df\)/,"len(df)")]},
+ "r-scale":{task:"قسّم زمنيًا (الاختبارات 1 إلى 4 تدريب)، ودرّب MinMaxScaler على درجات التدريب فقط، ثم حجّم كل الدرجات في score_scaled.",checks:[
+  R_(/df_proc\["split"\]=np\.where\(df_proc\["exam_number"\] ?<=4,"train","test"\)/,'df_proc["split"] = np.where(df_proc["exam_number"] <= 4, "train", "test")'),
+  R_(/scaler=MinMaxScaler\(\)/,"scaler = MinMaxScaler()"),R_(/scaler\.fit\(df_proc\.loc\[df_proc\["split"\]=="train",\["score"\]\]\)/,'scaler.fit(df_proc.loc[df_proc["split"] == "train", ["score"]])'),
+  R_(/df_proc\["score_scaled"\]=scaler\.transform\(df_proc\[\["score"\]\]\)/,'df_proc["score_scaled"] = scaler.transform(df_proc[["score"]])')]},
+ "r-enc":{task:"حوّل student_id إلى رقم بـ LabelEncoder في عمود student_id_encoded، واحفظ df_proc في student_scores_processed.csv.",checks:[
+  R_(/le=LabelEncoder\(\)/,"le = LabelEncoder()"),R_(/df_proc\["student_id_encoded"\]=le\.fit_transform\(df_proc\["student_id"\]\)/,'df_proc["student_id_encoded"] = le.fit_transform(df_proc["student_id"])'),
+  R_(/PROCESSED_PATH="student_scores_processed\.csv"/,'PROCESSED_PATH = "student_scores_processed.csv"'),R_(/df_proc\.to_csv\(PROCESSED_PATH,index=False\)/,"df_proc.to_csv(PROCESSED_PATH, index=False)")]}
+});
+wireBlocks(["r-prep","r-model","r-fit","r-pred","r-q1"]);
+
+/* ---------- windows over the 7-day series ---------- */
+const R_TEMP=[30,32,31,33,34,32,35];let rwSize=3,rwIdx=0;
+function rWindows(w,d){const X=[],y=[];for(let i=0;i+w<d.length;i++){X.push(d.slice(i,i+w));y.push(d[i+w]);}return {X,y};}
+const npRow=a=>"["+a.join(" ")+"]";
+function drawWin(){const {X,y}=rWindows(rwSize,R_TEMP);rwIdx=Math.max(0,Math.min(rwIdx,X.length-1));$("#rwV").textContent=rwSize;
+  const W=640,H=230,ml=44,mr=12,mt=22,mb=40,step=(W-ml-mr)/8,xc=d=>ml+step*(d-0.5),ys=sx(28,37,H-mb,mt);
+  let s=axes({W,H,ml,mr,mt,mb,xt:[1,2,3,4,5,6,7,8],xs:xc,yt:[28,30,32,34,36],ys,xcat:1,xl:"اليوم",yl:"°C"});
+  s+='<rect x="'+(xc(rwIdx+1)-step/2+3)+'" y="'+mt+'" width="'+(step*rwSize-6)+'" height="'+(H-mb-mt)+'" rx="8" style="fill:var(--violet-soft)"/>';
+  s+='<polyline points="'+R_TEMP.map((v,i)=>xc(i+1)+","+ys(v)).join(" ")+'" style="fill:none;stroke:var(--muted);stroke-width:2"/>';
+  s+='<line x1="'+xc(7)+'" y1="'+ys(35)+'" x2="'+xc(8)+'" y2="'+ys(33.5)+'" style="stroke:var(--muted);stroke-width:2;stroke-dasharray:4 4"/><circle cx="'+xc(8)+'" cy="'+ys(33.5)+'" r="9" style="fill:var(--surface);stroke:var(--muted);stroke-dasharray:3 3"/><text x="'+xc(8)+'" y="'+(ys(33.5)+4)+'" text-anchor="middle" class="ink">؟</text>';
+  R_TEMP.forEach((v,i)=>{const inW=i>=rwIdx&&i<rwIdx+rwSize,tg=i===rwIdx+rwSize,c=inW?"var(--violet)":tg?"var(--teal)":"var(--muted)";
+    s+='<g>'+tt("اليوم "+(i+1)+": "+v+"°"+(inW?" (مدخل)":tg?" (المخرج y)":""))+'<circle cx="'+xc(i+1)+'" cy="'+ys(v)+'" r="'+(inW||tg?8:6)+'" style="fill:'+c+';stroke:var(--surface);stroke-width:2"/></g><text x="'+xc(i+1)+'" y="'+(ys(v)-14)+'" text-anchor="middle" class="ink">'+v+'</text>';});
+  $("#rwChart").innerHTML=s;
+  $("#rwLegend").innerHTML=legend([["var(--violet)","المدخلات X (النافذة الحالية)"],["var(--teal)","المخرج y"],["var(--muted)","بقية الأيام"]]);
+  $("#rwTable").innerHTML='<thead><tr><th>#</th><th>X (المدخلات)</th><th>y (المخرج)</th></tr></thead><tbody>'+X.map((r,i)=>'<tr class="'+(i===rwIdx?"on":"")+'"><td class="mono">'+(i+1)+'</td><td class="mono">('+r.join(", ")+')</td><td class="mono">'+y[i]+'</td></tr>').join("")+'</tbody>';
+  $("#rwOut").textContent="X before reshape:\n ["+X.map((r,i)=>(i?" ":"")+npRow(r)).join("\n")+"]\ny:\n "+npRow(y)+"\nX after reshape: ("+X.length+", "+rwSize+", 1)";
+  $("#rwShapes").innerHTML=[["X قبل reshape","("+X.length+", "+rwSize+")",0],["X بعد reshape","("+X.length+", "+rwSize+", 1)",1],["y","("+X.length+",)",0]].map(r=>'<div class="'+(r[2]?"new":"")+'"><span>'+r[0]+'</span><span>'+r[1]+'</span></div>').join("");}
+$("#rwSize").oninput=e=>{rwSize=+e.target.value;drawWin();};
+$("#rwPrev").onclick=()=>{const n=R_TEMP.length-rwSize;rwIdx=(rwIdx-1+n)%n;drawWin();};
+$("#rwNext").onclick=()=>{const n=R_TEMP.length-rwSize;rwIdx=(rwIdx+1)%n;drawWin();};
+drawWin();
+
+/* ---------- a real SimpleRNN(16, tanh) + Dense(1), trained with Adam on MSE (backpropagation through time) ---------- */
+function rnnInit(seed){const H=16,R=rng(seed),u=l=>()=>(R()*2-1)*l;
+  return {H,wx:Float64Array.from({length:H},u(Math.sqrt(6/(1+H)))),wh:Float64Array.from({length:H*H},u(Math.sqrt(6/(2*H)))),b:new Float64Array(H),wd:Float64Array.from({length:H},u(Math.sqrt(6/(H+1)))),bd:new Float64Array(1)};}
+function rnnForward(m,xs){const H=m.H,hs=[new Float64Array(H)];
+  for(const x of xs){const p=hs[hs.length-1],h=new Float64Array(H);for(let j=0;j<H;j++){let a=m.wx[j]*x+m.b[j];for(let i=0;i<H;i++)a+=p[i]*m.wh[i*H+j];h[j]=Math.tanh(a);}hs.push(h);}
+  const hT=hs[hs.length-1];let y=m.bd[0];for(let j=0;j<H;j++)y+=m.wd[j]*hT[j];return {hs,y};}
+function rnnTrain(X,Y,epochs,seed){const m=rnnInit(seed),H=m.H,K=["wx","wh","b","wd","bd"],M={},V={},G={};K.forEach(k=>{M[k]=new Float64Array(m[k].length);V[k]=new Float64Array(m[k].length);G[k]=new Float64Array(m[k].length);});
+  const lr=0.001,b1=0.9,b2=0.999,eps=1e-7,loss=[],n=X.length;
+  for(let ep=1;ep<=epochs;ep++){K.forEach(k=>G[k].fill(0));let L=0;   // 4 samples < batch_size 32: one update per epoch, as in Keras
+    X.forEach((xs,s)=>{const {hs,y}=rnnForward(m,xs),e=y-Y[s],dy=2*e/n;L+=e*e/n;G.bd[0]+=dy;const hT=hs[hs.length-1];let dh=new Float64Array(H);
+      for(let j=0;j<H;j++){G.wd[j]+=dy*hT[j];dh[j]=dy*m.wd[j];}
+      for(let t=xs.length;t>=1;t--){const h=hs[t],p=hs[t-1],nd=new Float64Array(H);
+        for(let j=0;j<H;j++){const da=dh[j]*(1-h[j]*h[j]);G.wx[j]+=da*xs[t-1];G.b[j]+=da;for(let i=0;i<H;i++){G.wh[i*H+j]+=p[i]*da;nd[i]+=m.wh[i*H+j]*da;}}dh=nd;}});
+    loss.push(L);const c1=1-b1**ep,c2=1-b2**ep;
+    K.forEach(k=>{const w=m[k],g=G[k],mm=M[k],vv=V[k];for(let i=0;i<w.length;i++){mm[i]=b1*mm[i]+(1-b1)*g[i];vv[i]=b2*vv[i]+(1-b2)*g[i]*g[i];w[i]-=lr*(mm[i]/c1)/(Math.sqrt(vv[i]/c2)+eps);}});}
+  return {m,loss};}
+let rtScaled=false;
+function rtRun(){seg($("#rtRaw"),$("#rtScaled"),!rtScaled);const E=+$("#rtEp").value,lo=Math.min(...R_TEMP),hi=Math.max(...R_TEMP);
+  const f=v=>rtScaled?(v-lo)/(hi-lo):v,inv=v=>rtScaled?v*(hi-lo)+lo:v,{X,y}=rWindows(3,R_TEMP);
+  const {m,loss}=rnnTrain(X.map(r=>r.map(f)),y.map(f),E,7),xin=[34,32,35].map(f),fw=rnnForward(m,xin),pred=inv(fw.y);
+  // loss curve on a log scale
+  const W=600,H=260,ml=58,mr=12,mt=14,mb=42,lg=loss.map(v=>Math.log10(Math.max(v,1e-8))),lmin=Math.floor(Math.min(...lg)),lmax=Math.ceil(Math.max(...lg));
+  const xs=sx(1,E,ml,W-mr),ys=sx(lmin,lmax===lmin?lmin+1:lmax,H-mb,mt),yt=[];for(let k=lmin;k<=lmax;k++)yt.push(k);
+  let s=axes({W,H,ml,mr,mt,mb,xt:ticks(1,E,6).filter(t=>t>=1),xs,yt,ys,xl:"epoch",yl:"loss (log)"});
+  s=s.replace(/(<text x="[\d.]+" y="[\d.]+" text-anchor="end">)(-?\d+)(<\/text>)/g,(m0,a,k,b)=>a+"1e"+k+b);
+  const step=Math.max(1,Math.floor(E/300));let pts=[];for(let i=0;i<E;i+=step)pts.push(xs(i+1).toFixed(1)+","+ys(lg[i]).toFixed(1));pts.push(xs(E).toFixed(1)+","+ys(lg[E-1]).toFixed(1));
+  s+='<polyline points="'+pts.join(" ")+'" style="fill:none;stroke:var(--violet);stroke-width:2"/>';
+  $("#rtLoss").innerHTML=s;
+  $("#rtPred").textContent=pred.toFixed(2)+" °C";$("#rtLossV").textContent=loss[E-1].toPrecision(4)+(rtScaled?" (على القيم المحجَّمة)":" (°C²)");
+  $("#rtMsg").innerHTML=rtScaled?(pred>30&&pred<36?"<b>مع التحجيم</b> تقع القيم بين 0 و1، فتعمل tanh في منطقتها الحساسة وتتعلم الشبكة النمط بسرعة: التنبؤ داخل نطاق الأيام السابقة (30 إلى 35). ":"<b>مع التحجيم</b> ما زال التدريب قصيرًا؛ زِد epochs. ")+"نعيد التنبؤ إلى درجات مئوية بعكس التحجيم."
+    :(Math.abs(pred-33.5)>3?"<b>النموذج لم يتعلم بعد.</b> أرقام مثل 30 تُشبع tanh فتخرج كل الوحدات قريبة من 1، والمخرج يبدأ من 0 ويقترب من 33 ببطء، لأن Adam يغيّر كل وزن بخطوات صغيرة (معدل التعلم 0.001). زِد epochs كثيرًا، أو جرّب التحجيم.":"<b>بعد epochs كثيرة</b> اقترب النموذج من القيم الحقيقية حتى بلا تحجيم، لكنه احتاج وقتًا أطول بكثير.");
+  $("#rtSummary").textContent='Model: "sequential"\nLayer (type)              Output Shape        Param #\n=====================================================\nsimple_rnn (SimpleRNN)    (None, 16)          288\ndense (Dense)             (None, 1)           17\n=====================================================\nTotal params: 305\n\n# 288 = 16×1 (wx) + 16×16 (wh) + 16 (bias)';
+  const cell=v=>{const c=v>=0?"var(--teal)":"var(--amber)";return '<i title="'+v.toFixed(3)+'" style="background:color-mix(in srgb,'+c+' '+Math.round(Math.abs(v)*100)+'%,var(--surface))"></i>';};
+  $("#rtHidden").innerHTML=fw.hs.slice(1).map((h,t)=>'<span>h'+(t+1)+' ← '+[34,32,35][t]+'°</span>'+Array.from(h).map(cell).join("")).join("");}
+$("#rtRaw").onclick=()=>{rtScaled=false;rtRun();};$("#rtScaled").onclick=()=>{rtScaled=true;rtRun();};$("#rtGo").onclick=rtRun;$("#rtEp").onchange=rtRun;
+rtRun();
+
+/* ---------- topic 3: return_sequences and what training updates ---------- */
+function drawRS(on){seg($("#rsF"),$("#rsT"),!on);
+  $("#rsDiag").innerHTML=[1,2,3].map(t=>'<div class="st"><b class="'+(on||t===3?"outon":"outoff")+'">h'+t+'</b><i>↑</i><b class="cellbox">RNN'+(t<3?" →":"")+'</b><i>↑</i><b>x'+t+'</b></div>').join("");
+  $("#rsNote").innerHTML=on?'يُرجع الحالة الخفية لكل خطوة: الشكل <span class="ltr mono">(batch_size, timesteps, 16)</span>. نحتاجه حين نضع طبقة RNN فوق أخرى، أو حين نريد مخرجًا لكل خطوة.'
+    :'الافتراضي: يُرجع الحالة الخفية للخطوة الأخيرة فقط: الشكل <span class="ltr mono">(batch_size, 16)</span>. مناسب حين نريد تنبؤًا واحدًا للتسلسل كله، مثل حرارة اليوم القادم.';}
+$("#rsF").onclick=()=>drawRS(false);$("#rsT").onclick=()=>drawRS(true);drawRS(false);
+const upBtns=[...$("#upPick").querySelectorAll("[data-k]")];upBtns.forEach(b=>b.onclick=()=>b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!=="true"));
+$("#upCheck").onclick=()=>{const on=upBtns.filter(b=>b.getAttribute("aria-pressed")==="true").map(b=>b.dataset.k).sort().join("");
+  $("#upFb").innerHTML=on==="bw"?"<b>صحيح.</b> التدريب يعدّل الأوزان (Weights) والانحياز (Bias) فقط. دوال التنشيط نختارها نحن عند بناء النموذج وتبقى ثابتة.":
+    on.includes("a")?"<b>ليس تمامًا.</b> دوال التنشيط (relu و sigmoid) نختارها عند بناء النموذج ولا يغيّرها التدريب.":"<b>ناقص.</b> هناك عنصر آخر يتعدّل مع كل خطوة Backpropagation.";};
+
+/* ---------- topic 4: seven ways to collect data ---------- */
+const R_METHODS=[
+ ["أنظمة جاهزة","جمع البيانات من أنظمة موجودة مسبقًا.",["نظام شؤون الطلاب","نظام إدارة التعلم (LMS)"],["بيانات حقيقية","مرتبة زمنيًا","جاهزة للاستخدام"],["قد تحتوي على أخطاء","قد تحتوي على قيم مفقودة"]],
+ ["ملفات CSV / Excel","استخدام ملفات محفوظة بصيغة CSV أو Excel.",["ملف درجات الطلاب"],["سهلة وبسيطة","مناسبة للتعليم","لا تحتاج اتصالًا بالإنترنت"],["أخطاء إدخال يدوي","اختلاف في تنسيق الملفات"]],
+ ["الإدخال اليدوي","إدخال البيانات يدويًا.",["إدخال درجات طلاب للاختبارات"],["سهلة الفهم","مناسبة للأمثلة الصغيرة"],["غير مناسبة للبيانات الكبيرة","عرضة للأخطاء"]],
+ ["الأجهزة والحساسات","جمع البيانات تلقائيًا عبر أجهزة.",["أجهزة الحضور والانصراف","العدادات الذكية","أجهزة قياس صحية"],["بيانات متتابعة بطبيعتها","مناسبة جدًا لـ RNN"],["تحتاج تجهيزًا تقنيًا","صعوبة التحكم بالجودة"]],
+ ["واجهات APIs","الحصول على البيانات من مصادر خارجية عبر الإنترنت.",["بيانات الطقس","أسعار الأسهم"],["بيانات محدّثة","حجم بيانات كبير"],["تحتاج اتصالًا بالإنترنت","قد تتغير صيغة البيانات"]],
+ ["قواعد البيانات","استخراج البيانات من قواعد بيانات.",["قواعد بيانات الجامعات","قواعد بيانات الشركات"],["بيانات منظمة","سهلة الاستعلام"],["تحتاج معرفة بأساسيات قواعد البيانات"]],
+ ["بيانات اصطناعية","إنشاء بيانات وهمية لأغراض التعليم. بيانات هذا المختبر من هذا النوع.",["توليد درجات طلاب افتراضيين"],["آمنة","قابلة للتحكم","ممتازة للتدريس"],["ليست واقعية بالكامل"]]];
+let rmI=0;
+function drawMethods(){[...$("#rmTabs").children].forEach((b,i)=>b.setAttribute("aria-selected",i===rmI));const [,d,ex,pro,con]=R_METHODS[rmI],ul=a=>"<ul>"+a.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>";
+  $("#rmBody").innerHTML='<p style="font-size:.95rem">'+esc(d)+'</p><div class="mgrid"><div><h4>أمثلة</h4>'+ul(ex)+'</div><div><h4 style="color:var(--good)">المميزات</h4>'+ul(pro)+'</div><div><h4 style="color:var(--bad)">العيوب</h4>'+ul(con)+'</div></div>';}
+R_METHODS.forEach((m,i)=>{const b=el("button",{role:"tab","aria-selected":i===0},"<b>"+(i+1)+"</b>"+m[0]);b.onclick=()=>{rmI=i;drawMethods();};$("#rmTabs").appendChild(b);});drawMethods();
+
+/* ---------- topic 5: raw student scores with real-world problems, and a pandas-like pipeline ---------- */
+const R_IDS=[...Array(50)].map((_,i)=>"S"+String(i+1).padStart(2,"0"));
+const R_RAW=(()=>{const R=rng(2045),rows=[];
+  R_IDS.forEach(id=>{const base=55+R()*33,trend=(R()-0.35)*3.2;for(let e=1;e<=6;e++)rows.push({student_id:id,exam_number:e,score:Math.round(Math.min(100,Math.max(35,base+trend*e+(R()-0.5)*9)))});});
+  const at=(id,e)=>rows.find(r=>r.student_id===id&&r.exam_number===e);
+  [["S04",3],["S12",4],["S23",2],["S31",5],["S45",3]].forEach(([id,e])=>rows.splice(rows.indexOf(at(id,e)),1));      // missing exams (gaps)
+  [["S07",4],["S18",2],["S36",5]].forEach(([id,e])=>at(id,e).score="غائب");                                       // text instead of a score
+  [["S14",6,105],["S29",1,-5],["S40",6,112]].forEach(([id,e,v])=>at(id,e).score=v);                               // out of 0..100, at a series end
+  at("S21",4).score=22;at("S33",3).score=25;                                                                       // sharp drops: IQR outliers
+  [["S02",2],["S10",5],["S19",1],["S25",6],["S38",4],["S48",2]].forEach(([id,e])=>{rows.push({student_id:id,exam_number:e,score:at(id,e).score-3});}); // duplicates
+  [["S09",5,"five"],["S27",3,"three"]].forEach(([id,e,w])=>at(id,e).exam_number=w);                              // exam number typed as text
+  for(let i=rows.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[rows[i],rows[j]]=[rows[j],rows[i]];}
+  return rows.map(r=>({student_id:r.student_id,exam_number:String(r.exam_number),score:String(r.score)}));})();
+const R_ISSUES={S04:"الاختبار 3 كان مفقودًا، فعُوِّض بدرجة الاختبار 2 (ffill).",S12:"الاختبار 4 كان مفقودًا، فعُوِّض بدرجة الاختبار 3.",S23:"الاختبار 2 كان مفقودًا، فعُوِّض بدرجة الاختبار 1.",
+  S31:"الاختبار 5 كان مفقودًا، فعُوِّض بدرجة الاختبار 4.",S45:"الاختبار 3 كان مفقودًا، فعُوِّض بدرجة الاختبار 2.",S07:"درجة الاختبار 4 كانت «غائب»، فصارت NaN ثم عُوِّضت.",
+  S18:"درجة الاختبار 2 كانت «غائب».",S36:"درجة الاختبار 5 كانت «غائب».",S14:"درجة الاختبار 6 كانت 105 فحُذفت، فبقيت 5 اختبارات.",S29:"درجة الاختبار 1 كانت −5 فحُذفت، فبدأت السلسلة من الأسبوع الثاني وأُعيد ترقيمها.",
+  S40:"درجة الاختبار 6 كانت 112 فحُذفت.",S21:"هبوط حاد في الاختبار 4 (22): علّمه IQR كقيمة شاذة دون حذفه.",S33:"هبوط حاد في الاختبار 3 (25): قيمة شاذة معلَّمة.",
+  S09:"رقم الاختبار 5 كُتب «five» فصار NaN وضاع صفه، ثم عُوِّض.",S27:"رقم الاختبار 3 كُتب «three».",S02:"الاختبار 2 مكرر مرتين.",S10:"الاختبار 5 مكرر.",S19:"الاختبار 1 مكرر.",S25:"الاختبار 6 مكرر.",S38:"الاختبار 4 مكرر.",S48:"الاختبار 2 مكرر."};
+const DAY=864e5,R_BASE=Date.UTC(2025,0,1);
+const toNum=v=>{if(typeof v==="number")return v;const s=String(v).trim();return s!==""&&isFinite(+s)?+s:NaN;};
+const nan=v=>typeof v==="number"&&Number.isNaN(v);
+const byStudent=df=>{const g={};df.forEach(r=>(g[r.student_id]=g[r.student_id]||[]).push(r));return Object.keys(g).sort().map(k=>g[k]);};
+function rSort(df){return df.slice().sort((a,b)=>(a.student_id>b.student_id)-(a.student_id<b.student_id)||(nan(a.exam_number)-nan(b.exam_number))||(nan(a.exam_number)?0:a.exam_number-b.exam_number));}
+function rDedup(df){const seen=new Set();return df.filter(r=>{const k=r.student_id+"|"+r.exam_number;if(seen.has(k))return false;seen.add(k);return true;});}
+function rComplete(df){const out=[];byStudent(df).forEach(g=>{const ex=g.map(r=>r.exam_number).filter(e=>!nan(e)),lo=Math.min(...ex),hi=Math.max(...ex),rows=[];
+    for(let e=lo;e<=hi;e++){const m=g.filter(r=>r.exam_number===e);(m.length?m:[{score:NaN}]).forEach(r=>rows.push({student_id:g[0].student_id,exam_number:e,score:r.score}));}
+    for(let i=1;i<rows.length;i++)if(nan(rows[i].score))rows[i].score=rows[i-1].score;for(let i=rows.length-2;i>=0;i--)if(nan(rows[i].score))rows[i].score=rows[i+1].score;out.push(...rows);});return out;}
+function rRange(df){return df.filter(r=>r.score>=0&&r.score<=100);}
+function rIqr(df){return byStudent(df).flatMap(g=>{const s=g.map(r=>r.score),q1=aQuant(s,.25),q3=aQuant(s,.75),i=q3-q1;return g.map(r=>({...r,is_outlier_iqr:r.score<q1-1.5*i||r.score>q3+1.5*i}));});}
+function rTime(df){return df.map(r=>({...r,timestamp:R_BASE+(r.exam_number-1)*7*DAY}));}
+function rResample(df){return byStudent(df).flatMap(g=>{g=g.slice().sort((a,b)=>a.timestamp-b.timestamp);const t0=g[0].timestamp,K=Math.floor((g[g.length-1].timestamp-t0)/(7*DAY)),out=[];
+    for(let k=0;k<=K;k++){const m=g.filter(r=>Math.floor((r.timestamp-t0)/(7*DAY))===k);out.push({timestamp:t0+k*7*DAY,exam_number:k+1,score:m.length?aMean(m.map(r=>r.score)):NaN,is_outlier_iqr:m.length?aMean(m.map(r=>+!!r.is_outlier_iqr)):NaN,student_id:g[0].student_id});}return out;});}
+function rScale(df){const tr=aNN(df.filter(r=>r.exam_number<=4).map(r=>r.score)),lo=Math.min(...tr),hi=Math.max(...tr);
+  return {lo,hi,df:df.map(r=>({...r,split:r.exam_number<=4?"train":"test",score_scaled:(r.score-lo)/(hi-lo)}))};}
+function rEncode(df){const ids=[...new Set(df.map(r=>r.student_id))].sort();return df.map(r=>({...r,student_id_encoded:ids.indexOf(r.student_id)}));}
+const isoDay=t=>new Date(t).toISOString().slice(0,10);
+function rTable(df,n,t,cols){cols=cols||Object.keys(df[0]);const f=(c,v)=>{if(c==="exam_number")return t.exam==="obj"?v:nan(v)?"NaN":t.exam==="float"?v.toFixed(1):String(v);
+    if(c==="score")return t.score==="obj"?v:nan(v)?"NaN":v.toFixed(1);if(c==="timestamp")return isoDay(v);if(c==="is_outlier_iqr")return v?"True":"False";return String(v);};
+  return dfTable(cols,df.slice(0,n).map((r,i)=>[i,...cols.map(c=>({v:f(c,r[c]),hot:(c==="score"||c==="exam_number")&&(nan(r[c])||(t[c==="score"?"score":"exam"]==="obj"&&!isFinite(+r[c])))}))]));}
+const R_CELLS=[
+ {h:"تحميل البيانات الخام",d:"نقرأ الملف الخام ونعمل نسخة df حتى لا نغيّر الأصل. لاحظ أن الصفوف بلا ترتيب، وأن بعض القيم نصوص.",ex:"r-load",
+  code:'import pandas as pd\nimport numpy as np\nfrom sklearn.preprocessing import MinMaxScaler, LabelEncoder\n# (0) تحميل البيانات الخام (Raw Data)\nRAW_PATH = "student_scores_raw.csv"\ndf_raw = pd.read_csv(RAW_PATH)\n# نسخة للعمل حتى لا نغيّر البيانات الأصلية\ndf = df_raw.copy()\nprint(df.shape)\ndf.head()',
+  x:[["from sklearn.preprocessing import MinMaxScaler, LabelEncoder","أداتان سنحتاجهما في المعالجة: التحجيم وترميز النصوص."],['RAW_PATH = "student_scores_raw.csv"',"مسار ملف البيانات الخام في متغير، فيسهل تغييره."],
+     ["df_raw = pd.read_csv(RAW_PATH)","نقرأ الملف في جدول."],["df = df_raw.copy()","نعمل على نسخة، وتبقى df_raw كما هي للرجوع إليها."],["print(df.shape)","عدد الصفوف والأعمدة."]],
+  run:S=>{S.df=R_RAW.map(r=>({...r}));S.t={exam:"obj",score:"obj"};["pd","np","MinMaxScaler","LabelEncoder","RAW_PATH","df_raw","df"].forEach(v=>S.vars.add(v));
+    return {text:"("+S.df.length+", 3)",html:rTable(S.df,5,S.t)};}},
+ {h:"(1) التحقق من الترتيب الزمني",d:"نحوّل رقم الاختبار إلى رقم (errors=\"coerce\" يجعل النصوص مثل five قيمة NaN)، ثم نرتّب حسب الطالب ثم الاختبار.",ex:"r-sort",
+  code:'# (1) التحقق من الترتيب الزمني\n# تحويل رقم الاختبار إلى رقم (في حال وجود نصوص)\ndf["exam_number"] = pd.to_numeric(df["exam_number"], errors="coerce")\n# ترتيب البيانات حسب الطالب ثم حسب ترتيب الاختبار\ndf = df.sort_values(["student_id", "exam_number"]).reset_index(drop=True)\ndf.head(7)',
+  x:[['pd.to_numeric(df["exam_number"], errors="coerce")',"يحوّل النص إلى رقم. errors=\"coerce\" تعني: ما لا يمكن تحويله يصبح NaN بدل أن يتوقف الكود."],['df.sort_values(["student_id", "exam_number"])',"نرتّب حسب الطالب أولًا، ثم حسب رقم الاختبار داخل كل طالب."],[".reset_index(drop=True)","نعيد ترقيم الصفوف من 0 بعد الترتيب."]],
+  run:S=>{S.need("df");S.df.forEach(r=>r.exam_number=toNum(r.exam_number));S.t.exam="float";S.df=rSort(S.df);return {html:rTable(S.df,7,S.t)};}},
+ {h:"(2) إزالة التكرار الزمني",d:"صف مكرر لنفس الطالب ونفس الاختبار يعني أن الطالب أخذ الاختبار مرتين في التسلسل، فنبقي أول ظهور فقط.",ex:"r-dup",
+  code:'# (2) إزالة التكرار الزمني: صف مكرر لنفس الطالب ونفس الاختبار\ndf = df.drop_duplicates(subset=["student_id", "exam_number"], keep="first")\nlen(df)',
+  x:[['subset=["student_id", "exam_number"]',"نعتبر الصفين مكررين إذا تطابق الطالب ورقم الاختبار، حتى لو اختلفت الدرجة."],['keep="first"',"نحتفظ بأول ظهور ونحذف ما بعده."],["len(df)","عدد الصفوف بعد الحذف."]],
+  run:S=>{S.need("df");S.df=rDedup(S.df);return {text:String(S.df.length)};}},
+ {h:"(3) التعامل مع القيم المفقودة",d:"الدرجة «غائب» نص، فنحوّل العمود إلى أرقام فتصبح NaN، وسنعوّضها في الخطوة التالية.",
+  code:'# (3) التعامل مع القيم المفقودة: تحويل الدرجات إلى أرقام\ndf["score"] = pd.to_numeric(df["score"], errors="coerce")\ndf["score"].isna().sum()',
+  x:[['pd.to_numeric(df["score"], errors="coerce")',"كل درجة غير رقمية تصبح NaN."],['df["score"].isna().sum()',"عدد الدرجات المفقودة الآن."]],
+  run:S=>{S.need("df");S.df.forEach(r=>r.score=toNum(r.score));S.t.score="float";return {text:String(S.df.filter(r=>nan(r.score)).length)};}},
+ {h:"(4) اكتشاف ومعالجة الفجوات الزمنية",d:"لكل طالب ننشئ كل أرقام الاختبارات من أصغرها إلى أكبرها، وندمجها مع درجاته، فيظهر الاختبار الناقص كقيمة NaN ونعوّضه بالدرجة السابقة (ffill) ثم اللاحقة (bfill) حفاظًا على الاستمرارية الزمنية.",
+  code:'# (4) اكتشاف ومعالجة الفجوات الزمنية\ndef complete_exams(group):\n    # ترتيب درجات الطالب حسب الاختبار\n    group = group.sort_values("exam_number")\n    # أقل وأعلى رقم اختبار موجود\n    min_exam = int(np.nanmin(group["exam_number"]))\n    max_exam = int(np.nanmax(group["exam_number"]))\n    # إنشاء جميع أرقام الاختبارات المتوقعة\n    full = pd.DataFrame({"exam_number": np.arange(min_exam, max_exam + 1)})\n    full["student_id"] = group["student_id"].iloc[0]\n    # دمج البيانات لاكتشاف الاختبارات المفقودة\n    merged = full.merge(group[["student_id", "exam_number", "score"]],\n                        on=["student_id", "exam_number"], how="left")\n    # تعويض القيم المفقودة مع الحفاظ على الاستمرارية الزمنية\n    merged["score"] = merged["score"].ffill().bfill()\n    return merged\n\ndf = df.groupby("student_id", group_keys=False).apply(complete_exams).reset_index(drop=True)\nprint(len(df), df["score"].isna().sum())',
+  x:[["def complete_exams(group):","دالة تعمل على درجات طالب واحد (group)."],['np.nanmin(group["exam_number"])',"أصغر رقم اختبار مع تجاهل NaN، و nanmax أكبرها."],['np.arange(min_exam, max_exam + 1)',"كل الأرقام المتوقعة، مثل 1 إلى 6."],
+     ['full.merge(',"دمج left: كل اختبار متوقع يبقى، والناقص تصبح درجته NaN."],['merged["score"].ffill().bfill()',"ffill تنقل الدرجة السابقة إلى الفراغ، و bfill تملأ ما بقي في البداية من اللاحقة."],
+     ['df.groupby("student_id", group_keys=False).apply(complete_exams)',"نطبّق الدالة على كل طالب على حدة ثم نجمع النتائج."]],
+  run:S=>{S.need("df");if(S.t.exam==="obj")throw {py:"TypeError: '<=' not supported between instances of 'str' and 'int'",hint:"exam_number ما زال نصًا. شغّل الخلية 2 أولًا لتحويله إلى أرقام."};
+    S.df=rComplete(S.df);S.t.exam="int";const k=S.df.filter(r=>nan(r.score)).length;return {text:S.df.length+" "+k,hint:S.t.score==="obj"?"الدرجات ما زالت نصوصًا، فبقيت «غائب» كما هي ولم تُعوَّض. شغّل الخلية 4 ثم أعد هذه.":""};}},
+ {h:"(5) التحقق من القيم الشاذة وغير المنطقية",d:"الدرجة خارج 0 إلى 100 مستحيلة فنحذفها. أما الهبوط الحاد داخل النطاق فقد يكون حقيقيًا، فنعلّمه بـ IQR لكل طالب دون حذفه.",
+  code:'# (5) التحقق من القيم الشاذة / غير المنطقية\n# حذف أي درجة خارج النطاق المنطقي (0 إلى 100)\ndf = df[(df["score"] >= 0) & (df["score"] <= 100)].copy()\n# عمود تعليمي لاكتشاف القيم الشاذة باستخدام IQR\ndef add_iqr_flag(group):\n    q1 = group["score"].quantile(0.25)\n    q3 = group["score"].quantile(0.75)\n    iqr = q3 - q1\n    lower = q1 - 1.5 * iqr\n    upper = q3 + 1.5 * iqr\n    # تحديد القيم الشاذة دون حذفها\n    group["is_outlier_iqr"] = (group["score"] < lower) | (group["score"] > upper)\n    return group\n\ndf = df.groupby("student_id", group_keys=False).apply(add_iqr_flag)\nprint(len(df), df["is_outlier_iqr"].sum())',
+  x:[['df[(df["score"] >= 0) & (df["score"] <= 100)]',"نبقي فقط الدرجات بين 0 و100. & تعني «و»."],['group["score"].quantile(0.25)',"الربع الأول لدرجات الطالب، و0.75 الربع الثالث."],["iqr = q3 - q1","المدى الربيعي: عرض النصف الأوسط من الدرجات."],
+     ["lower = q1 - 1.5 * iqr","الحد الأدنى المقبول، و upper الحد الأعلى."],['group["is_outlier_iqr"] =',"True إذا خرجت الدرجة عن الحدين. نعلّمها فقط ولا نحذفها."],['df["is_outlier_iqr"].sum()',"عدد الدرجات المعلَّمة."]],
+  run:S=>{S.need("df");if(S.t.score==="obj")throw {py:"TypeError: '>=' not supported between instances of 'str' and 'int'",hint:"الدرجات ما زالت نصوصًا. شغّل الخلية 4 لتحويلها إلى أرقام."};
+    S.df=rIqr(rRange(S.df));return {text:S.df.length+" "+S.df.filter(r=>r.is_outlier_iqr).length};}},
+ {h:"(6) التحقق من الاتساق وحفظ الملف",d:"نتأكد أن لكل عمود نوعه الصحيح، ثم نحفظ نسخة نظيفة كاملة.",
+  code:'# (6) التحقق من الاتساق (Consistency): نوع البيانات لكل عمود\ndf["student_id"] = df["student_id"].astype(str)\ndf["exam_number"] = df["exam_number"].astype(int)\ndf["score"] = df["score"].astype(float)\n# حفظ ملف البيانات بعد التنظيف\nCLEANED_PATH = "student_scores_cleaned_full.csv"\ndf.to_csv(CLEANED_PATH, index=False)',
+  x:[['df["student_id"].astype(str)',"رقم الطالب نص."],['df["exam_number"].astype(int)',"رقم الاختبار عدد صحيح، وسيفشل لو بقيت NaN."],['df["score"].astype(float)',"الدرجة رقم عشري."],["df.to_csv(CLEANED_PATH, index=False)","نحفظ الملف النظيف بلا عمود الفهرس."]],
+  run:S=>{S.need("df");if(S.t.exam==="obj")throw {py:"ValueError: invalid literal for int() with base 10: 'five'",hint:"رقم الاختبار ما زال نصًا. شغّل الخلايا 2 ثم 5."};
+    if(S.df.some(r=>nan(r.exam_number)))throw {py:"IntCastingNaNError: Cannot convert non-finite values (NA or inf) to integer",hint:"ما زالت في exam_number قيم NaN (كانت نصوصًا مثل five). خلية الفجوات (5) تتخلص منها."};
+    if(S.t.score==="obj")throw {py:"ValueError: could not convert string to float: 'غائب'",hint:"شغّل الخلية 4 لتحويل الدرجات إلى أرقام."};
+    S.t.exam="int";S.vars.add("CLEANED_PATH");return {note:"لا يوجد ناتج يُطبع. حُفظ student_scores_cleaned_full.csv ("+S.df.length+" صفًا)."};}},
+ {h:"(7) معالجة الوقت (Datetime)",d:"نبدأ المعالجة على نسخة df_proc. نعطي كل اختبار تاريخًا افتراضيًا لأغراض التعليم: الأول 2025-01-01 وكل اختبار بعده بأسبوع.",
+  code:'# الجزء الثاني: معالجة البيانات (Data Processing)\ndf_proc = df.copy()\n# (7) معالجة الوقت: الاختبار الأول 2025-01-01 وكل اختبار بعده بأسبوع\nbase_date = pd.Timestamp("2025-01-01")\ndf_proc["timestamp"] = base_date + pd.to_timedelta((df_proc["exam_number"] - 1) * 7, unit="D")\ndf_proc.head(3)',
+  x:[["df_proc = df.copy()","نسخة للمعالجة، ويبقى df النظيف كما هو."],['pd.Timestamp("2025-01-01")',"تاريخ البداية."],['pd.to_timedelta((df_proc["exam_number"] - 1) * 7, unit="D")',"الاختبار 1 بعد 0 يوم، والاختبار 2 بعد 7 أيام، وهكذا."]],
+  run:S=>{S.need("df");if(S.t.exam==="obj")throw {py:"TypeError: unsupported operand type(s) for -: 'str' and 'int'",hint:"رقم الاختبار ما زال نصًا. شغّل الخلية 2 أولًا."};
+    S.dp=rTime(S.df.map(r=>({...r})));["df_proc","base_date"].forEach(v=>S.vars.add(v));return {html:rTable(S.dp,3,S.t)};}},
+ {h:"(8) إعادة أخذ عينات زمنية (Resampling)",d:"نعيد تنظيم كل طالب على شبكة أسبوعية منتظمة بالمتوسط، ثم نعيد ترقيم الاختبارات. لو بقيت فجوة داخل السلسلة لظهر أسبوع بلا درجة (NaN).",
+  code:'# (8) إعادة أخذ عينات زمنية (Resampling)\ndef resample_weekly(group):\n    # جعل الوقت هو الفهرس\n    g = group.set_index("timestamp").sort_index()\n    # إعادة التنظيم أسبوعيًا باستخدام المتوسط\n    g_res = g.resample("7D").mean(numeric_only=True)\n    # إعادة معلومات الطالب\n    g_res["student_id"] = group["student_id"].iloc[0]\n    g_res = g_res.reset_index()\n    # إعادة ترقيم الاختبارات بعد إعادة التنظيم\n    g_res["exam_number"] = np.arange(1, len(g_res) + 1)\n    return g_res\n\ndf_proc = df_proc.groupby("student_id", group_keys=False).apply(resample_weekly).reset_index(drop=True)\nprint(len(df_proc), df_proc["score"].isna().sum())',
+  x:[['group.set_index("timestamp").sort_index()',"الوقت يصبح الفهرس، مرتبًا."],['g.resample("7D").mean(numeric_only=True)',"نقسم الزمن إلى أسابيع ونأخذ متوسط كل أسبوع. الأسبوع الفارغ يصبح NaN."],
+     ['g_res["student_id"] = group["student_id"].iloc[0]',"resample يحذف الأعمدة النصية، فنعيد رقم الطالب."],['np.arange(1, len(g_res) + 1)',"نرقّم الاختبارات من جديد 1، 2، 3…"]],
+  run:S=>{S.need("df_proc");S.dp=rResample(S.dp);const k=S.dp.filter(r=>nan(r.score)).length;return {text:S.dp.length+" "+k,hint:k?"ظهرت أسابيع بلا درجة لأن السلسلة فيها فجوات. شغّل خلايا التنظيف بالترتيب قبل المعالجة.":""};}},
+ {h:"(9) التطبيع / التحجيم (Scaling)",d:"نقسم زمنيًا: الاختبارات 1 إلى 4 تدريب، والباقي اختبار. القاعدة الذهبية: الـ scaler يتعلم أصغر وأكبر قيمة من التدريب فقط، ثم نطبّقه على الكل، لذلك قد تخرج قيم الاختبار قليلًا عن 0 إلى 1.",ex:"r-scale",
+  code:'# (9) التطبيع / التحجيم (Scaling): تقسيم زمني إلى تدريب واختبار\ndf_proc["split"] = np.where(df_proc["exam_number"] <= 4, "train", "test")\nscaler = MinMaxScaler()\n# قاعدة ذهبية: ندرّب الـ scaler على بيانات التدريب فقط\nscaler.fit(df_proc.loc[df_proc["split"] == "train", ["score"]])\n# تطبيق التحجيم على كامل البيانات\ndf_proc["score_scaled"] = scaler.transform(df_proc[["score"]])\ndf_proc.groupby("split")["score_scaled"].agg(["min", "max"])',
+  x:[['np.where(df_proc["exam_number"] <= 4, "train", "test")',"تقسيم زمني لا عشوائي: الماضي للتدريب والمستقبل للاختبار، حتى لا يرى النموذج المستقبل."],["scaler = MinMaxScaler()","أداة تحوّل القيم إلى المدى 0 إلى 1."],
+     ['scaler.fit(df_proc.loc[df_proc["split"] == "train", ["score"]])',"يتعلم أصغر وأكبر درجة من التدريب فقط."],['scaler.transform(df_proc[["score"]])',"(الدرجة − الأصغر) ÷ (الأكبر − الأصغر) لكل الصفوف."],['.agg(["min", "max"])',"نتحقق: التدريب بين 0 و1 تمامًا، والاختبار قد يخرج قليلًا."]],
+  run:S=>{S.need("df_proc");const r=rScale(S.dp);S.dp=r.df;S.vars.add("scaler");const g=k=>S.dp.filter(x=>x.split===k).map(x=>x.score_scaled);
+    return {html:dfTable(["min","max"],["test","train"].map(k=>[k,{v:Math.min(...aNN(g(k))).toFixed(6)},{v:Math.max(...aNN(g(k))).toFixed(6)}]))};}},
+ {h:"(10) ترميز المتغيرات النصية وحفظ الملفات",d:"النموذج يحتاج أرقامًا، فنحوّل رقم الطالب النصي (S01) إلى رقم صحيح، ثم نحفظ الملف المعالَج.",ex:"r-enc",
+  code:'# (10) ترميز المتغيرات النصية (Encoding): رقم الطالب من نص إلى رقم\nle = LabelEncoder()\ndf_proc["student_id_encoded"] = le.fit_transform(df_proc["student_id"])\n# حفظ ملف البيانات بعد المعالجة\nPROCESSED_PATH = "student_scores_processed.csv"\ndf_proc.to_csv(PROCESSED_PATH, index=False)\nprint("تم حفظ الملفات بنجاح:")\nprint(" -", CLEANED_PATH)\nprint(" -", PROCESSED_PATH)',
+  x:[["le = LabelEncoder()","أداة تعطي كل قيمة نصية رقمًا ثابتًا."],['le.fit_transform(df_proc["student_id"])',"S01 تصبح 0، و S02 تصبح 1، وهكذا."],["df_proc.to_csv(PROCESSED_PATH, index=False)","نحفظ الملف الجاهز للنموذج."],['print(" -", CLEANED_PATH)',"نطبع اسمي الملفين."]],
+  run:S=>{S.need("df_proc");S.need("CLEANED_PATH");S.dp=rEncode(S.dp);["le","PROCESSED_PATH"].forEach(v=>S.vars.add(v));
+    return {text:"تم حفظ الملفات بنجاح:\n - student_scores_cleaned_full.csv\n - student_scores_processed.csv"};}}
+];
+makeNotebook({cells:R_CELLS,box:"#rnbCells",vars:"#rnbVars",all:"#rnbAll",reset:"#rnbReset",defs:{pd:0,df:0,CLEANED_PATH:6,df_proc:7}});
+
+/* ---------- each student's processed series, cut into RNN windows ---------- */
+const R_PROC=(()=>{let d=R_RAW.map(r=>({...r,exam_number:toNum(r.exam_number)}));d=rDedup(rSort(d));d.forEach(r=>r.score=toNum(r.score));
+  d=rIqr(rRange(rComplete(d)));return rEncode(rScale(rResample(rTime(d))).df);})();
+R_IDS.forEach(id=>$("#rsStu").appendChild(el("option",{value:id},id)));$("#rsStu").value="S29";
+function drawStu(){const id=$("#rsStu").value,g=R_PROC.filter(r=>r.student_id===id),n=g.length;
+  $("#rsInfo").textContent=R_ISSUES[id]||"لم تكن في بياناته الخام أي مشكلة.";
+  const W=640,H=240,ml=44,mr=14,mt=16,mb=40,xs=sx(0.5,6.5,ml,W-mr),ys=sx(0,100,H-mb,mt);
+  let s=axes({W,H,ml,mr,mt,mb,xt:[1,2,3,4,5,6],xs,yt:[0,25,50,75,100],ys,xcat:1,xl:"exam_number (بعد المعالجة)",yl:"score"});
+  s+='<rect x="'+xs(0.5)+'" y="'+mt+'" width="'+(xs(4.5)-xs(0.5))+'" height="'+(H-mb-mt)+'" style="fill:var(--violet-soft);opacity:.7"/><text x="'+xs(2.5)+'" y="'+(mt+14)+'" text-anchor="middle" class="ink">train</text><text x="'+((xs(4.5)+xs(6.5))/2)+'" y="'+(mt+14)+'" text-anchor="middle" class="ink">test</text>';
+  s+='<polyline points="'+g.map(r=>xs(r.exam_number)+","+ys(r.score)).join(" ")+'" style="fill:none;stroke:var(--violet);stroke-width:2"/>';
+  g.forEach(r=>{const o=r.is_outlier_iqr>0;s+='<g>'+tt("اختبار "+r.exam_number+": "+r.score+" · محجَّمة "+r.score_scaled.toFixed(3)+(o?" · قيمة شاذة (IQR)":""))+'<circle cx="'+xs(r.exam_number)+'" cy="'+ys(r.score)+'" r="'+(o?8:6)+'" style="fill:'+(o?"var(--amber)":"var(--violet)")+';stroke:var(--surface);stroke-width:2"/></g><text x="'+xs(r.exam_number)+'" y="'+(ys(r.score)-12)+'" text-anchor="middle" class="ink">'+Math.round(r.score)+'</text>';});
+  $("#rsChart").innerHTML=s;$("#rsLegend").innerHTML=legend([["var(--violet)","درجة الاختبار"],["var(--amber)","قيمة شاذة معلَّمة (IQR)"],["var(--violet-soft)","بيانات التدريب (الاختبارات 1 إلى 4)"]]);
+  const sc=g.map(r=>r.score),ss=g.map(r=>r.score_scaled),w=rWindows(3,sc),wz=rWindows(3,ss),f=v=>+v.toFixed(3);
+  $("#rsWins").textContent="# "+id+": "+n+" اختبارات → "+w.X.length+" نوافذ (window_size = 3)\n"+(w.X.length?w.X.map((x,i)=>"["+x.map(v=>Math.round(v)).join(", ")+"] → "+Math.round(w.y[i])+"      scaled: ["+wz.X[i].map(f).join(", ")+"] → "+f(wz.y[i])).join("\n"):"# السلسلة أقصر من أن تعطي نافذة واحدة");}
+$("#rsStu").onchange=drawStu;drawStu();
+
+/* ================= NLP203 ================= */
+Object.assign(XL,{
+ "n-libs":[["import numpy as np","NumPy للأرقام والمصفوفات، وسنحتاجها حين نمثّل النصوص كأرقام."],["import pandas as pd","Pandas لقراءة الملفات وتنظيم البيانات في جداول وتنظيفها."],
+   ["import matplotlib.pyplot as plt","Matplotlib للرسم: توزيع الفئات وأطوال النصوص."],["import re","التعبيرات النمطية (Regular Expressions) لتنظيف النص: حذف الرموز والأرقام والترقيم."]],
+ "n-urls":[["import re","نستورد مكتبة التعبيرات النمطية."],["def remove_urls(text):","نضع منطق الحذف في دالة لنطبّقها على كل مراجعة."],
+   ['return re.sub(r"http\\S+|www\\S+", "", text)',"re.sub تبحث وتستبدل: كل ما يبدأ بـ http أو www حتى أول مسافة (\\S+ أي حرف غير المسافة، مرة أو أكثر) يُستبدل بنص فارغ."],
+   ["reviews_no_urls = reviews.apply(remove_urls)","apply تطبّق الدالة على كل مراجعة، والناتج في متغير جديد فتبقى النسخة الأصلية للمقارنة."]],
+ "n-sym":[["def remove_symbols(text):","دالة تزيل الرموز غير الضرورية."],["text = str(text)","نتأكد أن القيمة نص."],
+   ['pattern = r"[',"قائمة الرموز التي نحذفها داخل [ ]، ومنها علامات عربية مثل ؟ ، ؛ و + تعني رمزًا أو أكثر متتاليًا."],
+   ['text = re.sub(pattern, " ", text)',"كل مجموعة رموز تُستبدل بمسافة واحدة، حتى لا تلتصق الكلمتان على جانبيها."],["return text","نرجع النص بعد التنظيف."],
+   ["reviews_no_symbols = reviews_no_urls.apply(remove_symbols)","نطبّقها على النصوص بعد حذف الروابط."]],
+ "n-emoji":[["!pip install emoji","نثبّت مكتبة emoji مرة واحدة في Colab. علامة ! تعني أمر نظام وليس كود Python."],["import emoji","نستورد المكتبة."],["def remove_emojis(text):","دالة إزالة الرموز التعبيرية."],
+   ['emoji.replace_emoji(text, replace="")',"تبحث عن أي رمز تعبيري وتستبدله بنص فارغ، أي تحذفه."],["reviews_no_emojis = reviews_no_symbols.apply(remove_emojis)","نطبّقها على آخر نسخة من النص."]],
+ "n-ment":[["def remove_mentions_hashtags(text):","دالة إزالة الهاشتاقات وأسماء المستخدمين."],['text = re.sub(r"@\\w+", "", text)',"@ ثم حرف أو أكثر (\\w+): اسم مستخدم، فنحذفه."],
+   ['text = re.sub(r"#\\w+", "", text)',"# ثم كلمة: هاشتاق، فنحذفه."],["return text","نرجع النص."],["reviews_no_mentions = reviews_no_emojis.apply(remove_mentions_hashtags)","نطبّقها على كل مراجعة."]],
+ "n-norm":[["def normalize_arabic(text):","دالة توحيد أشكال الحروف."],["text = str(text)","نتأكد أن القيمة نص."],['text = text.replace("أ", "ا")',"الهمزة على الألف تصبح ألفًا."],
+   ['text = text.replace("إ", "ا")',"والهمزة تحت الألف."],['text = text.replace("آ", "ا")',"والمدّة."],['text = text.replace("ى", "ي")',"الألف المقصورة تصبح ياء."],["return text","لا نلمس التاء المربوطة لأن تغييرها قد يغيّر المعنى."],
+   ["reviews_normalized = reviews_no_mentions.apply(normalize_arabic)","نسخة جديدة، ولم نغيّر النسخ السابقة."]],
+ "n-read":[["import pandas as pd","مكتبة الجداول."],['df = pd.read_csv("balanced-reviews.txt", sep="\\t", encoding="utf-16")',"read_csv تقرأ الملف رغم امتداده txt. sep=\"\\t\" لأن الأعمدة مفصولة بـ Tab، و encoding=\"utf-16\" لأنه ترميز الملف."],
+   ["df.head()","نتأكد أن الملف قُرئ صحيحًا وأن النص العربي غير مشوّه."],['reviews = df["review"].astype(str)',"نأخذ عمود النص فقط، ونضمن أن كل القيم نصوص."]],
+ "n-sent":[["import re","مكتبة التعبيرات النمطية للتقسيم بالأنماط."],["sample_text = reviews.iloc[0]","نختار أول مراجعة كنص تجريبي لنراقب النتيجة."],
+   ['sentences = re.split(r"[\\.!\\?؟]+", sample_text)',"نقسم عند النقطة وعلامة التعجب وعلامة الاستفهام الإنجليزية والعربية، لأن كل منها نهاية جملة محتملة."],
+   ["sentences = [s.strip() for s in sentences if s.strip()]","نزيل الفراغات حول كل جملة، ونحذف الجمل الفارغة الناتجة عن التقسيم."]],
+ "n-tok":[['tokens_basic = re.findall(r"\\w+", sample_text)',"findall ترجع كل تسلسل من الحروف والأرقام كقائمة كلمات، وتتجاهل الرموز والترقيم."],["tokens_basic[:30]","نعرض أول 30 كلمة."]],
+ "n-nltk":[["import nltk","مكتبة NLTK لمعالجة اللغة."],['nltk.download("punkt")',"نحمّل نموذج قواعد التقطيع مرة واحدة. في الإصدارات الحديثة قد تحتاج أيضًا nltk.download(\"punkt_tab\")."],
+   ["from nltk.tokenize import word_tokenize","دالة التقطيع إلى كلمات."],["tokens_nltk = word_tokenize(sample_text)","تقطيع بقواعد لغوية لا بالمسافات فقط، وتفصل علامات الترقيم أحيانًا كوحدات مستقلة."]],
+ "n-len":[["reviews.head(200)","أول 200 مراجعة."],['.apply(lambda x: len(re.findall(r"\\w+", x)))',"لكل مراجعة x: نقطّعها بـ \\w+ ونعدّ كلماتها. lambda دالة قصيرة بلا اسم."],["lengths.describe()","متوسط عدد الكلمات وانحرافه وأصغره وأكبره."]],
+ "n-count":[["from collections import Counter","Counter يعدّ تكرار كل عنصر في قائمة."],["Counter(tokens_nltk).most_common(10)","أكثر 10 كلمات تكرارًا مع عدد مرات كل منها."]]
+});
+Object.assign(EX,{
+ "n-libs":{task:"استورد numpy باسم np و pandas باسم pd و matplotlib.pyplot باسم plt، ثم مكتبة re.",checks:[R_(/import numpy as np/,"import numpy as np"),R_(/import pandas as pd/,"import pandas as pd"),R_(/import matplotlib\.pyplot as plt/,"import matplotlib.pyplot as plt"),R_(/import re/,"import re")]},
+ "n-open":{task:"افتح balanced-reviews.txt للقراءة بترميز utf-16، واقرأ محتواه كاملًا في المتغير text.",checks:[
+  R_(/with open\("balanced-reviews\.txt","r",encoding="utf-16"\)as f:/,'with open("balanced-reviews.txt", "r", encoding="utf-16") as f:'),R_(/text=f\.read\(\)/,"text = f.read()")]},
+ "n-lines":{task:"قسّم text إلى أسطر في القائمة lines، واعرض عددها.",checks:[R_(/lines=text\.split\("\\n"\)/,'lines = text.split("\\n")'),R_(/len\(lines\)/,"len(lines)")]},
+ "n-dropna":{task:"احذف المراجعات الفارغة من reviews، ثم تأكد أن عدد القيم الفارغة صار 0.",checks:[R_(/reviews=reviews\.dropna\(\)/,"reviews = reviews.dropna()"),R_(/reviews\.isnull\(\)\.sum\(\)/,"reviews.isnull().sum()")]},
+ "n-strip":{task:"حوّل كل المراجعات إلى نصوص، وأزل الفراغات من بدايتها ونهايتها، ثم اعرض أول 5.",checks:[R_(/reviews=reviews\.astype\(str\)/,"reviews = reviews.astype(str)"),R_(/reviews=reviews\.str\.strip\(\)/,"reviews = reviews.str.strip()"),R_(/reviews\.head\(\)/,"reviews.head()")]},
+ "n-urls":{task:"اكتب الدالة remove_urls التي تحذف ما يبدأ بـ http أو www، وطبّقها على reviews في reviews_no_urls.",checks:[
+  R_(/import re/,"import re"),R_(/def remove_urls\(text\):/,"def remove_urls(text):"),R_(/return re\.sub\(r"http\\S\+\|www\\S\+","",text\)/,'return re.sub(r"http\\S+|www\\S+", "", text)'),R_(/reviews_no_urls=reviews\.apply\(remove_urls\)/,"reviews_no_urls = reviews.apply(remove_urls)")]},
+ "n-sym":{task:"اكتب الدالة remove_symbols: حوّل القيمة إلى نص، وعرّف pattern للرموز، واستبدل كل مجموعة رموز بمسافة، ثم طبّقها على reviews_no_urls.",checks:[
+  R_(/def remove_symbols\(text\):/,"def remove_symbols(text):"),R_(/text=str\(text\)/,"text = str(text)"),R_(/pattern=r"\[!/,'pattern = r"[!...]+"'),R_(/text=re\.sub\(pattern," ",text\)/,'text = re.sub(pattern, " ", text)'),
+  R_(/return text/,"return text"),R_(/reviews_no_symbols=reviews_no_urls\.apply\(remove_symbols\)/,"reviews_no_symbols = reviews_no_urls.apply(remove_symbols)")]},
+ "n-emoji":{task:"ثبّت مكتبة emoji واستوردها، واكتب remove_emojis التي تحذف الرموز التعبيرية، وطبّقها على reviews_no_symbols.",checks:[
+  R_(/!pip install emoji/,"!pip install emoji"),R_(/import emoji/,"import emoji"),R_(/def remove_emojis\(text\):/,"def remove_emojis(text):"),R_(/return emoji\.replace_emoji\(text,replace=""\)/,'return emoji.replace_emoji(text, replace="")'),
+  R_(/reviews_no_emojis=reviews_no_symbols\.apply\(remove_emojis\)/,"reviews_no_emojis = reviews_no_symbols.apply(remove_emojis)")]},
+ "n-ment":{task:"اكتب remove_mentions_hashtags التي تحذف @username ثم #hashtag، وطبّقها على reviews_no_emojis.",checks:[
+  R_(/def remove_mentions_hashtags\(text\):/,"def remove_mentions_hashtags(text):"),R_(/text=re\.sub\(r"@\\w\+","",text\)/,'text = re.sub(r"@\\w+", "", text)'),R_(/text=re\.sub\(r"#\\w\+","",text\)/,'text = re.sub(r"#\\w+", "", text)'),
+  R_(/return text/,"return text"),R_(/reviews_no_mentions=reviews_no_emojis\.apply\(remove_mentions_hashtags\)/,"reviews_no_mentions = reviews_no_emojis.apply(remove_mentions_hashtags)")]},
+ "n-norm":{task:"اكتب normalize_arabic التي توحّد أ و إ و آ إلى ا، و ى إلى ي، وطبّقها على reviews_no_mentions.",checks:[
+  R_(/def normalize_arabic\(text\):/,"def normalize_arabic(text):"),R_(/text=text\.replace\("أ","ا"\)/,'text = text.replace("أ", "ا")'),R_(/text=text\.replace\("إ","ا"\)/,'text = text.replace("إ", "ا")'),
+  R_(/text=text\.replace\("آ","ا"\)/,'text = text.replace("آ", "ا")'),R_(/text=text\.replace\("ى","ي"\)/,'text = text.replace("ى", "ي")'),R_(/reviews_normalized=reviews_no_mentions\.apply\(normalize_arabic\)/,"reviews_normalized = reviews_no_mentions.apply(normalize_arabic)")]},
+ "n-read":{task:"اقرأ balanced-reviews.txt بـ pandas (فاصل Tab وترميز utf-16)، واعرض أول الصفوف، ثم خذ عمود review كنصوص في reviews.",checks:[
+  R_(/import pandas as pd/,"import pandas as pd"),R_(/df=pd\.read_csv\("balanced-reviews\.txt",sep="\\t",encoding="utf-16"\)/,'df = pd.read_csv("balanced-reviews.txt", sep="\\t", encoding="utf-16")'),
+  R_(/df\.head\(\)/,"df.head()"),R_(/reviews=df\["review"\]\.astype\(str\)/,'reviews = df["review"].astype(str)')]},
+ "n-sent":{task:"خذ أول مراجعة في sample_text، وقسّمها إلى جمل عند . ! ? ؟ ، ثم احذف الفراغات والجمل الفارغة.",checks:[
+  R_(/import re/,"import re"),R_(/sample_text=reviews\.iloc\[0\]/,"sample_text = reviews.iloc[0]"),R_(/sentences=re\.split\(r"\[\\\.!\\\?؟\]\+",sample_text\)/,'sentences = re.split(r"[\\.!\\?؟]+", sample_text)'),
+  R_(/sentences=\[s\.strip\(\)for s in sentences if s\.strip\(\)\]/,"sentences = [s.strip() for s in sentences if s.strip()]")]},
+ "n-tok":{task:"قطّع sample_text إلى كلمات بـ \\w+ في tokens_basic، واعرض أول 30.",checks:[R_(/tokens_basic=re\.findall\(r"\\w\+",sample_text\)/,'tokens_basic = re.findall(r"\\w+", sample_text)'),R_(/tokens_basic\[:30\]/,"tokens_basic[:30]")]},
+ "n-nltk":{task:"استورد nltk وحمّل punkt، ثم قطّع sample_text بـ word_tokenize في tokens_nltk.",checks:[
+  R_(/import nltk/,"import nltk"),R_(/nltk\.download\("punkt"\)/,'nltk.download("punkt")'),R_(/from nltk\.tokenize import word_tokenize/,"from nltk.tokenize import word_tokenize"),R_(/tokens_nltk=word_tokenize\(sample_text\)/,"tokens_nltk = word_tokenize(sample_text)")]},
+ "n-len":{task:"احسب عدد كلمات كل مراجعة من أول 200 مراجعة في lengths، ثم اعرض إحصاءاتها.",checks:[
+  R_(/lengths=reviews\.head\(200\)\.apply\(lambda x:len\(re\.findall\(r"\\w\+",x\)\)\)/,'lengths = reviews.head(200).apply(lambda x: len(re.findall(r"\\w+", x)))'),R_(/lengths\.describe\(\)/,"lengths.describe()")]},
+ "n-count":{task:"استورد Counter واعرض أكثر 10 كلمات تكرارًا في tokens_nltk.",checks:[R_(/from collections import Counter/,"from collections import Counter"),R_(/Counter\(tokens_nltk\)\.most_common\(10\)/,"Counter(tokens_nltk).most_common(10)")]}
+});
+wireBlocks(["n-libs","n-urls","n-sym","n-emoji","n-ment","n-norm","n-read","n-sent","n-tok","n-nltk","n-len","n-count"]);
+
+/* ---------- a 200-review file with HARD's structure: 10 hand-written reviews (with the noise the lesson cleans) + 190 generated ---------- */
+const N_HAND=[
+ ["  الفندق رائع جدا! الموظفين متعاونين والغرفة نظيفة 😍 هل أنصح فيه؟ نعم بقوة... السعر مناسب مقابل الخدمة.  ","pos"],
+ ["تجربة سيئة... الغرفة مو نظيفة والإنترنت ضعيف 😡 شوفوا الصور www.example.com/photos","neg"],
+ ["إقامة عادية، السعر مناسب لكن الإفطار متواضع. #فنادق_الرياض","neu"],
+ ["@hotel_support أرجو الرد على شكواي، الحجز اتلغى بدون سبب؟؟","neg"],
+ [null,"pos"],
+ ["الموقع ممتاز قريب من الحرم 👍👍 والإستقبال سريع https://booking.com/review/123","pos"],
+ ["أسوأ فندق نزلت فيه!!! الحمام قديم والتكييف لا يعمل 😤","neg"],
+ ["المكان هادئ ومريح، أنصح العائلات بالإقامة فيه 🌟 #تجربة_رائعة","pos"],
+ ["   لا بأس به... النظافة متوسطة والخدمة بطيئة نوعا ما   ","neu"],
+ ["إستقبال راقي وغرف واسعة، سأعود مرة أخرى إن شاء الله ❤️","pos"]];
+const N_BANK={pos:["الفندق رائع جدا","الموقع ممتاز وقريب من كل شي","الموظفين متعاونين وابتسامتهم دائمة","الغرفة نظيفة وواسعة","الإفطار متنوع ولذيذ","السرير مريح والهدوء ممتاز","أنصح فيه بقوة","تجربة جميلة وسأكررها","الاستقبال سريع وراقي","السعر مناسب مقابل الخدمة"],
+ neg:["الغرفة غير نظيفة","التكييف لا يعمل","الموظفين غير متعاونين","الإزعاج طوال الليل","الحمام قديم ويحتاج صيانة","الإنترنت ضعيف جدا","السعر مبالغ فيه","تأخروا في تسليم الغرفة","لن أكرر التجربة","الإفطار سيء"],
+ neu:["الفندق عادي","الموقع جيد لكن الغرفة صغيرة","الخدمة متوسطة","الإفطار مقبول","النظافة لا بأس بها","السعر متوسط","مناسب لليلة واحدة","المكان هادئ لكن قديم"]};
+const N_LAB={pos:"إيجابي",neg:"سلبي",neu:"محايد"};
+const N_ROWS=(()=>{const R=rng(203),pick=a=>a[Math.floor(R()*a.length)],rows=N_HAND.map(([t,l])=>({t,l}));
+  for(let i=0;i<190;i++){const l=["pos","neg","neu"][i%3],k=1+Math.floor(R()*4),used=[];
+    while(used.length<k){const p=pick(N_BANK[l]);if(!used.includes(p))used.push(p);}
+    let s=used.map((p,j)=>(j?pick(["، "," و",". ","! "," "]):"")+p).join("");if(R()<0.5)s+=pick([".","!"," 👍","..",""]);rows.push({t:s,l});}
+  const users=["مسافر منفرد","زوج","عائلة","مجموعة","مسافر لأغراض العمل"],rooms=["غرفة قياسية","غرفة ديلوكس","جناح","غرفة عائلية"],nights=["أقمت ليلة واحدة","أقمت ليلتين","أقمت 3 ليالٍ"];
+  rows.forEach((r,i)=>{r.hotel="فندق "+(1+Math.floor(R()*90));r.rating=r.l==="pos"?4+Math.floor(R()*2):r.l==="neg"?1+Math.floor(R()*2):3;r.user=pick(users);r.room=pick(rooms);r.nights=pick(nights);r.no=i+1;});
+  return rows;})();
+const N_FILE="no\tHotel name\trating\tuser type\troom type\tnights\treview\n"+N_ROWS.map(r=>[r.no,r.hotel,r.rating,r.user,r.room,r.nights,r.t==null?"":r.t].join("\t")).join("\n")+"\n";
+const cp=s=>Array.from(s);                                   // Python counts code points, not UTF-16 units
+const pyRepr=s=>"'"+s.replace(/\\/g,"\\\\").replace(/\t/g,"\\t").replace(/\n/g,"\\n").replace(/'/g,"\\'")+"'";
+const W_RE=/[\p{L}\p{N}_]+/gu;                               // Python's \w on Unicode text
+function seriesRepr(vals,name){const v=vals.map(x=>x==null?"NaN":cp(x).length>50?cp(x).slice(0,47).join("")+"...":x),w=Math.max(...v.map(x=>cp(x).length));
+  return v.map((x,i)=>String(i).padEnd(String(vals.length-1).length)+"    "+" ".repeat(w-cp(x).length)+x).join("\n")+"\nName: "+name+", dtype: object";}
+
+/* ---------- class imbalance ---------- */
+(function(){const C={pos:"var(--teal)",neg:"var(--amber)",neu:"var(--violet)"},rows=[["غير متوازنة",{pos:68,neg:13,neu:19}],["متوازنة",{pos:33.3,neg:33.3,neu:33.4}]];
+  const W=600,ml=100,mr=10,bh=46;let s="";
+  rows.forEach(([lab,p],k)=>{const y=20+k*(bh+34);let x=ml;s+='<text x="'+(ml-10)+'" y="'+(y+bh/2+4)+'" text-anchor="end" class="ink">'+lab+'</text>';
+    ["pos","neg","neu"].forEach(c=>{const w=(W-ml-mr)*p[c]/100;s+='<g>'+tt(N_LAB[c]+": "+Math.round(p[c])+"%")+'<rect x="'+(x+1)+'" y="'+y+'" width="'+(w-2)+'" height="'+bh+'" rx="4" style="fill:'+C[c]+'"/></g><text x="'+(x+w/2)+'" y="'+(y+bh/2+4)+'" text-anchor="middle" style="fill:var(--surface);font-weight:600">'+Math.round(p[c])+'%</text>';x+=w;});});
+  $("#niChart").innerHTML=s;$("#niLegend").innerHTML=legend([[C.pos,"إيجابي"],[C.neg,"سلبي"],[C.neu,"محايد"]]);
+  function lazy(){const p=+$("#nbPos").value/100,N=1000,pos=Math.round(p*N),neg=Math.round((N-pos)*13/32),neu=N-pos-neg;$("#nbPosV").textContent=Math.round(p*100)+"%";
+    $("#nbCm").innerHTML='<thead><tr><th>الفعلي ↓ / المتوقَّع →</th><th>إيجابي</th><th>سلبي</th><th>محايد</th></tr></thead><tbody>'+
+      [["إيجابي",pos,"hit"],["سلبي",neg,"miss"],["محايد",neu,"miss"]].map(([l,n,c])=>'<tr><td style="text-align:start;font-family:var(--f-body)">'+l+'</td><td class="'+c+'">'+n+'</td><td>0</td><td>0</td></tr>').join("")+'</tbody>';
+    const f1=2*p/(1+p)/3;
+    $("#nbStats").innerHTML=[["Accuracy",Math.round(p*100)+"%","تبدو جيدة"],["Recall السلبي","0%","لم يكتشف أي شكوى"],["Recall المحايد","0%",""],["Macro F1",(f1*100).toFixed(0)+"%","تكشف الحقيقة"]].map(([a,b,c])=>'<div class="stat"><b>'+b+'</b><span>'+a+(c?" · "+c:"")+'</span></div>').join("");}
+  $("#nbPos").oninput=lazy;lazy();})();
+
+/* ---------- reading the file, step by step ---------- */
+const N_CELLS=[
+ {h:"فتح الملف بالترميز الصحيح",d:"نفتح الملف للقراءة فقط ونقرأ محتواه كاملًا في متغير واحد text: كتلة نص طويلة واحدة فيها كل الأسطر.",ex:"n-open",
+  code:'with open("balanced-reviews.txt", "r", encoding="utf-16") as f:\n    text = f.read()',
+  x:[['open("balanced-reviews.txt", "r", encoding="utf-16")','"r" تعني read أي قراءة فقط، و encoding="utf-16" لأن الملف محفوظ بهذا الترميز، ولو استخدمنا ترميزًا آخر لظهر خطأ.'],["as f","نحفظ الملف المفتوح في متغير اسمه f، و with تغلقه تلقائيًا بعد الانتهاء."],["text = f.read()","يقرأ كل المحتوى في متغير نصي واحد."]],
+  run:S=>{["f","text"].forEach(v=>S.vars.add(v));return {note:"لا يوجد ناتج يُطبع. أصبح الملف كله في المتغير text: نص واحد طوله "+fmt(cp(N_FILE).length)+" حرفًا."};}},
+ {h:"معاينة أول 500 حرف",d:"لقطة صغيرة لفهم البنية قبل أي تنظيف: الملف جدولي محفوظ كنص، فيه أكثر من عمود، وآخر عمود هو نص المراجعة، والباقي معلومات وصفية (Meta-data).",
+  code:"print(text[:500])",x:[["text[:500]","أول 500 حرف (حروف ومسافات وأرقام) من النص."]],
+  run:S=>{S.need("text");return {text:cp(N_FILE).slice(0,500).join("")};}},
+ {h:"تقسيم النص إلى أسطر",d:"كل سجل يجب أن يكون وحدة مستقلة. split عند كل نهاية سطر \\n يجعل lines قائمة: lines[0] السطر الأول، و lines[1] الثاني، وهكذا.",ex:"n-lines",
+  code:'lines = text.split("\\n")\nlen(lines)',x:[['text.split("\\n")',"قسّم النص عند كل نهاية سطر، واجعل كل جزء عنصرًا في قائمة."],["len(lines)","عدد العناصر: سطر العناوين و200 مراجعة، وعنصر فارغ أخير لأن الملف ينتهي بنهاية سطر."]],
+  run:S=>{S.need("text");S.vars.add("lines");return {text:String(N_FILE.split("\n").length)};}},
+ {h:"معاينة أول ثلاثة أسطر",d:"نكتشف أن السطر الأول عناوين الأعمدة (Header)، وأن الأعمدة مفصولة بـ Tab (\\t) لا بالفاصلة، وأن النص المراد تحليله في العمود الأخير review.",
+  code:"lines[:3]",x:[["lines[:3]","أول ثلاثة عناصر من القائمة. \\t تظهر مكان كل Tab بين الأعمدة."]],
+  run:S=>{S.need("lines");return {text:"["+N_FILE.split("\n").slice(0,3).map(pyRepr).join(",\n ")+"]"};}},
+ {h:"قراءة الجدول واستخراج عمود المراجعات",d:"بعد فهم البنية نقرأ الملف كجدول، ونأخذ عمود review فقط لأنه النص الذي نطبّق عليه التنظيف.",
+  code:'import pandas as pd\ndf = pd.read_csv("balanced-reviews.txt", sep="\\t", encoding="utf-16")\nreviews = df["review"]\nreviews.head()',
+  x:[['pd.read_csv("balanced-reviews.txt", sep="\\t", encoding="utf-16")',"نقرأ الجدول: الفاصل Tab والترميز utf-16."],['reviews = df["review"]',"عمود المراجعات فقط، في متغير اسمه reviews."],["reviews.head()","أول 5 مراجعات. لاحظ الفراغات في بداية الأولى، و NaN في الخامسة."]],
+  run:S=>{["pd","df","reviews"].forEach(v=>S.vars.add(v));S.rev=N_ROWS.map(r=>r.t);return {text:seriesRepr(S.rev.slice(0,5),"review")};}},
+ {h:"هل يوجد صفوف بدون نص؟",d:"المستخدم قد يرسل تقييمًا بلا تعليق. القيم الفارغة لا يمكن معالجتها لغويًا، فنعدّها أولًا.",
+  code:"reviews.isnull().sum()",x:[["reviews.isnull()","True لكل مراجعة فارغة."],[".sum()","عددها."]],
+  run:S=>{S.need("reviews");return {text:String(S.rev.filter(t=>t==null).length)};}},
+ {h:"إزالة القيم الفارغة",d:"نحذف المراجعة الفارغة ثم نعيد الفحص للتأكد.",ex:"n-dropna",
+  code:"reviews = reviews.dropna()\nreviews.isnull().sum()",x:[["reviews = reviews.dropna()","يحذف كل مراجعة فارغة."],["reviews.isnull().sum()","نعيد الفحص: يجب أن يكون 0."]],
+  run:S=>{S.need("reviews");S.rev=S.rev.filter(t=>t!=null);return {text:"0"};}},
+ {h:"تنقية الفراغات الزائدة",d:"الفراغات في البداية والنهاية لا تحمل معنى، لكنها قد تؤثر على المعالجة. strip يزيلها ولا يلمس الكلمات نفسها.",ex:"n-strip",
+  code:"reviews = reviews.astype(str)\nreviews = reviews.str.strip()\nreviews.head()",x:[["reviews.astype(str)","نتأكد أن كل القيم نصية، لمنع أي خطأ."],["reviews.str.strip()","يزيل الفراغات من بداية كل نص ونهايته فقط."],["reviews.head()","نعاين النتيجة."]],
+  run:S=>{S.need("reviews");S.rev=S.rev.map(t=>t==null?"nan":t.trim());return {text:seriesRepr(S.rev.slice(0,5),"review"),hint:S.rev.includes("nan")?"ظهرت كلمة nan نصًا لأن المراجعة الفارغة لم تُحذف قبل astype(str). شغّل الخلية 7 أولًا.":""};}}
+];
+makeNotebook({cells:N_CELLS,box:"#nnbCells",vars:"#nnbVars",all:"#nnbAll",reset:"#nnbReset",defs:{text:0,lines:2,df:4,reviews:4}});
+function encDemo(u16){seg($("#neU8"),$("#neU16"),!u16);
+  $("#neOut").innerHTML=u16?esc("with open(\"balanced-reviews.txt\", \"r\", encoding=\"utf-16\") as f:\n    text = f.read()\nprint(text[:120])\n\n"+cp(N_FILE).slice(0,120).join(""))
+    :esc("with open(\"balanced-reviews.txt\", \"r\", encoding=\"utf-8\") as f:\n    text = f.read()\n\n")+'<span class="err">UnicodeDecodeError: \'utf-8\' codec can\'t decode byte 0xff in position 0: invalid start byte</span><div class="nbhint">أول بايتين في ملف UTF-16 هما 0xFF 0xFE، وهما غير صالحين في UTF-8، فيتوقف Python فورًا. لهذا نسأل عن ترميز الملف قبل أي كود.</div>';}
+$("#neU8").onclick=()=>encDemo(false);$("#neU16").onclick=()=>encDemo(true);encDemo(false);
+
+/* ---------- the text-cleaning lab: the same steps as the lesson, on the first 10 reviews ---------- */
+const N_STEPS={
+ strip:{n:"astype(str) و strip()",f:t=>t.trim(),find:t=>t!==t.trim()?["فراغات في الطرفين"]:[]},
+ url:{n:"حذف الروابط",re:/http\S+|www\S+/g,rep:""},
+ sym:{n:"إزالة الرموز",re:/[!"#$%&'()*+,\-./:;<=>?@\[\]^_`{|}~؟،؛]+/g,rep:" "},
+ emo:{n:"إزالة الرموز التعبيرية",re:/(?:\p{Extended_Pictographic}|\uFE0F|\u200D)+/gu,rep:""},
+ men:{n:"حذف الهاشتاقات والمنشن",re:/[@#][\p{L}\p{N}_]+/gu,rep:""},
+ norm:{n:"توحيد الحروف",re:/[أإآى]/g,rep:m=>m==="ى"?"ي":"ا"}};
+const N_ORDER={L:["strip","url","sym","emo","men","norm"],M:["strip","url","men","emo","sym","norm"]};
+let ncOrder="L";const ncOn={na:true,strip:true,url:true,sym:true,emo:true,men:true,norm:true};
+function drawClean(){const order=N_ORDER[ncOrder];seg($("#ncOrdL"),$("#ncOrdM"),ncOrder==="L");
+  $("#ncSteps").innerHTML=[["na","إزالة القيم الفارغة","dropna()"]].concat(order.map((k,i)=>[k,(i+1)+". "+N_STEPS[k].n,""])).map(([k,n,c])=>'<div class="stage"><label class="t"><input type="checkbox" data-k="'+k+'"'+(ncOn[k]?" checked":"")+'> '+n+'</label>'+(c?'<small class="ltr mono">'+c+'</small>':"")+'</div>').join("");
+  const changed={};
+  $("#ncRevs").innerHTML=N_ROWS.slice(0,10).map((r,i)=>{if(r.t==null&&ncOn.na)return '<div class="rev dropped"><div><span class="lab">#'+i+' · '+N_LAB[r.l]+' · الأصل</span><span class="t raw">NaN</span></div><div><span class="lab">بعد التنظيف</span><span class="t">حُذفت بـ dropna()</span></div></div>';
+    let t=r.t==null?"nan":r.t;const rm=[];
+    order.forEach(k=>{if(!ncOn[k])return;const st=N_STEPS[k];let found;
+      if(st.f){found=st.find(t);t=st.f(t);}else{found=t.match(st.re)||[];t=t.replace(st.re,st.rep);}
+      if(found.length){changed[k]=(changed[k]||0)+1;rm.push('<span><b>'+st.n+':</b> '+esc(k==="norm"?found.length+" حرفًا":[...new Set(found)].join("  "))+'</span>');}});
+    return '<div class="rev"><div><span class="lab">#'+i+' · '+N_LAB[r.l]+' · الأصل</span><span class="t raw">'+esc(r.t==null?"NaN":r.t)+'</span></div><div><span class="lab">بعد التنظيف</span><span class="t">'+esc(t)+'</span></div>'+(rm.length?'<div class="rm">'+rm.join("")+'</div>':"")+'</div>';}).join("");
+  $("#ncNote").innerHTML=!ncOn.na?"<b>انتبه:</b> بدون dropna تتحول المراجعة الفارغة عند astype(str) إلى النص «nan»، فيعاملها النموذج كأنها كلمة حقيقية."
+    :ncOrder==="L"?"<b>لاحظ في ترتيب الدرس:</b> خطوة الرموز تحذف @ و # و _ أيضًا، فحين تأتي خطوة الهاشتاقات بعدها لا تجد ما تحذفه، وتبقى «hotel support» و«فنادق الرياض» داخل النص. جرّب الترتيب الآخر."
+    :"<b>بتقديم خطوة الهاشتاقات</b> تُحذف «@hotel_support» و«#فنادق_الرياض» كاملة قبل أن تمسح خطوة الرموز علاماتها. الترتيب جزء من القرار.";}
+$("#ncSteps").addEventListener("change",e=>{const k=e.target.dataset.k;if(k){ncOn[k]=e.target.checked;drawClean();}});
+$("#ncOrdL").onclick=()=>{ncOrder="L";drawClean();};$("#ncOrdM").onclick=()=>{ncOrder="M";drawClean();};drawClean();
+
+/* ---------- tokenization lab ---------- */
+const N_SAMPLE=N_ROWS[0].t;          // reviews.iloc[0] after astype(str): its spaces are kept
+const ASCII_P=`!?.,;:"'()[]{}`;
+function nltkLike(t){const out=[];t.split(/\s+/).filter(Boolean).forEach(w=>{let a=0,b=w.length;while(a<b&&ASCII_P.includes(w[a]))a++;while(b>a&&ASCII_P.includes(w[b-1]))b--;
+  [...w.slice(0,a)].forEach(c=>out.push({t:c,p:1}));if(b>a)out.push({t:w.slice(a,b),p:0});const tr=w.slice(b);
+  for(let i=0;i<tr.length;){if(tr.startsWith("...",i)){out.push({t:"...",p:1});i+=3;}else{out.push({t:tr[i],p:1});i++;}}});return out;}
+let ncntMode="s";
+function drawTok(){const t=$("#ntIn").value,sents=t.split(/[.!?؟]+/).map(s=>s.trim()).filter(Boolean),re=t.match(W_RE)||[],nl=nltkLike(t);
+  $("#ntSent").innerHTML=sents.length?sents.map(s=>"<li>"+esc(s)+"</li>").join(""):'<li class="muted">لا توجد جمل.</li>';
+  $("#ntRe").innerHTML=re.map(w=>"<span>"+esc(w)+"</span>").join("");$("#ntReN").textContent=re.length+" كلمة";
+  $("#ntNl").innerHTML=nl.map(w=>'<span class="'+(w.p?"p":"")+'">'+esc(w.t)+'</span>').join("");$("#ntNlN").textContent=nl.length+" وحدة";
+  drawCount();}
+function topN(tokens,n){const c=new Map();tokens.forEach(w=>c.set(w,(c.get(w)||0)+1));return [...c.entries()].sort((a,b)=>b[1]-a[1]).slice(0,n);}
+function drawCount(){seg($("#ncntS"),$("#ncntC"),ncntMode==="s");
+  const toks=ncntMode==="s"?nltkLike($("#ntIn").value).map(w=>w.t):N_ROWS.flatMap(r=>(r.t==null?"nan":r.t).match(W_RE)||[]),top=topN(toks,10),mx=top.length?top[0][1]:1;
+  setCode($("#ncntCode"),ncntMode==="s"?"from collections import Counter\nCounter(tokens_nltk).most_common(10)":'from collections import Counter\nall_tokens = [w for r in reviews for w in re.findall(r"\\w+", r)]\nCounter(all_tokens).most_common(10)');
+  $("#ncntBars").innerHTML=top.map(([w,n])=>'<div><span>'+esc(w)+'</span><i style="width:'+(n/mx*100)+'%"></i><em>'+n+'</em></div>').join("");}
+$("#ntIn").value=N_SAMPLE.trim();$("#ntIn").addEventListener("input",drawTok);$("#ntReset").onclick=()=>{$("#ntIn").value=N_SAMPLE.trim();drawTok();};
+$("#ncntS").onclick=()=>{ncntMode="s";drawCount();};$("#ncntC").onclick=()=>{ncntMode="c";drawCount();};drawTok();
+
+/* ---------- review lengths over reviews.head(200) ---------- */
+(function(){const L=N_ROWS.map(r=>((r.t==null?"nan":r.t).match(W_RE)||[]).length),lo=Math.min(...L),hi=Math.max(...L),cnt=new Array(hi-lo+1).fill(0);L.forEach(v=>cnt[v-lo]++);
+  const W=600,H=250,ml=44,mr=12,mt=14,mb=42,xs=sx(lo-0.5,hi+0.5,ml,W-mr),mx=Math.max(...cnt),ys=sx(0,mx*1.1,H-mb,mt),bw=(W-ml-mr)/(hi-lo+1);
+  let s=axes({W,H,ml,mr,mt,mb,xt:ticks(lo,hi,8).filter(v=>Number.isInteger(v)),xs,yt:ticks(0,mx*1.1,5),ys,xl:"عدد الكلمات في المراجعة",yl:"عدد المراجعات"});
+  cnt.forEach((n,i)=>{if(n)s+='<g>'+tt((lo+i)+" كلمة: "+n+" مراجعة")+'<rect x="'+(xs(lo+i)-bw/2+1)+'" y="'+ys(n)+'" width="'+Math.max(1,bw-2)+'" height="'+(H-mb-ys(n))+'" rx="2" style="fill:var(--rose)"/></g>';});
+  const m=aMean(L);s+='<line x1="'+xs(m)+'" x2="'+xs(m)+'" y1="'+mt+'" y2="'+(H-mb)+'" style="stroke:var(--ink);stroke-width:2;stroke-dasharray:4 3"/><text x="'+(xs(m)+6)+'" y="'+(mt+12)+'" class="ink">mean '+m.toFixed(1)+'</text>';
+  $("#nlChart").innerHTML=s;
+  $("#nlOut").textContent=pySeries(A_STATS.map(x=>x[0]),A_STATS.map(([,f])=>f(L).toFixed(6)),"Name: review, dtype: float64");})();
+
 /* ================= QUIZ ================= */
 const QZ=[
  ["ما شكل صورة MNIST بعد التسطيح (Flatten)؟",["(28, 28)","(784,)","(1, 28, 28)","(10,)"],1,"28 × 28 = 784، فتصبح كل صورة متجهًا واحدًا طوله 784."],
@@ -2279,12 +3330,25 @@ const QZ=[
  ["مع 600 صف و test_size=0.2، كم صفًا للتدريب وكم للاختبار؟",["480 و120","500 و100","300 و300","540 و60"],0,"20% من 600 = 120 للاختبار، والباقي 480 للتدريب."],
  ["لماذا نستخدم fit_transform على التدريب و transform فقط على الاختبار؟",["لأن transform أسرع","لتجنب تسريب معلومات الاختبار إلى التدريب (Data Leakage)","لأن بيانات الاختبار أصغر","لأن fit لا يعمل مع الاختبار"],1,"المتوسط والانحراف يُحسبان من التدريب فقط، ثم يُطبّقان على الاختبار كما هما."],
  ["81% من الطلاب ناجحون في pass_final. ماذا يعني ذلك؟",["البيانات متوازنة تمامًا","عدم توازن نسبي، فالدقة وحدها قد تكون مضللة","يجب حذف بعض الناجحين","النموذج سيصل حتمًا لدقة 100%"],1,"نموذج يقول «ناجح» دائمًا يحصل على 81% دقة دون أن يتعلم شيئًا."],
- ["ارتباط Pearson قريب من 0 بين ميزتين يعني:",["علاقة سببية قوية","لا توجد علاقة خطية واضحة","علاقة عكسية قوية","خطأ في البيانات"],1,"القيمة بين 1− و1+، و0 يعني غياب علاقة خطية. والارتباط عمومًا لا يعني سببية."]
+ ["ارتباط Pearson قريب من 0 بين ميزتين يعني:",["علاقة سببية قوية","لا توجد علاقة خطية واضحة","علاقة عكسية قوية","خطأ في البيانات"],1,"القيمة بين 1− و1+، و0 يعني غياب علاقة خطية. والارتباط عمومًا لا يعني سببية."],
+ ["لماذا تُعد درجات الحرارة اليومية بيانات متتابعة (Sequential)؟",["لأنها أرقام عشرية","لأن ترتيبها مهم وكل قيمة تعتمد على ما قبلها","لأنها أقل من 100","لأنها تُجمع يدويًا"],1,"(30, 32, 31) ليست مثل (31, 32, 30)، ونريد التنبؤ بالمستقبل من الماضي."],
+ ["سلسلة من 7 قيم ونافذة طولها 3. كم عينة تدريب (X, y) نحصل عليها؟",["3","4","7","21"],1,"7 − 3 = 4 نوافذ، كل نافذة يليها مخرج واحد."],
+ ["ما شكل X بعد reshape في مثال الحرارة؟",["(4, 3)","(3, 4, 1)","(4, 3, 1)","(7, 1)"],2,"(عدد العينات، الخطوات الزمنية، عدد الخصائص) = (4, 3, 1)."],
+ ["SimpleRNN(16) مع return_sequences=False تُرجع:",["الحالة الخفية لكل خطوة (batch, timesteps, 16)","الحالة الخفية للخطوة الأخيرة فقط (batch, 16)","المدخلات كما هي","رقمًا واحدًا دائمًا"],1,"True تُرجع كل الخطوات، ونحتاجها عند وضع طبقة RNN فوق أخرى."],
+ ["ما الذي يعدّله التدريب في الشبكة؟",["الأوزان والانحياز","دوال التنشيط","عدد الطبقات","حجم المدخلات"],0,"دوال التنشيط والبنية نختارها نحن، والتدريب يعدّل الأوزان والانحياز فقط."],
+ ["لماذا ندرّب MinMaxScaler على بيانات التدريب (الاختبارات 1 إلى 4) فقط؟",["لأنه أسرع","حتى لا تتسرّب معلومات المستقبل إلى التدريب","لأن الاختبار لا يحتاج تحجيمًا","لأن MinMaxScaler لا يقبل أكثر من 4 قيم"],1,"وهي نفس قاعدة «ممنوع إدخال المستقبل» في جمع البيانات."],
+ ["68% من المراجعات إيجابية، ونموذج يتوقع «إيجابي» دائمًا. ما دقته؟",["0%","33%","68%، لكنه لم يتعلم اللغة","100%"],2,"دقة مرتفعة ظاهريًا، و Recall السلبي 0%. لهذا نستخدم Precision و Recall و F1."],
+ ["لماذا نكتب encoding=\"utf-16\" عند فتح balanced-reviews.txt؟",["لأنه أسرع","لأن الملف محفوظ بهذا الترميز، وإلا ظهر خطأ أو نص مشوّه","لأن العربية لا تُقرأ إلا بـ utf-16","لتقليل حجم الملف"],1,"الترميز الخاطئ يعطي UnicodeDecodeError."],
+ ["الأعمدة في balanced-reviews.txt مفصولة بـ:",["فاصلة ,","Tab \\t","مسافة واحدة","فاصلة منقوطة ;"],1,"لهذا نكتب sep=\"\\t\" في read_csv."],
+ ["ماذا تفعل reviews.str.strip()؟",["تحذف كل المسافات بين الكلمات","تزيل الفراغات من بداية النص ونهايته فقط","تحذف الرموز","تحوّل النص إلى أحرف صغيرة"],1,"لا تلمس الكلمات نفسها ولا المسافات بينها."],
+ ["لماذا لا نوحّد «ة» إلى «ه» في هذا الدرس؟",["لأنها نادرة","لأن تغييرها قد يغيّر المعنى","لأن re لا تدعمها","لأنها ليست حرفًا عربيًا"],1,"نوحّد أ إ آ إلى ا، و ى إلى ي فقط."],
+ ["ماذا يُرجع re.findall(r\"\\w+\", text)؟",["قائمة الجمل","قائمة الكلمات والأرقام مع تجاهل الرموز والترقيم","عدد الكلمات","النص بعد حذف المسافات"],1,"لكنه لا يفصل الواو الملتصقة مثل «والغرفة»."]
 ];
 let answered={};
 const quizPicks=()=>{try{return JSON.parse(store.get("cnn204-quiz")||"{}")}catch(e){return {}}};
 // quiz groups by course; answers stay keyed by their index in QZ
-const QG=[{id:"cnn",tag:"CNN204",title:"أسئلة الشبكات العصبية للصور",from:0,to:10},{id:"ann",tag:"ANN202",title:"أسئلة التنبؤ بنجاح الطالب",from:10,to:QZ.length}];
+const QG=[{id:"cnn",tag:"CNN204",title:"أسئلة الشبكات العصبية التلافيفية",from:0,to:10},{id:"ann",tag:"ANN202",title:"أسئلة الشبكات العصبية الاصطناعية",from:10,to:16},
+  {id:"rnn",tag:"RNN204",title:"أسئلة الشبكات العصبية المتكررة",from:16,to:22},{id:"nlp",tag:"NLP203",title:"أسئلة معالجة اللغة الطبيعية",from:22,to:28}];
 const inG=(g,i)=>+i>=g.from&&+i<g.to;
 function quizScore(g){const p=quizPicks(),ks=Object.keys(p).filter(i=>inG(g,i));return {done:ks.length,right:ks.filter(i=>QZ[i]&&p[i]===QZ[i][2]).length,n:g.to-g.from};}
 function renderQuiz(){const box=$("#quizbox");box.innerHTML="";answered={};const picks=quizPicks(),grids={};
@@ -2303,12 +3367,11 @@ $("#quizReset").onclick=()=>{store.set("cnn204-quiz","{}");renderQuiz();refreshP
 
 /* ---------- progress panel + cloud sync ---------- */
 function refreshPanel(){
-  [["pgQuiz",QG[0]],["pgQuizAnn",QG[1]]].forEach(([id,g])=>{const s=quizScore(g),e=$("#"+id);
+  [["pgQuiz",QG[0]],["pgQuizAnn",QG[1]],["pgQuizRnn",QG[2]],["pgQuizNlp",QG[3]]].forEach(([id,g])=>{const s=quizScore(g),e=$("#"+id);
     e.textContent=s.done?s.right+" / "+s.n:"لم يبدأ";e.classList.toggle("txt",!s.done);$("#"+id+"Bar").style.width=(s.done/s.n*100)+"%";});
-  const x=exCounts();[["pgEx",x.cD,x.cT],["pgExAnn",x.aD,x.aT]].forEach(([id,d,t])=>{$("#"+id).textContent=d+" / "+t;$("#"+id+"Bar").style.width=(d/t*100)+"%";});
-  updateProgress();}
+  updateProgress(true);}
 const SYNC_TXT={off:["","جارٍ التحقق من حسابك…"],loading:["","جارٍ تحميل تقدمك…"],pending:["amber","تغييرات لم تُحفظ بعد…"],saving:["amber","جارٍ الحفظ…"],
-  saved:["good","محفوظ في حسابك، ويظهر لك على أي جهاز"],local:["good","يُحفظ تقدمك تلقائيًا في هذا المتصفح"],
+  saved:["good","محفوظ في حسابك، ويظهر لك على أي جهاز"],local:["amber","محفوظ في هذا المتصفح فقط. سجّل الدخول ليُحفظ في حسابك"],
   readonly:["amber","محفوظ في هذا المتصفح فقط: صلاحيتك على الصفحة لا تسمح بالحفظ في الحساب"],error:["bad","تعذّر الحفظ في الحساب الآن، وتقدمك محفوظ في هذا المتصفح"]};
 Progress.onStatus(s=>{const c=$("#pgSync"),[cls,txt]=SYNC_TXT[s]||SYNC_TXT.off;c.className="chip "+cls;c.textContent=txt;});
 function rehydrate(){solved.clear();(store.get("cnn204-solved")||"").split(",").filter(Boolean).forEach(x=>solved.add(+x));

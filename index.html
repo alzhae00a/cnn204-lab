@@ -34,7 +34,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75}
 .wrap{max-width:1080px;margin:0 auto;padding-inline:16px}
 h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.35;margin:0}
 h2{font-size:clamp(1.45rem,3.2vw,1.9rem)}
@@ -302,6 +302,13 @@ details.exd>summary{cursor:pointer;font-family:var(--f-display);font-size:.95rem
 .course-end{margin-top:40px;border:0;border-top:2px dashed var(--line)}
 nav.bar .grp{flex:none;display:flex;gap:2px;align-items:center;padding-inline:8px;border-inline-start:2px solid var(--cc)}
 nav.bar a.cl{padding:2px 4px;background:transparent}
+nav.bar{display:block;border-radius:0}   /* undo the MNIST chart's .bar rule, which also matches this element */
+nav.bar .wrap.navrow{gap:10px;align-items:center;overflow:visible}
+nav.bar .navlinks{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1}
+nav.bar .jump{flex:none;width:min(260px,40vw);font-size:.88rem;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+nav.bar .jump:hover{border-color:var(--teal)}
+@media (max-width:760px){nav.bar .navlinks{display:none}nav.bar .jump{flex:1;width:auto}}
+main [id],header [id]{scroll-margin-top:64px}
 .pg-stat .ctag{font-size:.7rem;margin-inline-end:4px}
 .pg-stat.c-cnn .pg-bar i,.pg-stat.c-ann .pg-bar i{background:var(--cc)}
 .quizgroup{margin-top:22px}
@@ -391,6 +398,26 @@ footer{padding-block:40px;color:var(--muted);font-size:.82rem;border-top:1px sol
 <body>
 <div dir="rtl" lang="ar">
 
+<nav class="bar" aria-label="أقسام الصفحة"><div class="wrap navrow">
+  <select class="jump" id="jump" aria-label="انتقل إلى قسم">
+    <option value="">انتقل إلى قسم…</option>
+    <optgroup label="عام"><option value="#progress">تقدمك</option></optgroup>
+    <optgroup label="CNN204 · الشبكات العصبية التلافيفية"><option value="#cnn204">بداية المادة</option><option value="#mnist">مثال MNIST</option><option value="#mnist-lab">ارسم رقمًا</option><option value="#mnist-steps">خطوات الحل</option><option value="#mnist-train">ماذا يحدث داخل model.fit</option><option value="#case">دراسة حالة: قطط أم كلاب</option><option value="#case-inspect">فحص البيانات</option><option value="#clean">تنظيف البيانات</option><option value="#labels">مراجعة الترميز</option></optgroup>
+    <optgroup label="ANN202 · الشبكات العصبية الاصطناعية"><option value="#ann202">بداية المادة</option><option value="#ann-setup">بيئة العمل</option><option value="#ann-problem">تحديد المشكلة</option><option value="#ann-nb">دفتر التنظيف والتهيئة</option><option value="#ann-missing">قرار القيم المفقودة</option><option value="#ann-scale">ماذا يفعل Standardization</option><option value="#ann-eda">التحليل الاستكشافي EDA</option><option value="#ann-inputs">بناء مدخلات النموذج</option></optgroup>
+    <optgroup label="RNN204 · الشبكات العصبية المتكررة"><option value="#rnn204">بداية المادة</option><option value="#rnn-temp">حرارة اليوم الثامن</option><option value="#rnn-win">النوافذ: X و y</option><option value="#rnn-train">التدريب داخل المتصفح</option><option value="#rnn-act">النشاط التطبيقي</option><option value="#rnn-collect">جمع البيانات</option><option value="#rnn-clean">التنظيف والمعالجة</option><option value="#rnn-seq">نوافذ درجات الطلاب</option></optgroup>
+    <optgroup label="NLP203 · معالجة اللغة الطبيعية"><option value="#nlp203">بداية المادة</option><option value="#nlp-setup">بيئة العمل</option><option value="#nlp-data">البيانات وعدم التوازن</option><option value="#nlp-load">قراءة الملف</option><option value="#nlp-clean">تنظيف النص</option><option value="#nlp-tok">التقطيع</option><option value="#nlp-stats">التكرار والطول</option></optgroup>
+    <optgroup label="مراجعة"><option value="#quiz">اختبر نفسك</option></optgroup>
+  </select>
+  <div class="navlinks">
+  <a href="#progress">تقدمك</a>
+  <span class="grp c-cnn"><a class="cl" href="#cnn204"><span class="ctag">CNN204</span></a><a href="#mnist">MNIST</a><a href="#mnist-lab">ارسم رقمًا</a><a href="#mnist-steps">خطوات الحل</a><a href="#mnist-train">التدريب</a><a href="#case">دراسة الحالة</a><a href="#case-inspect">فحص البيانات</a><a href="#clean">تنظيف البيانات</a><a href="#labels">مراجعة الترميز</a></span>
+  <span class="grp c-ann"><a class="cl" href="#ann202"><span class="ctag">ANN202</span></a><a href="#ann-setup">بيئة العمل</a><a href="#ann-nb">دفتر البيانات</a><a href="#ann-eda">EDA</a><a href="#ann-inputs">مدخلات النموذج</a></span>
+  <span class="grp c-rnn"><a class="cl" href="#rnn204"><span class="ctag">RNN204</span></a><a href="#rnn-temp">حرارة اليوم الثامن</a><a href="#rnn-train">التدريب</a><a href="#rnn-act">النشاط</a><a href="#rnn-collect">جمع البيانات</a><a href="#rnn-clean">التنظيف والمعالجة</a></span>
+  <span class="grp c-nlp"><a class="cl" href="#nlp203"><span class="ctag">NLP203</span></a><a href="#nlp-data">البيانات</a><a href="#nlp-load">قراءة الملف</a><a href="#nlp-clean">تنظيف النص</a><a href="#nlp-tok">التقطيع</a><a href="#nlp-stats">التكرار والطول</a></span>
+  <a href="#quiz">الاختبار</a>
+  </div>
+</div></nav>
+
 <header class="top wrap">
   <div class="eyebrow">CNN204 · ANN202 · RNN204 · NLP203 · التطبيق العملي</div>
   <h1>مختبر التطبيق العملي</h1>
@@ -455,15 +482,6 @@ footer{padding-block:40px;color:var(--muted);font-size:.82rem;border-top:1px sol
     </div>
   </section>
 </header>
-
-<nav class="bar" aria-label="أقسام الصفحة"><div class="wrap">
-  <a href="#progress">تقدمك</a>
-  <span class="grp c-cnn"><a class="cl" href="#cnn204"><span class="ctag">CNN204</span></a><a href="#mnist">MNIST</a><a href="#mnist-lab">ارسم رقمًا</a><a href="#mnist-steps">خطوات الحل</a><a href="#mnist-train">التدريب</a><a href="#case">دراسة الحالة</a><a href="#case-inspect">فحص البيانات</a><a href="#clean">تنظيف البيانات</a><a href="#labels">مراجعة الترميز</a></span>
-  <span class="grp c-ann"><a class="cl" href="#ann202"><span class="ctag">ANN202</span></a><a href="#ann-setup">بيئة العمل</a><a href="#ann-nb">دفتر البيانات</a><a href="#ann-eda">EDA</a><a href="#ann-inputs">مدخلات النموذج</a></span>
-  <span class="grp c-rnn"><a class="cl" href="#rnn204"><span class="ctag">RNN204</span></a><a href="#rnn-temp">حرارة اليوم الثامن</a><a href="#rnn-train">التدريب</a><a href="#rnn-act">النشاط</a><a href="#rnn-collect">جمع البيانات</a><a href="#rnn-clean">التنظيف والمعالجة</a></span>
-  <span class="grp c-nlp"><a class="cl" href="#nlp203"><span class="ctag">NLP203</span></a><a href="#nlp-data">البيانات</a><a href="#nlp-load">قراءة الملف</a><a href="#nlp-clean">تنظيف النص</a><a href="#nlp-tok">التقطيع</a><a href="#nlp-stats">التكرار والطول</a></span>
-  <a href="#quiz">الاختبار</a>
-</div></nav>
 
 <main class="wrap">
 
@@ -3384,9 +3402,18 @@ refreshPanel();
 Progress.connect().then(changed=>{if(changed)rehydrate();});
 
 /* nav highlight */
-const links=[...document.querySelectorAll("nav.bar a")];
-const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id));}});},{rootMargin:"-40% 0px -55% 0px"});
-links.forEach(a=>{const t=document.querySelector(a.getAttribute("href"));if(t)io.observe(t);});
+const links=[...document.querySelectorAll("nav.bar a")],jump=$("#jump"),jumpTo=[...jump.options].map(o=>o.value).filter(Boolean);
+// the current section = the last target whose top has passed 40% of the screen height
+const targetsOf=hs=>hs.map(h=>[h,document.querySelector(h)]).filter(x=>x[1]);
+const linkT=targetsOf(links.map(a=>a.getAttribute("href"))),jumpT=targetsOf(jumpTo);
+function current(ts){const y=innerHeight*0.4;let cur="",best=-Infinity;for(const [h,t] of ts){const top=t.getBoundingClientRect().top;if(top<=y&&top>best){best=top;cur=h;}}return cur;}
+let navTimer=0;
+function navSync(){navTimer=0;const l=current(linkT),j=current(jumpT);links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")===l));if(jump.value!==j)jump.value=j;}
+addEventListener("scroll",()=>{if(!navTimer)navTimer=setTimeout(navSync,100);},{passive:true});navSync();
+// the dropdown: jump to the chosen section (the sticky bar stays on screen, scroll-margin keeps the heading clear of it)
+jump.onchange=()=>{const t=jump.value&&document.querySelector(jump.value);if(!t)return;
+  t.scrollIntoView({behavior:"instant",block:"start"});   // instant: the page is long, a smooth scroll would take seconds
+  try{history.replaceState(null,"",jump.value);}catch(e){}};
 })();
 </script>
 </body>

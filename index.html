@@ -106,9 +106,10 @@ section.unitsec{padding-block:44px 8px}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 
 /* code */
-pre.code{direction:ltr;text-align:left;margin:0;background:var(--code-bg);color:var(--code-fg);font-family:var(--f-mono);font-size:.82rem;line-height:1.65;padding:14px 16px;border-radius:8px;overflow-x:auto;tab-size:4}
+pre.code{direction:ltr;text-align:left;margin:0;background:var(--code-bg);color:var(--code-fg);font-family:var(--f-mono);font-size:.82rem;line-height:1.65;padding:14px 16px;border-radius:8px;tab-size:4;
+  white-space:pre-wrap;overflow-wrap:anywhere}   /* long lines wrap: the whole code is visible without scrolling sideways */
 pre.code .kw{color:var(--code-kw)} pre.code .st{color:var(--code-str)} pre.code .cm{color:var(--code-com);font-style:italic} pre.code .nu{color:var(--code-num)}
-.console{direction:ltr;text-align:left;font-family:var(--f-mono);font-size:.8rem;background:var(--sunk);border:1px dashed var(--line);border-radius:8px;padding:10px 14px;white-space:pre-wrap;min-height:2.5em;overflow-x:auto}
+.console{direction:ltr;text-align:left;font-family:var(--f-mono);font-size:.8rem;background:var(--sunk);border:1px dashed var(--line);border-radius:8px;padding:10px 14px;white-space:pre-wrap;overflow-wrap:anywhere;min-height:2.5em;overflow-x:auto}
 .console .p{color:var(--teal)}
 
 /* table */
@@ -190,7 +191,7 @@ details.exd>summary{cursor:pointer;font-family:var(--f-display);font-size:.95rem
 .pres li.hint{background:var(--amber-soft);color:var(--amber)}
 .pres li.retry-row{background:transparent;padding:0}
 .pres li.tb{flex-direction:column;align-items:stretch;gap:6px;background:var(--bad-soft)}
-.pres li.tb pre{margin:0;direction:ltr;text-align:left;font-family:var(--f-mono);font-size:.8rem;line-height:1.5;background:var(--code-bg);color:#F2A49B;padding:10px 12px;border-radius:6px;overflow-x:auto;white-space:pre}
+.pres li.tb pre{margin:0;direction:ltr;text-align:left;font-family:var(--f-mono);font-size:.8rem;line-height:1.5;background:var(--code-bg);color:#F2A49B;padding:10px 12px;border-radius:6px;white-space:pre-wrap;overflow-wrap:anywhere}
 .pres li.tb pre b{color:#FF7B72}
 .pres li.tb span{color:var(--bad);font-size:.85rem}
 .line-input{white-space:pre}

@@ -1899,7 +1899,7 @@ const Progress=(function(){
     state:()=>cloud,
     // connect to the viewer's private cloud record; resolves true when the merged state changed what the page shows
     async connect(){
-      if(!window.claude||!claude.use){status("local");return false;}
+      if(!window.claude||!claude.use){status("browser");return false;}   // hosted outside Claude (e.g. GitHub Pages): no account to sign in to
       const [db,user]=await Promise.all([claude.use("db"),claude.use("user")]);
       const uid=user?await user.id():null;
       if(!db||!uid){status("local");return false;}
@@ -3371,7 +3371,7 @@ function refreshPanel(){
     e.textContent=s.done?s.right+" / "+s.n:"لم يبدأ";e.classList.toggle("txt",!s.done);$("#"+id+"Bar").style.width=(s.done/s.n*100)+"%";});
   updateProgress(true);}
 const SYNC_TXT={off:["","جارٍ التحقق من حسابك…"],loading:["","جارٍ تحميل تقدمك…"],pending:["amber","تغييرات لم تُحفظ بعد…"],saving:["amber","جارٍ الحفظ…"],
-  saved:["good","محفوظ في حسابك، ويظهر لك على أي جهاز"],local:["amber","محفوظ في هذا المتصفح فقط. سجّل الدخول ليُحفظ في حسابك"],
+  saved:["good","محفوظ في حسابك، ويظهر لك على أي جهاز"],local:["amber","محفوظ في هذا المتصفح فقط. سجّل الدخول ليُحفظ في حسابك"],browser:["good","تقدمك محفوظ في هذا المتصفح"],
   readonly:["amber","محفوظ في هذا المتصفح فقط: صلاحيتك على الصفحة لا تسمح بالحفظ في الحساب"],error:["bad","تعذّر الحفظ في الحساب الآن، وتقدمك محفوظ في هذا المتصفح"]};
 Progress.onStatus(s=>{const c=$("#pgSync"),[cls,txt]=SYNC_TXT[s]||SYNC_TXT.off;c.className="chip "+cls;c.textContent=txt;});
 function rehydrate(){solved.clear();(store.get("cnn204-solved")||"").split(",").filter(Boolean).forEach(x=>solved.add(+x));

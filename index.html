@@ -217,8 +217,11 @@ details.exd>summary{cursor:pointer;font-family:var(--f-display);font-size:.95rem
 .stat{padding:10px 12px;border:1px solid var(--line);border-radius:8px}
 .stat b{display:block;font-family:var(--f-mono);font-size:1.35rem;font-weight:500;font-variant-numeric:tabular-nums}
 .stat span{font-size:.78rem;color:var(--muted)}
-.cycle{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
-@media (max-width:560px){.cycle{grid-template-columns:repeat(2,1fr)}}
+.cycle{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:16px}
+@media (max-width:560px){.cycle{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.phase{overflow-wrap:anywhere}
+.seg{max-width:100%;flex-wrap:wrap}
+.kv span:last-child{min-width:0;overflow-wrap:anywhere;text-align:end}
 .phase{padding:10px;border:1px solid var(--line);border-radius:8px;font-size:.85rem;transition:background .2s,border-color .2s}
 .phase b{display:block;font-family:var(--f-mono);font-size:.8rem;font-weight:500;color:var(--muted)}
 .phase.on{background:var(--violet-soft);border-color:var(--violet)}
@@ -321,6 +324,22 @@ main [id],header [id]{scroll-margin-top:64px}
 .chip.cc{background:var(--cc-soft);border-color:transparent;color:var(--cc)}
 .unitsec.c-rnn .steps button[aria-selected="true"],.unitsec.c-nlp .steps button[aria-selected="true"]{border-color:var(--cc);background:var(--cc-soft)}
 
+/* CNN204 topics 6-7 */
+.fecanvas{display:block;width:100%;max-width:420px;height:auto;border-radius:8px;background:var(--sunk);margin-inline:auto}
+.pipe{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pipe span{padding:4px 12px;border-radius:999px;background:var(--sunk);border:1px solid var(--line);font-size:.86rem}
+.pipe span small{color:var(--muted);font-family:var(--f-mono);font-size:.72rem;direction:ltr;unicode-bidi:isolate}
+.pipe span.on{background:var(--teal);border-color:var(--teal);color:var(--surface);font-weight:600}
+.pipe i{font-style:normal;color:var(--muted)}
+.prestages{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:10px}
+.prestage{border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--bg);display:flex;flex-direction:column;gap:4px;font-size:.8rem;min-width:0}
+.prestage canvas{display:block;width:100%;aspect-ratio:1;object-fit:contain;background:var(--sunk);border-radius:6px}
+.prestage b{font-family:var(--f-display);font-size:.85rem}
+.prestage .mono{direction:ltr;unicode-bidi:isolate;color:var(--teal)}
+.tile .flags{display:flex;flex-wrap:wrap;gap:3px}
+.tile .flags span{font-size:.65rem;padding:0 6px;border-radius:999px;background:var(--bad-soft);color:var(--bad);font-weight:600}
+.tile.flag{border-color:var(--bad)}
+
 /* RNN204 */
 .wtab td,.wtab th{padding:5px 10px}
 .wtab tr.on td{background:var(--violet-soft);color:var(--violet);font-weight:600}
@@ -339,6 +358,7 @@ main [id],header [id]{scroll-margin-top:64px}
 .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px;margin-top:10px}
 .mgrid h4{margin:0 0 4px;font-family:var(--f-display);font-size:.9rem}
 .mgrid ul{margin:0;padding-inline-start:18px;font-size:.9rem}
+#rsInfo{white-space:normal;line-height:1.6;padding-block:3px}
 .seqchip{display:inline-flex;gap:6px;direction:ltr;font-family:var(--f-mono);font-size:.95rem;background:var(--cc-soft);color:var(--cc);padding:4px 12px;border-radius:999px}
 
 /* NLP203 */
@@ -403,7 +423,7 @@ footer{padding-block:40px;color:var(--muted);font-size:.82rem;border-top:1px sol
   <select class="jump" id="jump" aria-label="انتقل إلى قسم">
     <option value="">انتقل إلى قسم…</option>
     <optgroup label="عام"><option value="#progress">تقدمك</option></optgroup>
-    <optgroup label="CNN204 · الشبكات العصبية التلافيفية"><option value="#cnn204">بداية المادة</option><option value="#mnist">مثال MNIST</option><option value="#mnist-lab">ارسم رقمًا</option><option value="#mnist-steps">خطوات الحل</option><option value="#mnist-train">ماذا يحدث داخل model.fit</option><option value="#case">دراسة حالة: قطط أم كلاب</option><option value="#case-inspect">فحص البيانات</option><option value="#clean">تنظيف البيانات</option><option value="#labels">مراجعة الترميز</option></optgroup>
+    <optgroup label="CNN204 · الشبكات العصبية التلافيفية"><option value="#cnn204">بداية المادة</option><option value="#mnist">مثال MNIST</option><option value="#mnist-lab">ارسم رقمًا</option><option value="#mnist-steps">خطوات الحل</option><option value="#mnist-train">ماذا يحدث داخل model.fit</option><option value="#case">دراسة حالة: قطط أم كلاب</option><option value="#case-inspect">فحص البيانات</option><option value="#clean">تنظيف البيانات</option><option value="#labels">مراجعة الترميز</option><option value="#fe">هندسة الخصائص</option><option value="#fe-color">RGB أم Grayscale</option><option value="#fe-nb">جدول خصائص الصور</option><option value="#fe-quality">أعلام جودة الصور</option><option value="#fe-pre">المعالجة المسبقة Preprocessing</option><option value="#split">تقسيم البيانات</option><option value="#split-lab">نسب التقسيم</option><option value="#split-curves">Overfitting والإيقاف المبكر</option><option value="#split-leak">اكتشف التسرّب</option><option value="#split-nb">دراسة حالة التقسيم</option></optgroup>
     <optgroup label="ANN202 · الشبكات العصبية الاصطناعية"><option value="#ann202">بداية المادة</option><option value="#ann-setup">بيئة العمل</option><option value="#ann-problem">تحديد المشكلة</option><option value="#ann-nb">دفتر التنظيف والتهيئة</option><option value="#ann-missing">قرار القيم المفقودة</option><option value="#ann-scale">ماذا يفعل Standardization</option><option value="#ann-eda">التحليل الاستكشافي EDA</option><option value="#ann-inputs">بناء مدخلات النموذج</option></optgroup>
     <optgroup label="RNN204 · الشبكات العصبية المتكررة"><option value="#rnn204">بداية المادة</option><option value="#rnn-temp">حرارة اليوم الثامن</option><option value="#rnn-win">النوافذ: X و y</option><option value="#rnn-train">التدريب داخل المتصفح</option><option value="#rnn-act">النشاط التطبيقي</option><option value="#rnn-collect">جمع البيانات</option><option value="#rnn-clean">التنظيف والمعالجة</option><option value="#rnn-seq">نوافذ درجات الطلاب</option></optgroup>
     <optgroup label="NLP203 · معالجة اللغة الطبيعية"><option value="#nlp203">بداية المادة</option><option value="#nlp-setup">بيئة العمل</option><option value="#nlp-data">البيانات وعدم التوازن</option><option value="#nlp-load">قراءة الملف</option><option value="#nlp-clean">تنظيف النص</option><option value="#nlp-tok">التقطيع</option><option value="#nlp-stats">التكرار والطول</option></optgroup>
@@ -411,7 +431,7 @@ footer{padding-block:40px;color:var(--muted);font-size:.82rem;border-top:1px sol
   </select>
   <div class="navlinks">
   <a href="#progress">تقدمك</a>
-  <span class="grp c-cnn"><a class="cl" href="#cnn204"><span class="ctag">CNN204</span></a><a href="#mnist">MNIST</a><a href="#mnist-lab">ارسم رقمًا</a><a href="#mnist-steps">خطوات الحل</a><a href="#mnist-train">التدريب</a><a href="#case">دراسة الحالة</a><a href="#case-inspect">فحص البيانات</a><a href="#clean">تنظيف البيانات</a><a href="#labels">مراجعة الترميز</a></span>
+  <span class="grp c-cnn"><a class="cl" href="#cnn204"><span class="ctag">CNN204</span></a><a href="#mnist">MNIST</a><a href="#mnist-lab">ارسم رقمًا</a><a href="#mnist-steps">خطوات الحل</a><a href="#mnist-train">التدريب</a><a href="#case">دراسة الحالة</a><a href="#case-inspect">فحص البيانات</a><a href="#clean">تنظيف البيانات</a><a href="#labels">مراجعة الترميز</a><a href="#fe">هندسة الخصائص</a><a href="#split">تقسيم البيانات</a></span>
   <span class="grp c-ann"><a class="cl" href="#ann202"><span class="ctag">ANN202</span></a><a href="#ann-setup">بيئة العمل</a><a href="#ann-nb">دفتر البيانات</a><a href="#ann-eda">EDA</a><a href="#ann-inputs">مدخلات النموذج</a></span>
   <span class="grp c-rnn"><a class="cl" href="#rnn204"><span class="ctag">RNN204</span></a><a href="#rnn-temp">حرارة اليوم الثامن</a><a href="#rnn-train">التدريب</a><a href="#rnn-act">النشاط</a><a href="#rnn-collect">جمع البيانات</a><a href="#rnn-clean">التنظيف والمعالجة</a></span>
   <span class="grp c-nlp"><a class="cl" href="#nlp203"><span class="ctag">NLP203</span></a><a href="#nlp-data">البيانات</a><a href="#nlp-load">قراءة الملف</a><a href="#nlp-clean">تنظيف النص</a><a href="#nlp-tok">التقطيع</a><a href="#nlp-stats">التكرار والطول</a></span>
@@ -430,6 +450,8 @@ footer{padding-block:40px;color:var(--muted);font-size:.82rem;border-top:1px sol
         <a class="unit" href="#mnist"><small>الموضوع الثاني</small><b>مثال تطبيقي: MNIST</b><span>شبكة Fully Connected بطبقة Dense واحدة</span></a>
         <a class="unit" href="#case"><small>الموضوع الرابع</small><b>دراسة حالة: قطط أم كلاب؟</b><span>جمع البيانات، الترميز، الفحص</span></a>
         <a class="unit" href="#clean"><small>الموضوع الخامس</small><b>تنظيف البيانات</b><span>التالف، الضبابي، المكرر، الشاذ، الترميز</span></a>
+        <a class="unit" href="#fe"><small>الموضوع السادس</small><b>هندسة الخصائص</b><span>الألوان، الأبعاد، القنوات، الجودة، Preprocessing</span></a>
+        <a class="unit" href="#split"><small>الموضوع السابع</small><b>تقسيم البيانات</b><span>Train / Val / Test، التسرّب، الإيقاف المبكر</span></a>
       </div>
     </div>
     <div class="course c-ann">
@@ -460,14 +482,14 @@ footer{padding-block:40px;color:var(--muted);font-size:.82rem;border-top:1px sol
       </div>
     </div>
   </div>
-  <a class="unit quizlink" href="#quiz"><small>مراجعة</small><b>اختبر نفسك</b><span>عشرة أسئلة لـ CNN204، وستة لكل من ANN202 و RNN204 و NLP203، بتصحيح فوري</span></a>
+  <a class="unit quizlink" href="#quiz"><small>مراجعة</small><b>اختبر نفسك</b><span>18 سؤالًا لـ CNN204، وستة لكل من ANN202 و RNN204 و NLP203، بتصحيح فوري</span></a>
   <section class="pg" id="progress" aria-label="تقدمك">
     <div class="pg-head">
       <h2>تقدمك</h2>
       <span class="chip" id="pgSync" aria-live="polite">جارٍ التحقق من حسابك…</span>
     </div>
     <div class="pg-stats">
-      <div class="pg-stat c-cnn"><span><span class="ctag">CNN204</span>تمارين الكود</span><b id="pgEx">0 / 21</b><div class="pg-bar"><i id="pgExBar"></i></div></div>
+      <div class="pg-stat c-cnn"><span><span class="ctag">CNN204</span>تمارين الكود</span><b id="pgEx">0 / 35</b><div class="pg-bar"><i id="pgExBar"></i></div></div>
       <div class="pg-stat c-cnn"><span><span class="ctag">CNN204</span>الاختبار</span><b id="pgQuiz">لم يبدأ</b><div class="pg-bar"><i id="pgQuizBar"></i></div></div>
       <div class="pg-stat c-ann"><span><span class="ctag">ANN202</span>تمارين الكود</span><b id="pgExAnn">0 / 11</b><div class="pg-bar"><i id="pgExAnnBar"></i></div></div>
       <div class="pg-stat c-ann"><span><span class="ctag">ANN202</span>الاختبار</span><b id="pgQuizAnn">لم يبدأ</b><div class="pg-bar"><i id="pgQuizAnnBar"></i></div></div>
@@ -490,7 +512,7 @@ footer{padding-block:40px;color:var(--muted);font-size:.82rem;border-top:1px sol
 <div class="course-banner c-cnn" id="cnn204">
   <span class="ctag">CNN204</span>
   <h2>الشبكات العصبية التلافيفية</h2>
-  <p>ثلاثة مواضيع: مثال MNIST بشبكة كثيفة، ودراسة حالة القطط والكلاب، وتنظيف بيانات الصور. كل ما يلي حتى بداية قسم ANN202 يخص هذه المادة.</p>
+  <p>خمسة مواضيع: مثال MNIST بشبكة كثيفة، ودراسة حالة القطط والكلاب، وتنظيف بيانات الصور، وهندسة الخصائص والمعالجة المسبقة، وتقسيم البيانات. كل ما يلي حتى بداية قسم ANN202 يخص هذه المادة.</p>
 </div>
 
 <!-- ============ MNIST ============ -->
@@ -823,6 +845,307 @@ def move_image(path, target_class):  # "cats" or "dogs"
     target_dir.mkdir(parents=True, exist_ok=True)
     shutil.move(str(path), str(target_dir / path.name))</pre>
     <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="move"></ol></div>
+  </div>
+</section>
+
+<!-- ============ CNN204 · TOPIC 6: FEATURE ENGINEERING ============ -->
+<section class="unitsec" id="fe">
+  <div class="sechead">
+    <span class="chip teal" style="align-self:flex-start">الموضوع السادس</span>
+    <h2>هندسة الخصائص في الشبكات العصبية الالتفافية (Feature Engineering)</h2>
+    <p>في CNN تتعلّم طبقات Convolution الحواف والأشكال والأنماط تلقائيًا، فلا نصمّم خصائص يدويًا. دور هندسة الخصائص هنا تمهيدي وتحليلي: نصف الصور قبل التدريب (الألوان، الأبعاد، القنوات، الجودة) لندعم قرارات التنظيف والمعالجة المسبقة وبنية النموذج، ونقلل التعقيد والتعلّم الزائد (Overfitting).</p>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-bottom:8px">هندسة الخصائص: التعلم الآلي التقليدي مقابل CNN</h3>
+      <div class="tbl"><table>
+        <thead><tr><th></th><th>التعلم الآلي ML</th><th>CNN</th></tr></thead>
+        <tbody>
+          <tr><td>من يستخرج الخصائص؟</td><td>الإنسان يدويًا: المساحة، الطول والعرض، اللون، الحواف</td><td>النموذج تلقائيًا داخل طبقات Convolution</td></tr>
+          <tr><td>جودة النموذج تعتمد على</td><td>خبرة الإنسان</td><td>البيانات وتمثيلها</td></tr>
+          <tr><td>دور Feature Engineering</td><td>إنشاء خصائص رقمية مباشرة</td><td>توصيف وتحليل يدعم القرارات</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:8px">ماذا تعني «الخصائص» في سياق CNN؟</h3>
+      <p style="font-size:.92rem">ليست حوافًا أو أشكالًا مصمّمة يدويًا، بل خصائص تصف تمثيل الصورة:</p>
+      <div class="ptype" style="margin-top:10px">
+        <div class="card"><small>1</small><b>نوع التمثيل اللوني</b><div class="mono muted ltr" style="font-size:.78rem">RGB / Grayscale</div></div>
+        <div class="card"><small>2</small><b>أبعاد الصورة</b><div class="mono muted ltr" style="font-size:.78rem">width · height · aspect</div></div>
+        <div class="card"><small>3</small><b>عدد القنوات</b><div class="mono muted ltr" style="font-size:.78rem">L=1 · RGB=3 · RGBA=4</div></div>
+        <div class="card"><small>4</small><b>جودة الصورة</b><div class="mono muted ltr" style="font-size:.78rem">blur · brightness · contrast</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" id="fe-color">
+    <h3>الخطوة الأولى: اختيار تمثيل الألوان (Color Space Selection)</h3>
+    <p class="muted" style="margin-bottom:12px;max-width:72ch">هل نستخدم RGB بثلاث قنوات أم Grayscale بقناة واحدة؟ القرار يؤثر على كمية المعلومات، وعدد المعاملات، وسرعة التدريب. اختر صورة وقارن تمثيلاتها، وراقب عدد معاملات أول طبقة Conv2D(32, 3×3).</p>
+    <div class="card">
+      <div class="ctl">
+        <label>الصورة<select class="btn small" id="fcImg"></select></label>
+        <div class="seg" role="group" aria-label="التمثيل" id="fcView"><button data-v="RGB" aria-pressed="true">RGB</button><button data-v="L" aria-pressed="false">Grayscale</button><button data-v="R" aria-pressed="false">قناة R</button><button data-v="G" aria-pressed="false">قناة G</button><button data-v="B" aria-pressed="false">قناة B</button></div>
+      </div>
+      <div class="grid2">
+        <div style="min-width:0"><canvas class="fecanvas" id="fcCanvas" aria-label="الصورة بالتمثيل المختار"></canvas></div>
+        <div style="min-width:0;display:flex;flex-direction:column;gap:8px">
+          <div class="kv"><span>نمط الملف الأصلي img.mode</span><span id="fcMode"></span></div>
+          <div class="kv"><span>شكل المصفوفة np.array(img).shape</span><span id="fcShape"></span></div>
+          <div class="kv"><span>معاملات أول Conv2D(32, 3×3)</span><span id="fcParams"></span></div>
+          <p class="lm-goal" id="fcNote"></p>
+        </div>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:14px">
+      <div class="card">
+        <h3 style="margin-bottom:8px">نستخدم RGB عندما</h3>
+        <ul style="margin:0;padding-inline-start:20px;font-size:.92rem;display:flex;flex-direction:column;gap:4px"><li>اللون عنصر أساسي في التعرّف.</li><li>الفئات تعتمد على فروقات لونية.</li><li>أمثلة: الفواكه، الملابس، إشارات المرور. هنا فقدان اللون = فقدان معلومة مهمة.</li></ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:8px">نستخدم Grayscale عندما</h3>
+        <ul style="margin:0;padding-inline-start:20px;font-size:.92rem;display:flex;flex-direction:column;gap:4px"><li>اللون غير مؤثّر في القرار، والتركيز على الشكل أو البنية.</li><li>أمثلة: الأشعة الطبية، الحروف، الصور الصناعية.</li><li>الفائدة: تقليل التعقيد، وتسريع التدريب، وتقليل عدد المعاملات.</li></ul>
+      </div>
+    </div>
+    <div class="block grid2">
+      <div><h4 class="exh" style="margin-top:0">تحويل التمثيل اللوني</h4>
+<pre class="code">from PIL import Image
+# 1.1 تحويل الصورة إلى RGB
+img_rgb = Image.open(path).convert("RGB")
+# 1.2 تحويل الصورة إلى Grayscale
+img_gray = Image.open(path).convert("L")
+# 1.3 قرار بسيط: اختيار التمثيل حسب المشكلة
+USE_GRAYSCALE = True  # غيّريها حسب المشكلة
+img = Image.open(path).convert("L" if USE_GRAYSCALE else "RGB")</pre>
+      <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="f6-color"></ol></div>
+      <div><h4 class="exh" style="margin-top:0">الخطوة الثانية: تحليل الأبعاد (Image Dimensions)</h4>
+<pre class="code">from collections import Counter
+import numpy as np
+# 2.1 العرض والارتفاع ونسبة الأبعاد
+w, h = Image.open(path).size
+aspect_ratio = w / h
+# 2.2 أكثر الأحجام تكرارًا في كل البيانات
+sizes = [Image.open(p).size for p in paths]
+print(Counter(sizes).most_common(10))
+# 2.3 إحصائيات عامة للأبعاد
+ws = np.array([Image.open(p).size[0] for p in paths])
+hs = np.array([Image.open(p).size[1] for p in paths])
+print(ws.min(), ws.max(), ws.mean(), hs.min(), hs.max(), hs.mean())</pre>
+      <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="f6-dims"></ol></div>
+    </div>
+  </div>
+
+  <div class="block" id="fe-nb">
+    <h3>دراسة حالة: جدول الخصائص لصور القطط والكلاب</h3>
+    <p class="muted" style="margin-bottom:12px;max-width:72ch">نبني جدولًا (DataFrame) يصف كل صورة: نمطها اللوني، وأبعادها، وقنواتها، ووضوحها، وسطوعها، وتباينها، ثم نضع أعلامًا على الصور المشتبه بها دون حذفها (الحذف مكانه التنظيف). الصور هي عيّنة المختبر نفسها (22 صورة بعد استبعاد الملفين التالفين)، وكل الأرقام تُحسب فعليًا من بكسلاتها.</p>
+    <div class="card">
+      <div class="nbbar">
+        <div class="row"><button class="btn primary" id="fnbAll">شغّل الكل</button><button class="btn" id="fnbReset">إعادة تشغيل الجلسة</button></div>
+        <div class="vars" id="fnbVars"></div>
+      </div>
+      <div class="cells" id="fnbCells"></div>
+    </div>
+  </div>
+
+  <div class="block" id="fe-quality">
+    <h3>الخطوة الرابعة: تقييم جودة الصور بالأعلام (Flags)</h3>
+    <p class="muted" style="margin-bottom:12px;max-width:72ch">نقيس الوضوح (Laplacian Variance)، والسطوع (متوسط الرمادي)، والتباين (الانحراف المعياري). حرّك العتبات وراقب الصور التي تُعلَّم. العلامة لا تحذف الصورة، بل تجهّز قرار التنظيف.</p>
+    <div class="card">
+      <div class="ctl">
+        <label>BLUR_MIN = <b class="mono" style="color:var(--ink)" id="fqBlurV">80</b><input type="range" id="fqBlur" min="0" max="400" step="5" value="80" aria-label="أقل وضوح مقبول"></label>
+        <label>CONTRAST_MIN = <b class="mono" style="color:var(--ink)" id="fqConV">20</b><input type="range" id="fqCon" min="0" max="80" value="20" aria-label="أقل تباين مقبول"></label>
+        <label>BRIGHT_MIN = <b class="mono" style="color:var(--ink)" id="fqBminV">40</b><input type="range" id="fqBmin" min="0" max="120" value="40" aria-label="أقل سطوع مقبول"></label>
+        <label>BRIGHT_MAX = <b class="mono" style="color:var(--ink)" id="fqBmaxV">220</b><input type="range" id="fqBmax" min="140" max="255" value="220" aria-label="أعلى سطوع مقبول"></label>
+      </div>
+      <div class="summary" id="fqSum" style="margin-top:0"></div>
+      <div class="tiles" id="fqTiles"></div>
+    </div>
+    <div class="block grid2">
+      <div><h4 class="exh" style="margin-top:0">قياس الوضوح والضوضاء بـ OpenCV</h4>
+<pre class="code">import cv2
+import numpy as np
+# 4.1 قياس الوضوح باستخدام Laplacian Variance
+im = cv2.imread(str(path))
+gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
+blur_score = cv2.Laplacian(gray, cv2.CV_64F).var()
+# 4.2 فلترة الصور الضبابية
+BLUR_TH = 80.0
+keep = blur_score >= BLUR_TH
+# 4.3 مؤشر تقريبي للضوضاء أو التباين العالي
+noise_score = gray.std()</pre>
+      <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="f6-blur"></ol></div>
+      <div class="card" style="align-self:start">
+        <h3 style="margin-bottom:8px">لماذا OpenCV هنا؟</h3>
+        <p style="font-size:.92rem">قياس الوضوح والتشويش عمليًا أسهل به. إن لم يكن مثبتًا: <code>pip install opencv-python</code>. والصورة الضبابية فيها حواف قليلة، فيكون تباين Laplacian صغيرًا.</p>
+        <p class="note" style="margin-top:10px">لاحظ في المختبر: الصورة الداكنة جدًا تُعلَّم غالبًا كضبابية أيضًا، لأن تعتيمها يُضعف حوافها. لهذا نجمع أكثر من مقياس قبل أي قرار.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" id="fe-pre">
+    <h3>المعالجة المسبقة (Preprocessing): من صورة خام إلى Tensor</h3>
+    <p class="muted" style="margin-bottom:12px;max-width:72ch">بعد التنظيف ومراجعة الترميز، نهيّئ الصور بالشكل الذي يقبله نموذج CNN: نفس الحجم، ونفس عدد القنوات، ونفس نطاق القيم. اختر صورة وتابع شكلها في كل خطوة.</p>
+    <div class="card">
+      <div class="ctl">
+        <label>الصورة<select class="btn small" id="fpImg"></select></label>
+        <div class="seg" role="group" aria-label="القنوات"><button id="fpRgb" aria-pressed="true">الخطوة 2: RGB</button><button id="fpGray" aria-pressed="false">الخطوة 3: Grayscale</button></div>
+      </div>
+      <div class="prestages" id="fpStages"></div>
+      <pre class="code" id="fpCode" style="margin-top:12px"></pre>
+    </div>
+    <div class="block grid2">
+      <div><h4 class="exh" style="margin-top:0">خطوات Preprocessing لصورة واحدة</h4>
+<pre class="code">import numpy as np
+from PIL import Image
+img = Image.open(path).resize((224, 224))  # 1. توحيد الحجم
+img = img.convert("RGB")                   # 2. توحيد القنوات إلى RGB
+# img = img.convert("L")                   # 3. أو Grayscale إن لم يكن اللون مهمًا
+img = np.array(img) / 255.0                # 4. التطبيع إلى 0..1
+img = np.expand_dims(img, axis=0)          # 5. Tensor جاهز لـ CNN</pre>
+      <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="f6-pre"></ol></div>
+      <div><h4 class="exh" style="margin-top:0">توحيد حجم كل الملفات وقنواتها</h4>
+<pre class="code">from PIL import Image
+TARGET_SIZE = (224, 224)
+def resize_and_overwrite(image_paths, size=(224, 224)):
+    ok = 0
+    failed = 0
+    for p in image_paths:
+        try:
+            img = Image.open(p).convert("RGB")
+            img = img.resize(size)
+            img.save(p)  # نكتب فوق نفس الملف (اختياري)
+            ok += 1
+        except Exception:
+            failed += 1
+    return ok, failed
+ok, failed = resize_and_overwrite(image_paths, TARGET_SIZE)
+print("Resized:", ok, "Failed:", failed)</pre>
+      <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="f6-resize"></ol></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3 style="margin-bottom:8px">الفرق بين Feature Engineering و Preprocessing</h3>
+      <div class="tbl"><table>
+        <thead><tr><th>المقارنة</th><th>Feature Engineering</th><th>Preprocessing</th></tr></thead>
+        <tbody>
+          <tr><td>الهدف</td><td>تحسين التعلّم وفهم التمثيل</td><td>تجهيز البيانات رقميًا</td></tr>
+          <tr><td>التركيز</td><td>التنوع والمعنى</td><td>الشكل الرقمي</td></tr>
+          <tr><td>هل يزيد البيانات؟</td><td>نعم (نسخ بزوايا وإضاءة وأحجام مختلفة)</td><td>لا</td></tr>
+          <tr><td>هل يغيّر المحتوى؟</td><td>شكليًا فقط</td><td>لا</td></tr>
+          <tr><td>ناتج المرحلة</td><td>بيانات أكثر تنوعًا</td><td>Tensors جاهزة</td></tr>
+          <tr><td>موقعها في الـ Pipeline</td><td>قبل Preprocessing</td><td>قبل التدريب</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note" style="margin-top:10px">الخلاصة: في CNN يبدأ التعلّم الجيد من فهم البيانات وتمثيلها الصحيح قبل بناء النموذج.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CNN204 · TOPIC 7: DATA SPLITTING ============ -->
+<section class="unitsec" id="split">
+  <div class="sechead">
+    <span class="chip teal" style="align-self:flex-start">الموضوع السابع</span>
+    <h2>تقسيم البيانات في التعلم العميق (Train / Validation / Test)</h2>
+    <p>الهدف ليس نموذجًا بدقة عالية فقط، بل نموذج يعمّم (Generalization) على صور لم يرها. لذلك نقسم البيانات إلى ثلاث مجموعات مستقلة، لكل منها دور مختلف في دورة حياة النموذج.</p>
+  </div>
+  <div class="card">
+    <h3 style="margin-bottom:10px">موقع التقسيم في الـ ML Pipeline</h3>
+    <div class="pipe"><span>تنظيف البيانات</span><i>←</i><span>هندسة الخصائص</span><i>←</i><span>المعالجة المسبقة<small> Resize · Normalize · Encoding</small></span><i>←</i><span class="on">تقسيم البيانات</span><i>←</i><span>التدريب</span></div>
+    <p class="note" style="margin-top:10px">نقسم بعد Preprocessing حتى تكون كل الصور بنفس الحجم ونطاق القيم وتمثيل الخصائص. أي تغيير بعد التقسيم قد يسبب تسرّب البيانات (Data Leakage).</p>
+  </div>
+  <div class="block">
+    <h3>دور كل مجموعة</h3>
+    <div class="grid2" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))">
+      <div class="card"><span class="chip teal">Training</span><h4 style="margin:8px 0 4px;font-family:var(--f-display)">التعلم وتحديث الأوزان</h4><p style="font-size:.88rem">الجزء الأكبر. لكل Batch: Forward Pass ← حساب Loss ← Backpropagation ← تحديث الأوزان بـ Gradient Descent. يجب أن تكون نظيفة وممثّلة ومتوازنة قدر الإمكان.</p></div>
+      <div class="card"><span class="chip violet">Validation</span><h4 style="margin:8px 0 4px;font-family:var(--f-display)">المراقبة والضبط</h4><p style="font-size:.88rem">النموذج يراها لكنه لا يتعلم منها: Forward Pass وحساب Validation Loss و Accuracy فقط، بعد كل Epoch. نكتشف بها Overfitting، ونفعّل Early Stopping، ونضبط Hyperparameters.</p></div>
+      <div class="card"><span class="chip amber">Test</span><h4 style="margin:8px 0 4px;font-family:var(--f-display)">التقييم النهائي مرة واحدة</h4><p style="font-size:.88rem">منفصلة تمامًا: لا تدريب ولا ضبط ولا اختيار نموذج. فقط Prediction ثم Evaluation (Accuracy و Precision و Recall و F1، أو MSE و RMSE و MAE). إعادة استخدامها تحوّلها إلى جزء من التطوير.</p></div>
+    </div>
+    <div class="tbl" style="margin-top:12px"><table>
+      <thead><tr><th>الخاصية</th><th>Training</th><th>Validation</th><th>Test</th></tr></thead>
+      <tbody>
+        <tr><td>تُستخدم في التعلم</td><td>نعم</td><td>لا</td><td>لا</td></tr>
+        <tr><td>تُستخدم أثناء التدريب</td><td>نعم</td><td>نعم</td><td>لا</td></tr>
+        <tr><td>تحديث الأوزان</td><td>نعم</td><td>لا</td><td>لا</td></tr>
+        <tr><td>ضبط النموذج</td><td>لا</td><td>نعم</td><td>لا</td></tr>
+        <tr><td>تقييم نهائي</td><td>لا</td><td>لا</td><td>نعم</td></tr>
+        <tr><td>تمثل الواقع الحقيقي</td><td>جزئيًا</td><td>جزئيًا</td><td>نعم</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="block" id="split-lab">
+    <h3>اختر نسب التقسيم وشاهد النتيجة</h3>
+    <p class="muted" style="margin-bottom:12px;max-width:72ch">لا توجد نسبة إلزامية؛ الاختيار قرار منهجي يعتمد على حجم البيانات وطبيعة المشكلة وتعقيد النموذج. غيّر حجم البيانات والنسب وطريقة التقسيم، وراقب توازن الفئات في كل مجموعة. الأعداد تُحسب كما في كود الدرس بـ int().</p>
+    <div class="card">
+      <div class="ctl">
+        <label>عدد الصور<select class="btn small" id="slN"><option>100</option><option>500</option><option selected>2012</option><option>5000</option><option>20000</option></select></label>
+        <label>نسبة القطط = <b class="mono" style="color:var(--ink)" id="slCatV">50%</b><input type="range" id="slCat" min="20" max="80" value="50" aria-label="نسبة صور القطط"></label>
+        <div class="seg" role="group" aria-label="نسب التقسيم" id="slRatio"><button data-r="60" aria-pressed="false">60/20/20</button><button data-r="70" aria-pressed="true">70/15/15</button><button data-r="80" aria-pressed="false">80/10/10</button></div>
+        <div class="seg" role="group" aria-label="طريقة التقسيم"><button id="slCls" aria-pressed="true">داخل كل فئة (الدرس)</button><button id="slRnd" aria-pressed="false">عشوائي على الكل</button></div>
+      </div>
+      <svg class="chart" id="slChart" viewBox="0 0 640 200" role="img" aria-label="توزيع الفئات في كل مجموعة"></svg>
+      <div class="legend" id="slLegend"></div>
+      <div class="grid2" style="margin-top:10px">
+        <div class="tbl"><table id="slTable"></table></div>
+        <p class="lm-goal" id="slNote" style="align-self:start"></p>
+      </div>
+    </div>
+    <div class="tbl" style="margin-top:12px"><table>
+      <thead><tr><th>حجم البيانات</th><th>النسبة المفضلة</th><th>لماذا؟</th></tr></thead>
+      <tbody>
+        <tr><td>صغيرة جدًا</td><td class="num">60 / 20 / 20</td><td>بيانات محدودة، ونحتاج تحققًا واختبارًا أكبر لتقييم متحفظ، كما في الدراسات الأولية</td></tr>
+        <tr><td>متوسطة</td><td class="num">70 / 15 / 15</td><td>الأكثر استخدامًا في الأبحاث والمشاريع التعليمية ومهام CNN العامة</td></tr>
+        <tr><td>كبيرة</td><td class="num">80 / 10 / 10</td><td>نماذج عميقة معقّدة تحتاج تدريبًا أكبر، وخطر Underfitting أكبر من Overfitting</td></tr>
+      </tbody>
+    </table></div>
+    <div class="block grid2">
+      <div><h4 class="exh" style="margin-top:0">حساب أحجام المجموعات</h4>
+<pre class="code">def compute_split_sizes(n, train_ratio, val_ratio):
+    n_train = int(n * train_ratio)
+    n_val = int(n * val_ratio)
+    n_test = n - n_train - n_val
+    return n_train, n_val, n_test</pre>
+      <h4 class="exh">شرح الكود سطرًا بسطر</h4><ol class="explain stack" data-x="f7-sizes"></ol></div>
+      <div class="card" style="align-self:start">
+        <h3 style="margin-bottom:8px">ضوابط التقسيم</h3>
+        <ul style="margin:0;padding-inline-start:20px;font-size:.92rem;display:flex;flex-direction:column;gap:4px">
+          <li><b>توازن الفئات:</b> كل من Train و Val و Test فيها تمثيل متقارب للفئات.</li>
+          <li><b>الاستقلالية:</b> لا تتكرر العينة نفسها في أكثر من مجموعة، خاصة صور الأشخاص والسلاسل الزمنية.</li>
+          <li><b>طبيعة البيانات:</b> البيانات الزمنية لا تُقسَّم عشوائيًا، والصور تُقسَّم عشوائيًا مع الحفاظ على التوازن.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" id="split-curves">
+    <h3>بيانات التحقق في العمل: Overfitting والإيقاف المبكر</h3>
+    <p class="muted" style="margin-bottom:12px;max-width:72ch">منحنيات خسارة توضيحية لنموذج CNN: خسارة التدريب تنخفض دائمًا، أما خسارة التحقق فتنخفض ثم تبدأ بالارتفاع حين يبدأ النموذج بحفظ صور التدريب. Early Stopping يراقب val_loss ويتوقف بعد عدد من الـ Epochs بلا تحسّن (patience).</p>
+    <div class="card">
+      <div class="ctl"><label>patience = <b class="mono" style="color:var(--ink)" id="scPatV">5</b><input type="range" id="scPat" min="1" max="12" value="5" aria-label="عدد الـ epochs المسموح بلا تحسّن"></label></div>
+      <svg class="chart" id="scChart" viewBox="0 0 640 260" role="img" aria-label="خسارة التدريب والتحقق عبر الـ epochs"></svg>
+      <div class="legend" id="scLegend"></div>
+      <div class="grid2" style="margin-top:10px">
+        <div class="stats" id="scStats" style="margin-top:0"></div>
+        <div><pre class="code" id="scCode"></pre><p class="note" style="margin-top:6px">مثال توضيحي بـ Keras لفكرة الإيقاف المبكر من الدرس، والمنحنيات مولّدة للتوضيح.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" id="split-leak">
+    <h3>اكتشف التسرّب (Data Leakage)</h3>
+    <p class="muted" style="margin-bottom:12px;max-width:72ch">التسرّب يعطي دقة عالية وهمية، ثم يفشل النموذج في الواقع. يحدث حين تُستخدم بيانات Validation أو Test أثناء التدريب، أو حين تُحسب عملية من بيانات غير تدريبية. لكل حالة: هل فيها تسرّب؟</p>
+    <div class="quizgrid" id="lkBox"></div>
+  </div>
+
+  <div class="block" id="split-nb">
+    <h3>دراسة الحالة: تقسيم صور القطط والكلاب خطوة بخطوة</h3>
+    <p class="muted" style="margin-bottom:12px;max-width:72ch">بعد جمع البيانات وفحصها وهندسة خصائصها وتنظيفها، نقسّمها 70/15/15 داخل كل فئة. المجلد هنا افتراضي يحاكي data/cats_and_dogs: فيه 1012 ملفًا للقطط و1009 للكلاب، بينها ملفات غير صالحة. شغّل الخلايا بالترتيب، ثم جرّب الخلية الأخيرة لترى كيف يكشف فحص التداخل خطأ التسرّب.</p>
+    <div class="card">
+      <div class="nbbar">
+        <div class="row"><button class="btn primary" id="snbAll">شغّل الكل</button><button class="btn" id="snbReset">إعادة تشغيل الجلسة</button></div>
+        <div class="vars" id="snbVars"></div>
+      </div>
+      <div class="cells" id="snbCells"></div>
+    </div>
   </div>
 </section>
 
@@ -2867,6 +3190,306 @@ updateProgress();
 function wireBlocks(keys){keys.forEach(k=>{const o=$('ol[data-x="'+k+'"]');o.innerHTML=explainHTML(XL[k]);const h=o.previousElementSibling,pre=h.previousElementSibling;
   practiceWidget(pre,()=>[o,h],()=>({id:k,task:EX[k].task,checks:EX[k].checks}));});}
 
+/* ================= CNN204 · topic 6: feature engineering ================= */
+Object.assign(XL,{
+ "f6-color":[["from PIL import Image","مكتبة PIL لفتح الصور وتحويلها."],['img_rgb = Image.open(path).convert("RGB")',"نفتح الصورة ونحوّلها إلى ثلاث قنوات: أحمر وأخضر وأزرق."],
+   ['img_gray = Image.open(path).convert("L")',"\"L\" تعني تدرّجًا رماديًا بقناة واحدة."],["USE_GRAYSCALE = True","قرار واحد واضح في متغير، نغيّره حسب المشكلة."],
+   ['img = Image.open(path).convert("L" if USE_GRAYSCALE else "RGB")',"إن كان المتغير True نحوّل إلى L، وإلا إلى RGB."]],
+ "f6-dims":[["from collections import Counter","Counter لعدّ تكرار كل حجم."],["import numpy as np","NumPy للإحصاءات."],["w, h = Image.open(path).size","size يعطي (العرض، الارتفاع) لصورة واحدة."],
+   ["aspect_ratio = w / h","نسبة الأبعاد: أكبر من 1 صورة عريضة، وأقل من 1 صورة طويلة."],["sizes = [Image.open(p).size for p in paths]","قائمة بأحجام كل الصور."],
+   ["print(Counter(sizes).most_common(10))","أكثر 10 أحجام تكرارًا، لتسهيل اختيار حجم Resize لاحقًا."],["ws = np.array([Image.open(p).size[0] for p in paths])","عروض كل الصور في مصفوفة."],
+   ["hs = np.array([Image.open(p).size[1] for p in paths])","وارتفاعاتها."],["print(ws.min(), ws.max(), ws.mean(), hs.min(), hs.max(), hs.mean())","أصغر وأكبر ومتوسط العرض والارتفاع: هل الأحجام متنوعة جدًا؟"]],
+ "f6-blur":[["import cv2","مكتبة OpenCV لمعالجة الصور."],["im = cv2.imread(str(path))","نقرأ الصورة (OpenCV يقرأ الألوان بترتيب BGR)."],["gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)","نحوّلها إلى رمادي، فالوضوح لا يحتاج ألوانًا."],
+   ["blur_score = cv2.Laplacian(gray, cv2.CV_64F).var()","تباين Laplacian: الحواف الكثيرة تعطي قيمة كبيرة، والصورة الضبابية قيمة صغيرة."],["BLUR_TH = 80.0","عتبة الضبابية."],
+   ["keep = blur_score >= BLUR_TH","True إذا كانت الصورة واضحة بما يكفي."],["noise_score = gray.std()","الانحراف المعياري للرمادي: مؤشر تقريبي، كلما زاد قد يدل على ضوضاء أو تباين عالٍ."]],
+ "f6-pre":[["img = Image.open(path).resize((224, 224))","1. توحيد الحجم: CNN يتطلب مدخلات بحجم ثابت."],['img = img.convert("RGB")',"2. توحيد عدد القنوات إلى 3 لكل الصور."],
+   ['# img = img.convert("L")',"3. بديل: Grayscale حين لا تكون الألوان مهمة."],["img = np.array(img) / 255.0","4. التطبيع: قيم البكسل من 0..255 إلى 0..1 لتسهيل التعلم واستقراره."],
+   ["img = np.expand_dims(img, axis=0)","5. نضيف بُعد الدفعة: (224, 224, 3) تصبح (1, 224, 224, 3) جاهزة للنموذج."]],
+ "f6-resize":[["TARGET_SIZE = (224, 224)","الحجم الموحّد."],["def resize_and_overwrite(image_paths, size=(224, 224)):","دالة تمر على كل الصور وتعدّ الناجح والفاشل."],
+   ['img = Image.open(p).convert("RGB")',"نفتح الصورة ونوحّد قنواتها."],["img = img.resize(size)","نغيّر حجمها."],["img.save(p)","نكتب فوق الملف نفسه (اختياري؛ الأفضل أحيانًا الحفظ في مجلد جديد)."],
+   ["except Exception:","أي صورة تفشل لا توقف البرنامج، بل نعدّها في failed."],["return ok, failed","نرجع العددين."],['print("Resized:", ok, "Failed:", failed)',"تقرير بالنتيجة."]],
+ "f7-sizes":[["def compute_split_sizes(n, train_ratio, val_ratio):","تحسب أحجام المجموعات الثلاث لفئة فيها n صورة."],["n_train = int(n * train_ratio)","int يقرّب للأسفل، مثل int(703.5) = 703."],
+   ["n_val = int(n * val_ratio)","حجم التحقق."],["n_test = n - n_train - n_val","الباقي للاختبار، فيبقى المجموع صحيحًا دائمًا ولا تضيع صورة بسبب التقريب."],["return n_train, n_val, n_test","نرجع الثلاثة."]]
+});
+Object.assign(EX,{
+ "f6-color":{task:"حوّل صورة path إلى RGB في img_rgb وإلى Grayscale في img_gray، ثم اختر التمثيل حسب المتغير USE_GRAYSCALE.",checks:[
+  R_(/img_rgb=Image\.open\(path\)\.convert\("RGB"\)/,'img_rgb = Image.open(path).convert("RGB")'),R_(/img_gray=Image\.open\(path\)\.convert\("L"\)/,'img_gray = Image.open(path).convert("L")'),
+  R_(/USE_GRAYSCALE=True/,"USE_GRAYSCALE = True"),R_(/img=Image\.open\(path\)\.convert\("L" if USE_GRAYSCALE else "RGB"\)/,'img = Image.open(path).convert("L" if USE_GRAYSCALE else "RGB")')]},
+ "f6-dims":{task:"احسب العرض والارتفاع ونسبة الأبعاد لصورة، ثم أكثر 10 أحجام تكرارًا، ثم أصغر وأكبر ومتوسط العرض والارتفاع لكل الصور.",checks:[
+  R_(/w,h=Image\.open\(path\)\.size/,"w, h = Image.open(path).size"),R_(/aspect_ratio=w\/h/,"aspect_ratio = w / h"),R_(/sizes=\[Image\.open\(p\)\.size for p in paths\]/,"sizes = [Image.open(p).size for p in paths]"),
+  R_(/Counter\(sizes\)\.most_common\(10\)/,"Counter(sizes).most_common(10)"),R_(/ws=np\.array\(\[Image\.open\(p\)\.size\[0\]for p in paths\]\)/,"ws = np.array([Image.open(p).size[0] for p in paths])"),
+  R_(/hs=np\.array\(\[Image\.open\(p\)\.size\[1\]for p in paths\]\)/,"hs = np.array([Image.open(p).size[1] for p in paths])")]},
+ "f6-blur":{task:"اقرأ الصورة بـ OpenCV وحوّلها للرمادي، واحسب blur_score بـ Laplacian، واحتفظ بها إذا كانت ≥ 80، واحسب noise_score.",checks:[
+  R_(/im=cv2\.imread\(str\(path\)\)/,"im = cv2.imread(str(path))"),R_(/gray=cv2\.cvtColor\(im,cv2\.COLOR_BGR2GRAY\)/,"gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)"),
+  R_(/blur_score=cv2\.Laplacian\(gray,cv2\.CV_64F\)\.var\(\)/,"blur_score = cv2.Laplacian(gray, cv2.CV_64F).var()"),R_(/BLUR_TH=80(\.0)?/,"BLUR_TH = 80.0"),
+  R_(/keep=blur_score ?>=BLUR_TH/,"keep = blur_score >= BLUR_TH"),R_(/noise_score=gray\.std\(\)/,"noise_score = gray.std()")]},
+ "f6-pre":{task:"جهّز صورة لـ CNN: Resize إلى 224×224، ثم RGB، ثم قسمة على 255، ثم أضف بُعد الدفعة.",checks:[
+  R_(/img=Image\.open\(path\)\.resize\(\(224,224\)\)/,"img = Image.open(path).resize((224, 224))"),R_(/img=img\.convert\("RGB"\)/,'img = img.convert("RGB")'),
+  R_(/img=np\.array\(img\)\/255(\.0)?/,"img = np.array(img) / 255.0"),R_(/img=np\.expand_dims\(img,axis=0\)/,"img = np.expand_dims(img, axis=0)")]},
+ "f6-resize":{task:"اكتب resize_and_overwrite: لكل صورة حاول فتحها بـ RGB وتغيير حجمها وحفظها، وعُدّ الناجح والفاشل، ثم شغّلها واطبع النتيجة.",checks:[
+  R_(/TARGET_SIZE=\(224,224\)/,"TARGET_SIZE = (224, 224)"),R_(/def resize_and_overwrite\(image_paths,size=\(224,224\)\):/,"def resize_and_overwrite(image_paths, size=(224, 224)):"),
+  R_(/img=Image\.open\(p\)\.convert\("RGB"\)/,'img = Image.open(p).convert("RGB")'),R_(/img=img\.resize\(size\)/,"img = img.resize(size)"),R_(/img\.save\(p\)/,"img.save(p)"),
+  R_(/except Exception:/,"except Exception:"),R_(/return ok,failed/,"return ok, failed"),R_(/ok,failed=resize_and_overwrite\(image_paths,TARGET_SIZE\)/,"ok, failed = resize_and_overwrite(image_paths, TARGET_SIZE)")]},
+ "f6-mode":{task:"ابنِ DataFrame فيه path و label و class لكل صورة، ثم أضف عمود mode بالدالة get_mode واطبع توزيعه.",checks:[
+  R_(/class_to_label=\{"cats":0,"dogs":1\}/,'class_to_label = {"cats": 0, "dogs": 1}'),R_(/rows\.append\(\{"path":str\(p\),"label":label,"class":class_name\}\)/,'rows.append({"path": str(p), "label": label, "class": class_name})'),
+  R_(/df=pd\.DataFrame\(rows\)/,"df = pd.DataFrame(rows)"),R_(/return img\.mode/,"return img.mode"),R_(/df\["mode"\]=df\["path"\]\.apply\(get_mode\)/,'df["mode"] = df["path"].apply(get_mode)'),
+  R_(/print\(df\["mode"\]\.value_counts\(\)\)/,'print(df["mode"].value_counts())')]},
+ "f6-size":{task:"أضف عمودي width و height بالدالة get_size، ثم aspect_ratio، واعرض إحصاءاتها.",checks:[
+  R_(/def get_size\(path\):/,"def get_size(path):"),R_(/w,h=img\.size/,"w, h = img.size"),
+  R_(/df\[\["width","height"\]\]=df\["path"\]\.apply\(lambda p:pd\.Series\(get_size\(p\)\)\)/,'df[["width", "height"]] = df["path"].apply(lambda p: pd.Series(get_size(p)))'),
+  R_(/df\["aspect_ratio"\]=df\["width"\]\/df\["height"\]/,'df["aspect_ratio"] = df["width"] / df["height"]')]},
+ "f6-flags":{task:"عرّف العتبات (BLUR_MIN = 80، CONTRAST_MIN = 20، السطوع بين 40 و220)، وأضف الأعلام الثلاثة، واطبع عدد كل منها.",checks:[
+  R_(/BLUR_MIN=80(\.0)?/,"BLUR_MIN = 80.0"),R_(/CONTRAST_MIN=20(\.0)?/,"CONTRAST_MIN = 20.0"),R_(/df\["flag_blurry"\]=df\["blur_score"\] ?< ?BLUR_MIN/,'df["flag_blurry"] = df["blur_score"] < BLUR_MIN'),
+  R_(/df\["flag_low_contrast"\]=df\["contrast"\] ?< ?CONTRAST_MIN/,'df["flag_low_contrast"] = df["contrast"] < CONTRAST_MIN'),
+  R_(/df\["flag_bad_brightness"\]=\(df\["brightness"\] ?< ?BRIGHT_MIN\) ?\| ?\(df\["brightness"\] ?> ?BRIGHT_MAX\)/,'df["flag_bad_brightness"] = (df["brightness"] < BRIGHT_MIN) | (df["brightness"] > BRIGHT_MAX)')]},
+ "f6-save":{task:"أنشئ مجلد artifacts واحفظ فيه df باسم feature_engineering_manifest.csv بلا عمود الفهرس.",checks:[
+  R_(/out_dir=Path\("artifacts"\)/,'out_dir = Path("artifacts")'),R_(/out_dir\.mkdir\(exist_ok=True\)/,"out_dir.mkdir(exist_ok=True)"),
+  R_(/df\.to_csv\(out_dir\/"feature_engineering_manifest\.csv",index=False\)/,'df.to_csv(out_dir / "feature_engineering_manifest.csv", index=False)')]},
+ "f7-sizes":{task:"اكتب compute_split_sizes التي ترجع أحجام التدريب والتحقق بـ int، والباقي للاختبار.",checks:[
+  R_(/def compute_split_sizes\(n,train_ratio,val_ratio\):/,"def compute_split_sizes(n, train_ratio, val_ratio):"),R_(/n_train=int\(n\*train_ratio\)/,"n_train = int(n * train_ratio)"),
+  R_(/n_val=int\(n\*val_ratio\)/,"n_val = int(n * val_ratio)"),R_(/n_test=n-n_train-n_val/,"n_test = n - n_train - n_val"),R_(/return n_train,n_val,n_test/,"return n_train, n_val, n_test")]},
+ "f7-seed":{task:"ثبّت العشوائية بالقيمة 42 في random و numpy و PYTHONHASHSEED، واطبعها.",checks:[
+  R_(/import random/,"import random"),R_(/SEED=42/,"SEED = 42"),R_(/random\.seed\(SEED\)/,"random.seed(SEED)"),R_(/np\.random\.seed\(SEED\)/,"np.random.seed(SEED)"),
+  R_(/os\.environ\["PYTHONHASHSEED"\]=str\(SEED\)/,'os.environ["PYTHONHASHSEED"] = str(SEED)')]},
+ "f7-setup":{task:"حدّد SOURCE_DIR و SPLIT_DIR، والنسب 70/15/15 مع التحقق أن مجموعها 1، وأسماء الفئتين.",checks:[
+  R_(/SOURCE_DIR=Path\("data\/cats_and_dogs"\)/,'SOURCE_DIR = Path("data/cats_and_dogs")'),R_(/SPLIT_DIR=Path\("data_split"\)/,'SPLIT_DIR = Path("data_split")'),
+  R_(/TRAIN_RATIO=0\.70?/,"TRAIN_RATIO = 0.70"),R_(/VAL_RATIO=0\.15/,"VAL_RATIO = 0.15"),R_(/TEST_RATIO=0\.15/,"TEST_RATIO = 0.15"),
+  R_(/assert abs\(\(TRAIN_RATIO\+VAL_RATIO\+TEST_RATIO\)-1\.0\)/,"assert abs((TRAIN_RATIO + VAL_RATIO + TEST_RATIO) - 1.0) < 1e-9"),R_(/CLASS_NAMES=\["cats","dogs"\]/,'CLASS_NAMES = ["cats", "dogs"]')]},
+ "f7-split":{task:"اكتب split_list التي تقسم قائمة بالنسب (الباقي للاختبار)، ثم املأ splits لكل فئة واطبع الأحجام.",checks:[
+  R_(/def split_list\(items,train_ratio,val_ratio,test_ratio\):/,"def split_list(items, train_ratio, val_ratio, test_ratio):"),R_(/n_train=int\(n\*train_ratio\)/,"n_train = int(n * train_ratio)"),
+  R_(/n_test=n-\(n_train\+n_val\)/,"n_test = n - (n_train + n_val)"),R_(/val_items=items\[n_train:n_train\+n_val\]/,"val_items = items[n_train:n_train + n_val]"),
+  R_(/test_items=items\[n_train\+n_val:\]/,"test_items = items[n_train + n_val:]"),R_(/splits=\{"train":\{\},"val":\{\},"test":\{\}\}/,'splits = {"train": {}, "val": {}, "test": {}}')]},
+ "f7-load":{task:"حمّل مجلدات train و val و test كـ Datasets بحجم 224×224 ودفعات 32 (التدريب فقط مخلوط بـ SEED).",checks:[
+  R_(/import tensorflow as tf/,"import tensorflow as tf"),R_(/IMG_SIZE=\(224,224\)/,"IMG_SIZE = (224, 224)"),R_(/BATCH_SIZE=32/,"BATCH_SIZE = 32"),
+  R_(/train_ds=tf\.keras\.utils\.image_dataset_from_directory\(/,"train_ds = tf.keras.utils.image_dataset_from_directory("),R_(/shuffle=True,seed=SEED/,"shuffle=True, seed=SEED"),
+  R_(/val_ds=tf\.keras\.utils\.image_dataset_from_directory\(/,"val_ds = ..."),R_(/test_ds=tf\.keras\.utils\.image_dataset_from_directory\(/,"test_ds = ...")]}
+});
+wireBlocks(["f6-color","f6-dims","f6-blur","f6-pre","f6-resize","f7-sizes"]);
+
+/* the lab's 22 readable images (the 2 damaged files excluded), with a few typical variations: grayscale, RGBA, palette, too dark, washed out */
+const FE_TWEAK={"cat.3.jpg":{mode:"L"},"dog.4.jpg":{mode:"L"},"cat.8.jpg":{mode:"RGBA"},"dog.10.jpg":{mode:"P"},"cat.25.jpg":{tone:v=>v*0.22},"dog.18.jpg":{tone:v=>255-(255-v)*0.2}};
+function mapPixels(cv,f){const c=document.createElement("canvas");c.width=cv.width;c.height=cv.height;const x=c.getContext("2d");x.drawImage(cv,0,0);const id=x.getImageData(0,0,c.width,c.height);f(id.data);x.putImageData(id,0,0);return c;}
+const toGray=cv=>mapPixels(cv,d=>{for(let i=0;i<d.length;i+=4){const g=0.299*d[i]+0.587*d[i+1]+0.114*d[i+2];d[i]=d[i+1]=d[i+2]=g;}});
+function grayStats(cv){const d=cv.getContext("2d").getImageData(0,0,cv.width,cv.height).data;let s=0,s2=0;const n=d.length/4;for(let i=0;i<d.length;i+=4){const g=0.299*d[i]+0.587*d[i+1]+0.114*d[i+2];s+=g;s2+=g*g;}const m=s/n;return {mean:m,std:Math.sqrt(Math.max(0,s2/n-m*m))};}
+const FE=DATA.filter(d=>!d.corrupt).map(d=>{const t=FE_TWEAK[d.n]||{};let cv=d.cv;if(t.tone)cv=mapPixels(cv,a=>{for(let i=0;i<a.length;i+=4){a[i]=t.tone(a[i]);a[i+1]=t.tone(a[i+1]);a[i+2]=t.tone(a[i+2]);}});
+  const mode=t.mode||"RGB";if(mode==="L")cv=toGray(cv);const g=grayStats(cv);
+  return {...d,cv,mode,channels:{L:1,RGB:3,RGBA:4}[mode]||null,blur:lapVar(cv),brightness:g.mean,contrast:g.std,path:"data/cats_and_dogs/"+d.f+"/"+d.n};});
+
+/* ---------- color space ---------- */
+let fcV="RGB";
+FE.forEach((it,i)=>{$("#fcImg").appendChild(el("option",{value:i},it.n+" · "+it.mode));$("#fpImg").appendChild(el("option",{value:i},it.n+" · "+it.mode+" · "+it.w+"×"+it.h));});
+function drawColor(){const it=FE[+$("#fcImg").value||0],c=$("#fcCanvas"),k={R:0,G:1,B:2}[fcV];[...$("#fcView").children].forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===fcV));
+  let src=it.cv;if(fcV==="L")src=toGray(src);else if(k!=null)src=mapPixels(src,d=>{for(let i=0;i<d.length;i+=4){const v=d[i+k];d[i]=k===0?v:0;d[i+1]=k===1?v:0;d[i+2]=k===2?v:0;}});
+  c.width=src.width;c.height=src.height;c.getContext("2d").drawImage(src,0,0);
+  const ch=fcV==="RGB"?3:1;$("#fcMode").textContent=it.mode+(it.mode==="L"?" (رمادي في الأصل)":it.mode==="RGBA"?" (4 قنوات مع الشفافية)":it.mode==="P"?" (لوحة ألوان)":"");
+  $("#fcShape").textContent=fcV==="RGB"?"("+it.h+", "+it.w+", 3)":"("+it.h+", "+it.w+")";
+  $("#fcParams").textContent=fmt(3*3*ch*32+32)+" = 3×3×"+ch+"×32 + 32";
+  $("#fcNote").innerHTML=fcV==="RGB"?"<b>RGB:</b> ثلاث قنوات، فأول طبقة Conv تحتاج 896 معاملًا. في القطط والكلاب نختار RGB لأن أغلب الصور ملونة، والـ CNN يستفيد من اللون حتى لو لم يكن حاسمًا."
+    :fcV==="L"?"<b>Grayscale:</b> قناة واحدة، فتنخفض معاملات أول طبقة من 896 إلى 320، ويسرع التدريب. نخسر اللون، وهذا مقبول حين يعتمد القرار على الشكل فقط."
+    :"<b>قناة "+fcV+" وحدها:</b> كل قناة مصفوفة رمادية بحد ذاتها؛ الصورة الملونة هي ثلاث مصفوفات فوق بعضها، وهذا معنى البُعد الثالث في (h, w, 3).";}
+$("#fcImg").onchange=drawColor;[...$("#fcView").children].forEach(b=>b.onclick=()=>{fcV=b.dataset.v;drawColor();});drawColor();
+
+/* ---------- quality flags ---------- */
+function drawFlags(){const B=+$("#fqBlur").value,C=+$("#fqCon").value,b0=+$("#fqBmin").value,b1=+$("#fqBmax").value;
+  $("#fqBlurV").textContent=B;$("#fqConV").textContent=C;$("#fqBminV").textContent=b0;$("#fqBmaxV").textContent=b1;let nb=0,nc=0,nl=0;$("#fqTiles").innerHTML="";
+  FE.forEach(it=>{const f=[];if(it.blur<B){f.push("ضبابية");nb++;}if(it.contrast<C){f.push("تباين منخفض");nc++;}if(it.brightness<b0||it.brightness>b1){f.push(it.brightness<b0?"داكنة":"فاتحة جدًا");nl++;}
+    const t=el("div",{class:"tile"+(f.length?" flag":"")}),im=el("div",{class:"img"});im.appendChild(thumb(it));t.appendChild(im);
+    t.appendChild(el("div",{class:"nm",title:it.path},it.f+"/"+it.n));
+    t.appendChild(el("div",{class:"meta"},"<span>"+it.mode+" · "+it.w+"×"+it.h+"</span><span>blur "+Math.round(it.blur)+"</span>"));
+    t.appendChild(el("div",{class:"meta"},"<span>bright "+Math.round(it.brightness)+"</span><span>contrast "+Math.round(it.contrast)+"</span>"));
+    if(f.length)t.appendChild(el("div",{class:"flags"},f.map(x=>"<span>"+x+"</span>").join("")));$("#fqTiles").appendChild(t);});
+  $("#fqSum").innerHTML='<span class="chip '+(nb?"bad":"good")+'">Blurry: '+nb+'</span><span class="chip '+(nc?"bad":"good")+'">Low contrast: '+nc+'</span><span class="chip '+(nl?"bad":"good")+'">Bad brightness: '+nl+'</span><span class="muted" style="font-size:.85rem">من '+FE.length+' صورة. الأعلام لا تحذف شيئًا.</span>';}
+["#fqBlur","#fqCon","#fqBmin","#fqBmax"].forEach(s=>$(s).oninput=drawFlags);drawFlags();
+
+/* ---------- preprocessing stages ---------- */
+let fpGray=false;
+function drawPre(){const it=FE[+$("#fpImg").value||0];seg($("#fpRgb"),$("#fpGray"),!fpGray);
+  const sized=(()=>{const c=document.createElement("canvas");c.width=c.height=224;c.getContext("2d").drawImage(it.cv,0,0,224,224);return c;})(),chan=fpGray?toGray(sized):sized,ch=fpGray?"":", 3";
+  const px=chan.getContext("2d").getImageData(0,0,224,224).data;let lo=255,hi=0;for(let i=0;i<px.length;i+=4){lo=Math.min(lo,px[i],px[i+1],px[i+2]);hi=Math.max(hi,px[i],px[i+1],px[i+2]);}
+  const origCh=it.mode==="L"?"":it.mode==="RGBA"?", 4":", 3";
+  const st=[["الصورة الخام",it.cv,"("+it.h+", "+it.w+origCh+") · uint8","mode "+it.mode+" · "+it.w+"×"+it.h],["1. Resize",sized,"(224, 224"+origCh+")","كل الصور بنفس الحجم"+(Math.abs(it.w/it.h-1)>0.05?"، والنسبة "+(it.w/it.h).toFixed(2)+" صارت 1":"")],
+    [fpGray?"3. Grayscale":"2. RGB",chan,"(224, 224"+ch+")",fpGray?"قناة واحدة":it.mode==="RGB"?"كانت RGB أصلًا":"كانت "+it.mode+" وصارت 3 قنوات"],["4. Normalize",chan,"float · "+(lo/255).toFixed(2)+" … "+(hi/255).toFixed(2),"قبلها: "+lo+" … "+hi+" (uint8)"],
+    ["5. expand_dims",chan,"(1, 224, 224"+ch+")","دفعة من صورة واحدة"]];
+  $("#fpStages").innerHTML="";st.forEach(([t,c,shape,note])=>{const d=el("div",{class:"prestage"},"<b>"+t+"</b>");const cv=document.createElement("canvas");cv.width=c.width;cv.height=c.height;cv.getContext("2d").drawImage(c,0,0);d.appendChild(cv);
+    d.appendChild(el("span",{class:"mono"},shape));d.appendChild(el("span",{class:"muted"},esc(note)));$("#fpStages").appendChild(d);});
+  setCode($("#fpCode"),'img = Image.open("'+it.path+'").resize((224, 224))\nimg = img.convert("'+(fpGray?"L":"RGB")+'")\nimg = np.array(img) / 255.0\nimg = np.expand_dims(img, axis=0)\nprint(img.shape)   # (1, 224, 224'+ch+')');}
+$("#fpImg").onchange=drawPre;$("#fpRgb").onclick=()=>{fpGray=false;drawPre();};$("#fpGray").onclick=()=>{fpGray=true;drawPre();};drawPre();
+
+/* ---------- case study notebook: the feature-engineering manifest ---------- */
+const vcText=(name,pairs,foot)=>name+"\n"+pySeries(pairs.map(p=>p[0]),pairs.map(p=>String(p[1])),foot||"Name: count, dtype: int64");
+const countBy=(arr)=>{const m=new Map();arr.forEach(v=>m.set(v,(m.get(v)||0)+1));return [...m.entries()].sort((a,b)=>b[1]-a[1]);};
+const describeCols=(rows,cols)=>dfTable(cols,A_STATS.map(([nm,f])=>[nm,...cols.map(c=>({v:f(rows.map(r=>r[c])).toFixed(6)}))]));
+function needCol(S,c,cell){if(!S.cols.has(c))throw {py:"KeyError: '"+c+"'",hint:"العمود "+c+" لم يُضف إلى df بعد. شغّل الخلية "+cell+" أولًا."};}
+const F_CELLS=[
+ {h:"بناء الجدول واكتشاف النمط اللوني",d:"لكل صورة صف: مسارها، ورقم فئتها، واسم الفئة، ثم نمطها اللوني img.mode. هل أغلب الصور RGB؟ وهل توجد صور Grayscale؟",ex:"f6-mode",
+  code:'from pathlib import Path\nimport pandas as pd\nfrom PIL import Image\nDATA_DIR = Path("data/cats_and_dogs")\nclass_to_label = {"cats": 0, "dogs": 1}\n# بناء DataFrame أساسي\nrows = []\nfor class_name, label in class_to_label.items():\n    for p in (DATA_DIR / class_name).glob("*.*"):\n        rows.append({"path": str(p), "label": label, "class": class_name})\ndf = pd.DataFrame(rows)\ndef get_mode(path):\n    with Image.open(path) as img:\n        return img.mode  # RGB / L / RGBA ...\ndf["mode"] = df["path"].apply(get_mode)\nprint("Modes distribution:")\nprint(df["mode"].value_counts())',
+  x:[['class_to_label = {"cats": 0, "dogs": 1}',"اسم المجلد هو الفئة، ورقمها هو الـ label."],["for p in (DATA_DIR / class_name).glob(\"*.*\"):","كل ملف داخل مجلد الفئة."],['rows.append({"path": str(p), "label": label, "class": class_name})',"صف لكل صورة."],
+     ["df = pd.DataFrame(rows)","نحوّل القائمة إلى جدول."],["def get_mode(path):","دالة ترجع نمط الصورة."],["return img.mode","RGB أو L (رمادي) أو RGBA أو غيرها."],['df["mode"] = df["path"].apply(get_mode)',"عمود جديد بنمط كل صورة."],['print(df["mode"].value_counts())',"كم صورة من كل نمط."]],
+  run:S=>{S.df=FE.map(it=>({path:it.path,label:it.label,class:it.f,mode:it.mode,_:it}));S.cols=new Set(["path","label","class","mode"]);["Path","pd","Image","DATA_DIR","class_to_label","rows","df","get_mode"].forEach(v=>S.vars.add(v));
+    return {text:"Modes distribution:\n"+vcText("mode",countBy(S.df.map(r=>r.mode)))};}},
+ {h:"اتخاذ القرار: RGB أم Grayscale؟",d:"إذا كانت 80% أو أكثر RGB نثبت على RGB، وإذا كانت 80% Grayscale يمكن استخدامه، وإن كانت مختلطة نختار RGB غالبًا. القرار تحليلي هنا، والتحويل الفعلي يكون في Preprocessing.",
+  code:'modes = df["mode"].value_counts(normalize=True) * 100\nrgb_ratio = modes.get("RGB", 0)\ngray_ratio = modes.get("L", 0)\nprint(f"RGB: {rgb_ratio:.2f}% | Grayscale(L): {gray_ratio:.2f}%")\nif rgb_ratio >= 80:\n    decision = "Use RGB"\nelif gray_ratio >= 80:\n    decision = "Use Grayscale"\nelse:\n    decision = "Mixed -> Prefer RGB then convert all to RGB in Preprocessing"\nprint("Decision:", decision)',
+  x:[['df["mode"].value_counts(normalize=True) * 100',"النسبة المئوية لكل نمط."],['modes.get("RGB", 0)',"نسبة RGB، أو 0 إن لم يوجد."],["if rgb_ratio >= 80:","إذا كانت 80% أو أكثر RGB…"],['decision = "Use RGB"',"…نثبت على RGB."],["elif gray_ratio >= 80:","وإذا كانت أغلبها رمادية…"],
+     ['decision = "Mixed -> Prefer RGB then convert all to RGB in Preprocessing"',"وإن كانت مختلطة نختار RGB ونحوّل الكل في Preprocessing."]],
+  run:S=>{S.need("df");needCol(S,"mode",1);const n=S.df.length,p=m=>S.df.filter(r=>r.mode===m).length/n*100,r=p("RGB"),g=p("L");["modes","rgb_ratio","gray_ratio","decision"].forEach(v=>S.vars.add(v));
+    return {text:"RGB: "+r.toFixed(2)+"% | Grayscale(L): "+g.toFixed(2)+"%\nDecision: "+(r>=80?"Use RGB":g>=80?"Use Grayscale":"Mixed -> Prefer RGB then convert all to RGB in Preprocessing")};}},
+ {h:"تحليل الأبعاد",d:"نفهم اختلاف أحجام الصور قبل توحيدها لاحقًا: العرض والارتفاع ونسبة الأبعاد.",ex:"f6-size",
+  code:'def get_size(path):\n    with Image.open(path) as img:\n        w, h = img.size\n    return w, h\ndf[["width", "height"]] = df["path"].apply(lambda p: pd.Series(get_size(p)))\ndf["aspect_ratio"] = df["width"] / df["height"]\nprint(df[["width", "height", "aspect_ratio"]].describe())',
+  x:[["def get_size(path):","دالة ترجع (العرض، الارتفاع)."],["w, h = img.size","size في PIL يعطي العرض ثم الارتفاع."],['df["path"].apply(lambda p: pd.Series(get_size(p)))',"نطبّقها على كل صورة، و pd.Series يوزّع القيمتين على عمودين."],
+     ['df["aspect_ratio"] = df["width"] / df["height"]',"نسبة الأبعاد لكل صورة."],[".describe()","العدد والمتوسط والانحراف والأصغر والأرباع والأكبر."]],
+  run:S=>{S.need("df");S.df.forEach(r=>{r.width=r._.w;r.height=r._.h;r.aspect_ratio=r._.w/r._.h;});["width","height","aspect_ratio"].forEach(c=>S.cols.add(c));S.vars.add("get_size");
+    return {html:describeCols(S.df,["width","height","aspect_ratio"])};}},
+ {h:"أكثر الأبعاد شيوعًا",d:"معرفة أشهر الأحجام تسهّل اختيار حجم الـ Resize لاحقًا.",
+  code:'from collections import Counter\nsizes = list(zip(df["width"], df["height"]))\ncommon_sizes = Counter(sizes).most_common(10)\nprint("Top 10 common sizes:")\nfor s, c in common_sizes:\n    print(s, "->", c)',
+  x:[['list(zip(df["width"], df["height"]))',"نجمع العرض والارتفاع في أزواج (w, h)."],["Counter(sizes).most_common(10)","أكثر 10 أزواج تكرارًا."],["for s, c in common_sizes:","لكل حجم وعدد مراته…"],['print(s, "->", c)',"…نطبعهما."]],
+  run:S=>{S.need("df");needCol(S,"width",3);S.vars.add("common_sizes");return {text:"Top 10 common sizes:\n"+countBy(S.df.map(r=>"("+r.width+", "+r.height+")")).slice(0,10).map(([s,c])=>s+" -> "+c).join("\n")};}},
+ {h:"تحليل عدد القنوات",d:"نحوّل النمط إلى عدد قنوات: L = 1، و RGB = 3، و RGBA = 4، وأي نمط آخر (P أو CMYK) يصبح None. الهدف توحيد التمثيل ومنع أخطاء الإدخال.",
+  code:'def mode_to_channels(mode):\n    if mode == "L":  # grayscale\n        return 1\n    if mode == "RGB":\n        return 3\n    if mode == "RGBA":\n        return 4\n    # حالات أخرى (CMYK, P, ...)\n    return None\ndf["channels"] = df["mode"].apply(mode_to_channels)\nprint("Channels distribution:")\nprint(df["channels"].value_counts(dropna=False))',
+  x:[["def mode_to_channels(mode):","دالة تحوّل النمط إلى عدد قنوات."],['if mode == "L":',"الرمادي: قناة واحدة."],['if mode == "RGBA":',"RGBA: أربع قنوات، الرابعة للشفافية."],["return None","أي نمط غير متوقع."],
+     ['df["channels"] = df["mode"].apply(mode_to_channels)',"عمود عدد القنوات. None تصبح NaN، لذلك تظهر الأرقام عشرية."],["value_counts(dropna=False)","dropna=False لنرى NaN في العدّ أيضًا."]],
+  run:S=>{S.need("df");needCol(S,"mode",1);S.df.forEach(r=>r.channels=r._.channels);S.cols.add("channels");S.vars.add("mode_to_channels");
+    return {text:"Channels distribution:\n"+vcText("channels",countBy(S.df.map(r=>r.channels==null?"NaN":r.channels.toFixed(1))))};}},
+ {h:"اكتشاف الصور غير القياسية",d:"الصور التي نمطها غير متوقع (channels = NaN) قد تسبب مشاكل لاحقًا، فنعرضها.",
+  code:'weird = df[df["channels"].isna()][["path", "mode"]]\nprint("Weird modes count:", len(weird))\nif len(weird) > 0:\n    print(weird.head(10))',
+  x:[['df[df["channels"].isna()]',"الصفوف التي عدد قنواتها مفقود."],['[["path", "mode"]]',"نعرض عمودين فقط."],["if len(weird) > 0:","إن وُجدت…"],["print(weird.head(10))","…نطبع أول 10."]],
+  run:S=>{S.need("df");needCol(S,"channels",5);const w=S.df.map((r,i)=>[i,r]).filter(([,r])=>r.channels==null);S.vars.add("weird");
+    return {text:"Weird modes count: "+w.length,html:w.length?dfTable(["path","mode"],w.slice(0,10).map(([i,r])=>[i,{v:r.path},{v:r.mode}])):""};}},
+ {h:"قياس الوضوح (Blur Score)",d:"تباين Laplacian لكل صورة: القيمة الصغيرة تعني صورة ضبابية. إن لم تُقرأ الصورة نرجع 0.",
+  code:'import cv2\ndef blur_score(path):\n    img = cv2.imread(str(path))\n    if img is None:\n        return 0.0\n    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)\n    return float(cv2.Laplacian(gray, cv2.CV_64F).var())\ndf["blur_score"] = df["path"].apply(blur_score)\nprint(df["blur_score"].describe())',
+  x:[["def blur_score(path):","دالة تقيس وضوح صورة."],["if img is None:","إن فشلت القراءة…"],["return 0.0","…نعتبرها غير واضحة."],["cv2.Laplacian(gray, cv2.CV_64F).var()","تباين الحواف."],['df["blur_score"] = df["path"].apply(blur_score)',"عمود الوضوح لكل الصور."]],
+  run:S=>{S.need("df");S.df.forEach(r=>r.blur_score=r._.blur);S.cols.add("blur_score");["cv2","blur_score"].forEach(v=>S.vars.add(v));return {text:describeSeries(S.df.map(r=>r.blur_score),"blur_score")};}},
+ {h:"قياس السطوع والتباين",d:"نكتشف الصور الداكنة جدًا أو الفاتحة جدًا أو منخفضة التباين: السطوع متوسط الرمادي، والتباين انحرافه المعياري.",
+  code:'import numpy as np\ndef brightness_contrast(path):\n    img = cv2.imread(str(path))\n    if img is None:\n        return 0.0, 0.0\n    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)\n    brightness = float(np.mean(gray))  # متوسط الإضاءة\n    contrast = float(np.std(gray))     # الانحراف المعياري = مؤشر التباين\n    return brightness, contrast\ndf[["brightness", "contrast"]] = df["path"].apply(lambda p: pd.Series(brightness_contrast(p)))\nprint(df[["brightness", "contrast"]].describe())',
+  x:[["def brightness_contrast(path):","دالة ترجع السطوع والتباين."],["brightness = float(np.mean(gray))","متوسط قيم الرمادي من 0 (أسود) إلى 255 (أبيض)."],["contrast = float(np.std(gray))","انحرافها المعياري: صغير يعني صورة باهتة."],
+     ['df[["brightness", "contrast"]] =',"نوزّع القيمتين على عمودين."]],
+  run:S=>{S.need("df");S.need("cv2");S.df.forEach(r=>{r.brightness=r._.brightness;r.contrast=r._.contrast;});["brightness","contrast"].forEach(c=>S.cols.add(c));["np","brightness_contrast"].forEach(v=>S.vars.add(v));
+    return {html:describeCols(S.df,["brightness","contrast"])};}},
+ {h:"وضع أعلام للصور منخفضة الجودة",d:"نصنّف الصور «المشتبه بها» دون حذفها؛ الحذف يكون في التنظيف. جرّب العتبات نفسها في مختبر الأعلام أسفل الدفتر.",ex:"f6-flags",
+  code:'BLUR_MIN = 80.0\nCONTRAST_MIN = 20.0\n# حدود سطوع تقريبية (0 .. 255)\nBRIGHT_MIN = 40.0\nBRIGHT_MAX = 220.0\ndf["flag_blurry"] = df["blur_score"] < BLUR_MIN\ndf["flag_low_contrast"] = df["contrast"] < CONTRAST_MIN\ndf["flag_bad_brightness"] = (df["brightness"] < BRIGHT_MIN) | (df["brightness"] > BRIGHT_MAX)\nprint("Blurry:", df["flag_blurry"].sum())\nprint("Low contrast:", df["flag_low_contrast"].sum())\nprint("Bad brightness:", df["flag_bad_brightness"].sum())',
+  x:[["BLUR_MIN = 80.0","أقل وضوح مقبول."],["CONTRAST_MIN = 20.0","أقل تباين مقبول."],["BRIGHT_MIN = 40.0","أقل سطوع، و BRIGHT_MAX أعلاه."],['df["flag_blurry"] = df["blur_score"] < BLUR_MIN',"True للصورة الضبابية."],
+     ['df["flag_low_contrast"] = df["contrast"] < CONTRAST_MIN',"True للصورة الباهتة."],['df["flag_bad_brightness"] =',"True للداكنة جدًا أو الفاتحة جدًا. | تعني «أو»."],['print("Blurry:", df["flag_blurry"].sum())',"عدد كل نوع."]],
+  run:S=>{S.need("df");needCol(S,"blur_score",7);needCol(S,"contrast",8);S.df.forEach(r=>{r.flag_blurry=r.blur_score<80;r.flag_low_contrast=r.contrast<20;r.flag_bad_brightness=r.brightness<40||r.brightness>220;});
+    ["flag_blurry","flag_low_contrast","flag_bad_brightness"].forEach(c=>S.cols.add(c));["BLUR_MIN","CONTRAST_MIN","BRIGHT_MIN","BRIGHT_MAX"].forEach(v=>S.vars.add(v));const k=c=>S.df.filter(r=>r[c]).length;
+    return {text:"Blurry: "+k("flag_blurry")+"\nLow contrast: "+k("flag_low_contrast")+"\nBad brightness: "+k("flag_bad_brightness")};}},
+ {h:"حفظ تقرير Feature Engineering (Manifest)",d:"نحفظ جدول الخصائص لنستخدمه في الخطوات القادمة: التنظيف والمعالجة المسبقة والتقسيم.",ex:"f6-save",
+  code:'out_dir = Path("artifacts")\nout_dir.mkdir(exist_ok=True)\ndf.to_csv(out_dir / "feature_engineering_manifest.csv", index=False)\nprint("Saved:", (out_dir / "feature_engineering_manifest.csv").resolve())',
+  x:[['out_dir = Path("artifacts")',"مجلد لنتائج التحليل."],["out_dir.mkdir(exist_ok=True)","ننشئه إن لم يكن موجودًا."],['df.to_csv(out_dir / "feature_engineering_manifest.csv", index=False)',"نحفظ الجدول كاملًا بكل أعمدته."],['print("Saved:",',"نطبع المسار الكامل للملف."]],
+  run:S=>{S.need("df");S.vars.add("out_dir");return {text:"Saved: /content/artifacts/feature_engineering_manifest.csv",hint:S.cols.has("flag_blurry")?"":"الملف حُفظ، لكن بلا أعمدة الأعلام. شغّل الخلايا السابقة قبل الحفظ ليكتمل التقرير."};}}
+];
+makeNotebook({cells:F_CELLS,box:"#fnbCells",vars:"#fnbVars",all:"#fnbAll",reset:"#fnbReset",defs:{df:0,cv2:6}});
+
+/* ================= CNN204 · topic 7: data splitting ================= */
+/* split lab: class-wise (as in the lesson) or one random split over everything */
+let slR=70,slMode="cls";
+function drawSplit(){const N=+$("#slN").value,pc=+$("#slCat").value/100,tr=slR/100,va=(1-tr)/2,nc=Math.round(N*pc),nd=N-nc;$("#slCatV").textContent=Math.round(pc*100)+"%";
+  [...$("#slRatio").children].forEach(b=>b.setAttribute("aria-pressed",+b.dataset.r===slR));seg($("#slCls"),$("#slRnd"),slMode==="cls");
+  const sizes=n=>{const a=Math.floor(n*tr),b=Math.floor(n*va);return [a,b,n-a-b];};let rows;
+  if(slMode==="cls"){const c=sizes(nc),d=sizes(nd);rows=[0,1,2].map(k=>[c[k],d[k]]);}
+  else{const R=rng(42),lab=Array.from({length:N},(_,i)=>i<nc?1:0);for(let i=N-1;i>0;i--){const j=Math.floor(R()*(i+1));[lab[i],lab[j]]=[lab[j],lab[i]];}
+    const s=sizes(N);let o=0;rows=s.map(n=>{const part=lab.slice(o,o+n);o+=n;const cats=part.filter(Boolean).length;return [cats,n-cats];});}
+  const names=["Train","Validation","Test"],W=640,H=200,ml=96,mr=170,rowH=44,maxN=rows[0][0]+rows[0][1];let s="";   // mr leaves room for the count label
+  rows.forEach(([c,d],k)=>{const y=14+k*(rowH+18),tot=c+d,wTot=(W-ml-mr)*(tot/maxN),wc=tot?wTot*c/tot:0;
+    s+='<text x="'+(ml-10)+'" y="'+(y+rowH/2+4)+'" text-anchor="end" class="ink">'+names[k]+'</text>';
+    s+='<g>'+tt(names[k]+": قطط "+c+" · كلاب "+d)+'<rect x="'+ml+'" y="'+y+'" width="'+Math.max(0,wc-1)+'" height="'+rowH+'" rx="4" style="fill:var(--teal)"/><rect x="'+(ml+wc+1)+'" y="'+y+'" width="'+Math.max(0,wTot-wc-1)+'" height="'+rowH+'" rx="4" style="fill:var(--amber)"/></g>';
+    s+='<text x="'+(ml+wTot+8)+'" y="'+(y+rowH/2+4)+'" class="ink">'+fmt(tot)+' · '+(tot?(c/tot*100).toFixed(1):"0")+'% قطط</text>';});
+  $("#slChart").innerHTML=s;$("#slLegend").innerHTML=legend([["var(--teal)","cats"],["var(--amber)","dogs"]]);
+  $("#slTable").innerHTML='<thead><tr><th>المجموعة</th><th>cats</th><th>dogs</th><th>المجموع</th><th>نسبة القطط</th></tr></thead><tbody>'+rows.map(([c,d],k)=>'<tr><td>'+names[k]+'</td><td class="num">'+fmt(c)+'</td><td class="num">'+fmt(d)+'</td><td class="num">'+fmt(c+d)+'</td><td class="num">'+((c+d)?(c/(c+d)*100).toFixed(1):"0")+'%</td></tr>').join("")+'</tbody>';
+  const p=rows.map(([c,d])=>(c+d)?c/(c+d)*100:0),gap=Math.max(...p)-Math.min(...p),size=N<1000?["صغيرة جدًا","60/20/20"]:N<10000?["متوسطة","70/15/15"]:["كبيرة","80/10/10"];
+  $("#slNote").innerHTML=(slMode==="cls"?"<b>داخل كل فئة:</b> نسبة القطط شبه ثابتة في المجموعات الثلاث (الفرق "+gap.toFixed(1)+" نقطة فقط بسبب التقريب)، وهذا هو توازن الفئات المطلوب."
+      :"<b>عشوائي على الكل:</b> نسبة القطط تختلف بين المجموعات بـ "+gap.toFixed(1)+" نقطة"+(gap>3?"، فقد يُختبر النموذج على توزيع مختلف عمّا تدرّب عليه. لهذا يقسم الدرس داخل كل فئة.":". الفرق صغير هنا لأن البيانات كبيرة، ويكبر مع البيانات الصغيرة."))
+    +" <br>بحسب جدول الدرس، "+fmt(N)+" صورة تُعدّ بيانات "+size[0]+"، فالنسبة المفضلة "+size[1]+" (حدود الحجم هنا تقريبية للتوضيح).";}
+["#slN","#slCat"].forEach(s=>$(s).oninput=drawSplit);$("#slN").onchange=drawSplit;
+[...$("#slRatio").children].forEach(b=>b.onclick=()=>{slR=+b.dataset.r;drawSplit();});$("#slCls").onclick=()=>{slMode="cls";drawSplit();};$("#slRnd").onclick=()=>{slMode="rnd";drawSplit();};drawSplit();
+
+/* overfitting and early stopping (illustrative curves) */
+const SC=(()=>{const R=rng(77),tr=[],va=[];for(let e=1;e<=40;e++){tr.push(0.95*Math.exp(-e/7)+0.06+(R()-0.5)*0.01);va.push(0.9*Math.exp(-e/8)+0.17+Math.max(0,e-13)*0.016+(R()-0.5)*0.035);}return {tr,va};})();
+function drawCurves(){const P=+$("#scPat").value;$("#scPatV").textContent=P;let best=0,stop=40;
+  for(let e=0;e<40;e++){if(SC.va[e]<SC.va[best])best=e;if(e-best>=P){stop=e+1;break;}}
+  const W=640,H=260,ml=48,mr=14,mt=14,mb=40,xs=sx(1,40,ml,W-mr),ys=sx(0,1,H-mb,mt);
+  let s=axes({W,H,ml,mr,mt,mb,xt:[1,5,10,15,20,25,30,35,40],xs,yt:[0,0.25,0.5,0.75,1],ys,xl:"epoch",yl:"loss"});
+  s+='<rect x="'+xs(best+1)+'" y="'+mt+'" width="'+(xs(40)-xs(best+1))+'" height="'+(H-mb-mt)+'" style="fill:var(--bad-soft);opacity:.55"/><text x="'+(xs(best+1)+8)+'" y="'+(mt+14)+'" class="ink">منطقة Overfitting</text>';
+  const line=(a,c,dash)=>'<polyline points="'+a.map((v,i)=>xs(i+1).toFixed(1)+","+ys(v).toFixed(1)).join(" ")+'" style="fill:none;stroke:'+c+';stroke-width:2'+(dash?";stroke-dasharray:4 4":"")+'"/>';
+  s+=line(SC.tr,"var(--teal)")+line(SC.va,"var(--violet)");
+  s+='<line x1="'+xs(stop)+'" x2="'+xs(stop)+'" y1="'+mt+'" y2="'+(H-mb)+'" style="stroke:var(--ink);stroke-width:2;stroke-dasharray:5 4"/><text x="'+(xs(stop)-6)+'" y="'+(H-mb-8)+'" text-anchor="end" class="ink">توقف عند '+stop+'</text>';
+  s+='<g>'+tt("أفضل val_loss عند epoch "+(best+1)+": "+SC.va[best].toFixed(3))+'<circle cx="'+xs(best+1)+'" cy="'+ys(SC.va[best])+'" r="7" style="fill:var(--violet);stroke:var(--surface);stroke-width:2"/></g>';
+  $("#scChart").innerHTML=s;$("#scLegend").innerHTML=legend([["var(--teal)","Training loss"],["var(--violet)","Validation loss"],["var(--bad-soft)","Validation loss يرتفع: حفظ لا فهم"]]);
+  $("#scStats").innerHTML=[["أفضل epoch",best+1,"أقل val_loss"],["توقف التدريب عند",stop,"بعد "+P+" بلا تحسّن"],["epochs موفَّرة",40-stop,"من 40"],["val_loss عند الأفضل",SC.va[best].toFixed(3),"تُسترجع أوزانها"]].map(([a,b,c])=>'<div class="stat"><b>'+b+'</b><span>'+a+" · "+c+'</span></div>').join("");
+  setCode($("#scCode"),'from tensorflow.keras.callbacks import EarlyStopping\nearly_stop = EarlyStopping(monitor="val_loss", patience='+P+', restore_best_weights=True)\nhistory = model.fit(train_ds, validation_data=val_ds, epochs=40, callbacks=[early_stop])');}
+$("#scPat").oninput=drawCurves;drawCurves();
+
+/* spot the leak */
+const LEAKS=[["حسبنا mean و std للتطبيع (Normalization) من كل الصور، ثم قسمنا البيانات.",1,"إحصاءات صور الاختبار دخلت في تجهيز التدريب. الصحيح: نحسبها من Train فقط ثم نطبّقها على الباقي."],
+ ["طبّقنا Data Augmentation (تدوير وإضاءة) على كل الصور، ثم قسمنا.",1,"نسخ معدّلة من الصورة نفسها قد تقع في Train و Test معًا. التكثيف يكون على Train بعد التقسيم."],
+ ["صورة قطة في Train، ونسخة مصغّرة منها في Test.",1,"صور متشابهة أو مكررة بين المجموعتين تجعل الاختبار سهلًا وهميًا. لهذا ننظّف التكرار قبل التقسيم."],
+ ["جرّبنا عدة قيم لـ learning rate واخترنا الأعلى دقة على Test.",1,"صار Test جزءًا من التطوير. ضبط Hyperparameters يكون على Validation فقط."],
+ ["وحّدنا حجم كل صورة إلى 224×224 قبل التقسيم.",0,"Resize يعمل على كل صورة وحدها ولا يستخدم إحصاءات من صور أخرى، فلا تسرّب. لهذا يأتي التقسيم بعد Preprocessing."],
+ ["اخترنا عدد الـ Epochs بالإيقاف المبكر على val_loss.",0,"هذا دور Validation بالضبط. التسرّب يكون لو استخدمنا Test لهذا القرار."]];
+LEAKS.forEach(([t,leak,why],i)=>{const d=el("div",{class:"q"});d.appendChild(el("p",{class:"qq"},(i+1)+". "+esc(t)));const o=el("div",{class:"opts"}),fb=el("p",{class:"fb"});
+  ["فيها تسرّب بيانات","سليمة"].forEach((lab,j)=>{const b=el("button",{},lab);b.onclick=()=>{const right=(j===0)===!!leak;[...o.children].forEach((x,k)=>{x.disabled=true;if((k===0)===!!leak)x.classList.add("ok");else if(x===b)x.classList.add("no");});fb.textContent=(right?"صحيح. ":"ليس تمامًا. ")+why;};o.appendChild(b);});
+  d.appendChild(o);d.appendChild(fb);$("#lkBox").appendChild(d);});
+
+/* case study notebook: a virtual data/cats_and_dogs folder with a few unusable files */
+const SP_SRC=(()=>{const mk=(stem,n,bad)=>Array.from({length:n},(_,k)=>{const i=k+1,b=bad[i];return {name:b&&b.name?b.name:stem+"."+i+".jpg",ok:!b};});
+  return {cats:mk("cat",1012,{77:{name:"notes.txt"},140:{name:"cat.140.gif"},301:{},560:{},911:{}}),dogs:mk("dog",1009,{12:{name:"Thumbs.db"},388:{},702:{},845:{name:"dog.845.txt"}})};})();
+const SP_CLS=["cats","dogs"],SP_SETS=["train","val","test"];
+function spCheck(S){const out=[];let ok=true;SP_CLS.forEach(c=>{const s=k=>S.dir[k][c],a=[...s("train")].filter(x=>s("val").has(x)).length,b=[...s("train")].filter(x=>s("test").has(x)).length,v=[...s("val")].filter(x=>s("test").has(x)).length;
+  if(a||b||v){ok=false;out.push("[LEAKAGE] class="+c,"train∩val : "+a,"train∩test: "+b,"val∩test : "+v);}else out.push("[OK] No overlap for class="+c);});return {ok,text:out.join("\n")+"\nLeak-free: "+(ok?"True":"False")};}
+const S_CELLS=[
+ {h:"الخطوة 1: تثبيت العشوائية (Reproducibility)",d:"نثبّت قيمة العشوائية حتى يعطي الخلط والتقسيم النتيجة نفسها في كل تشغيل، فتكون التجربة قابلة للإعادة.",ex:"f7-seed",
+  code:'import os\nimport random\nimport numpy as np\nSEED = 42\nrandom.seed(SEED)\nnp.random.seed(SEED)\nos.environ["PYTHONHASHSEED"] = str(SEED)\nprint("Seed fixed =", SEED)',
+  x:[["SEED = 42","رقم ثابت لكل مصادر العشوائية."],["random.seed(SEED)","عشوائية Python."],["np.random.seed(SEED)","عشوائية NumPy."],['os.environ["PYTHONHASHSEED"] = str(SEED)',"ترتيب الـ hash في Python، لتثبيت ترتيب المجموعات (sets) أيضًا."]],
+  run:S=>{["os","random","np","SEED"].forEach(v=>S.vars.add(v));return {text:"Seed fixed = 42"};}},
+ {h:"الخطوة 2: المسارات ونسب التقسيم",d:"نكتب القرار المنهجي بوضوح: من أين نقرأ، وأين نكتب، وبأي نسب. هنا 70/15/15، ونتأكد أن مجموعها 1.",ex:"f7-setup",
+  code:'from pathlib import Path\n# مسار البيانات الأصلية (قبل التقسيم): يحتوي cats/ و dogs/\nSOURCE_DIR = Path("data/cats_and_dogs")\n# مسار الخرج بعد التقسيم\nSPLIT_DIR = Path("data_split")\n# نسب التقسيم\nTRAIN_RATIO = 0.70\nVAL_RATIO = 0.15\nTEST_RATIO = 0.15\nassert abs((TRAIN_RATIO + VAL_RATIO + TEST_RATIO) - 1.0) < 1e-9, "Ratios must sum to 1"\nCLASS_NAMES = ["cats", "dogs"]\nprint("SOURCE_DIR:", SOURCE_DIR.resolve())\nprint("SPLIT_DIR :", SPLIT_DIR.resolve())\nprint("Ratios:", TRAIN_RATIO, VAL_RATIO, TEST_RATIO)',
+  x:[['SOURCE_DIR = Path("data/cats_and_dogs")',"المجلد الأصلي، وفيه مجلد لكل فئة."],['SPLIT_DIR = Path("data_split")',"المجلد الذي ستُنسخ إليه المجموعات."],["TRAIN_RATIO = 0.70","70% تدريب، و15% تحقق، و15% اختبار."],
+     ["assert abs((TRAIN_RATIO + VAL_RATIO + TEST_RATIO) - 1.0) < 1e-9","assert يوقف البرنامج إن لم يكن المجموع 1. نستخدم abs و 1e-9 لأن جمع الكسور العشرية قد يعطي 0.9999999."],['CLASS_NAMES = ["cats", "dogs"]',"أسماء الفئات."]],
+  run:S=>{["Path","SOURCE_DIR","SPLIT_DIR","TRAIN_RATIO","VAL_RATIO","TEST_RATIO","CLASS_NAMES"].forEach(v=>S.vars.add(v));return {text:"SOURCE_DIR: /content/data/cats_and_dogs\nSPLIT_DIR : /content/data_split\nRatios: 0.7 0.15 0.15"};}},
+ {h:"الخطوة 3: إنشاء هيكل المجلدات",d:"بنية معيارية تسهّل التحميل لاحقًا: data_split/train/cats و train/dogs، ومثلها لـ val و test. نحذف أي تقسيم قديم أولًا.",
+  code:'import shutil\ndef make_split_folders(base_dir: Path, class_names):\n    # حذف مجلد التقسيم القديم (اختياري)\n    if base_dir.exists():\n        shutil.rmtree(base_dir)\n    for split in ["train", "val", "test"]:\n        for cls in class_names:\n            (base_dir / split / cls).mkdir(parents=True, exist_ok=True)\n\nmake_split_folders(SPLIT_DIR, CLASS_NAMES)\nprint("Split folders created.")',
+  x:[["def make_split_folders(base_dir: Path, class_names):","base_dir: Path تلميح نوع يوضّح المتوقع."],["shutil.rmtree(base_dir)","يحذف المجلد القديم بكل محتواه حتى لا تختلط ملفات تقسيم سابق."],['for split in ["train", "val", "test"]:',"لكل مجموعة…"],
+     ["(base_dir / split / cls).mkdir(parents=True, exist_ok=True)","…ننشئ مجلدًا لكل فئة."]],
+  run:S=>{S.need("SPLIT_DIR");S.need("CLASS_NAMES");S.dir={};SP_SETS.forEach(k=>{S.dir[k]={};SP_CLS.forEach(c=>S.dir[k][c]=new Set());});["shutil","make_split_folders"].forEach(v=>S.vars.add(v));return {text:"Split folders created."};}},
+ {h:"الخطوة 4: تحديد الصور الصالحة (Input Validation)",d:"ندخل بيانات صحيحة فقط: امتداد صورة مسموح، وملف يُفتح فعلًا. ملفات مثل notes.txt و Thumbs.db والصور التالفة تُستبعد.",
+  code:'from PIL import Image\nALLOWED_EXT = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}\ndef is_valid_image(path: Path) -> bool:\n    if path.suffix.lower() not in ALLOWED_EXT:\n        return False\n    try:\n        with Image.open(path) as img:\n            img.verify()  # تحقق من سلامة الصورة\n        return True\n    except Exception:\n        return False\n\ndef collect_valid_images_per_class(source_dir: Path, class_names):\n    class_to_images = {}\n    for cls in class_names:\n        cls_dir = source_dir / cls\n        assert cls_dir.exists(), f"Missing folder: {cls_dir}"\n        all_files = [p for p in cls_dir.glob("*") if p.is_file()]\n        valid = [p for p in all_files if is_valid_image(p)]\n        class_to_images[cls] = valid\n        print(f"{cls}: total={len(all_files)} | valid={len(valid)} | removed={len(all_files)-len(valid)}")\n    return class_to_images\n\nclass_to_images = collect_valid_images_per_class(SOURCE_DIR, CLASS_NAMES)',
+  x:[['ALLOWED_EXT = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}',"الامتدادات المسموحة. gif و txt ليست منها."],["if path.suffix.lower() not in ALLOWED_EXT:","امتداد غير مسموح؟ الملف غير صالح."],["img.verify()","نتحقق أن الصورة سليمة دون تحميلها كاملة."],
+     ["except Exception:","أي خطأ في الفتح يعني ملفًا تالفًا."],['all_files = [p for p in cls_dir.glob("*") if p.is_file()]',"كل الملفات في مجلد الفئة."],["valid = [p for p in all_files if is_valid_image(p)]","الصالحة منها فقط."],["class_to_images[cls] = valid","قاموس: الفئة ← قائمة صورها الصالحة."]],
+  run:S=>{S.need("SOURCE_DIR");S.need("CLASS_NAMES");S.cti={};const lines=SP_CLS.map(c=>{const all=SP_SRC[c],v=all.filter(f=>f.ok).map(f=>f.name);S.cti[c]=v;return c+": total="+all.length+" | valid="+v.length+" | removed="+(all.length-v.length);});
+    ["Image","ALLOWED_EXT","is_valid_image","collect_valid_images_per_class","class_to_images"].forEach(v=>S.vars.add(v));return {text:lines.join("\n")};}},
+ {h:"الخطوة 5: الخلط داخل كل فئة",d:"ترتيب الملفات قد يحمل تحيّزًا (Ordering Bias)، مثل صور متتالية من مصدر واحد. نخلط داخل كل فئة بـ Seed ثابت.",
+  code:'def shuffle_in_place(items, seed=42):\n    rng = random.Random(seed)\n    rng.shuffle(items)\n\nfor cls in CLASS_NAMES:\n    shuffle_in_place(class_to_images[cls], seed=SEED)\nprint("Class-wise shuffling done (controlled).")',
+  x:[["rng = random.Random(seed)","مولّد عشوائية خاص بـ seed ثابت، فلا يتأثر بأي عشوائية أخرى في البرنامج."],["rng.shuffle(items)","يخلط القائمة في مكانها."],["shuffle_in_place(class_to_images[cls], seed=SEED)","نخلط صور كل فئة على حدة."]],
+  run:S=>{S.need("class_to_images");S.need("SEED");S.need("random");SP_CLS.forEach(c=>{const R=rng(42),a=S.cti[c];for(let i=a.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[a[i],a[j]]=[a[j],a[i]];}});S.vars.add("shuffle_in_place");return {text:"Class-wise shuffling done (controlled)."};}},
+ {h:"الخطوة 6: التقسيم داخل كل فئة (Class-wise Split)",d:"نقسم كل فئة وحدها بالنسب نفسها، فيبقى توازن القطط والكلاب متقاربًا في المجموعات الثلاث. الباقي بعد int() يذهب للاختبار.",ex:"f7-split",
+  code:'def split_list(items, train_ratio, val_ratio, test_ratio):\n    n = len(items)\n    n_train = int(n * train_ratio)\n    n_val = int(n * val_ratio)\n    # الباقي للاختبار لضمان مجموع صحيح\n    n_test = n - (n_train + n_val)\n    train_items = items[:n_train]\n    val_items = items[n_train:n_train + n_val]\n    test_items = items[n_train + n_val:]\n    assert len(train_items) + len(val_items) + len(test_items) == n\n    return train_items, val_items, test_items\n\nsplits = {"train": {}, "val": {}, "test": {}}\nfor cls in CLASS_NAMES:\n    train_items, val_items, test_items = split_list(\n        class_to_images[cls], TRAIN_RATIO, VAL_RATIO, TEST_RATIO\n    )\n    splits["train"][cls] = train_items\n    splits["val"][cls] = val_items\n    splits["test"][cls] = test_items\n    print(f"{cls}: train={len(train_items)}, val={len(val_items)}, test={len(test_items)}")',
+  x:[["n_train = int(n * train_ratio)","عدد صور التدريب مقرّبًا للأسفل."],["n_test = n - (n_train + n_val)","الباقي للاختبار، فلا تضيع صورة."],["train_items = items[:n_train]","أول n_train صورة بعد الخلط."],["val_items = items[n_train:n_train + n_val]","التي تليها."],
+     ["test_items = items[n_train + n_val:]","الباقي حتى النهاية."],["assert len(train_items) + len(val_items) + len(test_items) == n","نتحقق أن كل صورة ذهبت لمجموعة واحدة بالضبط."],['splits = {"train": {}, "val": {}, "test": {}}',"قاموس: المجموعة ← الفئة ← قائمة الصور."]],
+  run:S=>{S.need("class_to_images");S.need("TRAIN_RATIO");S.split={train:{},val:{},test:{}};const lines=SP_CLS.map(c=>{const a=S.cti[c],n=a.length,t=Math.floor(n*0.7),v=Math.floor(n*0.15);
+    S.split.train[c]=a.slice(0,t);S.split.val[c]=a.slice(t,t+v);S.split.test[c]=a.slice(t+v);return c+": train="+t+", val="+v+", test="+(n-t-v);});["split_list","splits"].forEach(v=>S.vars.add(v));return {text:lines.join("\n")};}},
+ {h:"نسخ الصور إلى مجلدات المجموعات",d:"نضع كل صورة في مجلد مجموعتها وفئتها، كما في الصيغة العامة للدرس (shutil.copy2 يحافظ على بيانات الملف).",
+  code:'# نسخ كل صورة إلى مجلد مجموعتها وفئتها\nfor split, per_class in splits.items():\n    for cls, items in per_class.items():\n        for p in items:\n            shutil.copy2(p, SPLIT_DIR / split / cls / p.name)\nprint("Files copied.")',
+  x:[["for split, per_class in splits.items():","لكل مجموعة (train و val و test)…"],["for cls, items in per_class.items():","ولكل فئة فيها…"],["shutil.copy2(p, SPLIT_DIR / split / cls / p.name)","ننسخ الصورة بالاسم نفسه، والأصل يبقى كما هو."]],
+  run:S=>{S.need("splits");S.need("shutil");if(!S.dir)throw {py:"FileNotFoundError: [Errno 2] No such file or directory: 'data_split/train/cats/"+S.split.train.cats[0]+"'",hint:"مجلدات التقسيم غير موجودة. شغّل الخلية 3 أولًا."};
+    SP_SETS.forEach(k=>SP_CLS.forEach(c=>S.split[k][c].forEach(n=>S.dir[k][c].add(n))));return {text:"Files copied."};}},
+ {h:"الخطوة 7: التحقق من عدم التداخل (Leakage Check)",d:"نتأكد أنه لا توجد صورة في أكثر من مجموعة. أي تقاطع يعني تسرّبًا وتقييمًا غير موثوق.",
+  code:'def list_files(base_dir: Path, split: str, cls: str):\n    return {p.name for p in (base_dir / split / cls).glob("*") if p.is_file()}\n\ndef leakage_check(base_dir: Path, class_names):\n    ok = True\n    for cls in class_names:\n        train_set = list_files(base_dir, "train", cls)\n        val_set = list_files(base_dir, "val", cls)\n        test_set = list_files(base_dir, "test", cls)\n        inter_tv = train_set.intersection(val_set)\n        inter_tt = train_set.intersection(test_set)\n        inter_vt = val_set.intersection(test_set)\n        if inter_tv or inter_tt or inter_vt:\n            ok = False\n            print(f"[LEAKAGE] class={cls}")\n            print("train∩val :", len(inter_tv))\n            print("train∩test:", len(inter_tt))\n            print("val∩test :", len(inter_vt))\n        else:\n            print(f"[OK] No overlap for class={cls}")\n    return ok\n\nleak_free = leakage_check(SPLIT_DIR, CLASS_NAMES)\nprint("Leak-free:", leak_free)',
+  x:[["return {p.name for p in (base_dir / split / cls).glob(\"*\") if p.is_file()}","مجموعة (set) بأسماء الملفات في مجلد."],["inter_tv = train_set.intersection(val_set)","الأسماء المشتركة بين التدريب والتحقق."],["if inter_tv or inter_tt or inter_vt:","أي تقاطع غير فارغ…"],
+     ["ok = False","…يعني تسرّبًا."],["leak_free = leakage_check(SPLIT_DIR, CLASS_NAMES)","النتيجة True إن كانت المجموعات منفصلة تمامًا."]],
+  run:S=>{S.need("SPLIT_DIR");if(!S.dir)throw {py:"FileNotFoundError: [Errno 2] No such file or directory: 'data_split/train/cats'",hint:"شغّل الخلية 3 لإنشاء مجلدات التقسيم."};["list_files","leakage_check","leak_free"].forEach(v=>S.vars.add(v));return {text:spCheck(S).text};}},
+ {h:"الخطوة 8: تحميل البيانات بعد التقسيم (TensorFlow Dataset)",d:"نحوّل المجلدات إلى tf.data.Dataset جاهزة لتدريب CNN: الفئة تؤخذ من اسم المجلد، والحجم يتوحّد إلى 224×224. نخلط التدريب فقط، ونترك التحقق والاختبار بترتيب ثابت.",ex:"f7-load",
+  code:'import tensorflow as tf\nIMG_SIZE = (224, 224)  # حجم موحد\nBATCH_SIZE = 32\ntrain_ds = tf.keras.utils.image_dataset_from_directory(\n    str(SPLIT_DIR / "train"), image_size=IMG_SIZE, batch_size=BATCH_SIZE, shuffle=True, seed=SEED\n)\nval_ds = tf.keras.utils.image_dataset_from_directory(\n    str(SPLIT_DIR / "val"), image_size=IMG_SIZE, batch_size=BATCH_SIZE, shuffle=False\n)\ntest_ds = tf.keras.utils.image_dataset_from_directory(\n    str(SPLIT_DIR / "test"), image_size=IMG_SIZE, batch_size=BATCH_SIZE, shuffle=False\n)\nprint("Class names:", train_ds.class_names)\nfor images, labels in train_ds.take(1):\n    print("Train batch:", images.shape, labels.shape)',
+  x:[["IMG_SIZE = (224, 224)","حجم موحّد لكل الصور عند التحميل."],["BATCH_SIZE = 32","32 صورة في كل دفعة."],["tf.keras.utils.image_dataset_from_directory(","يقرأ المجلد، ويعطي كل مجلد فرعي رقم فئة بالترتيب الأبجدي: cats = 0 و dogs = 1."],
+     ["shuffle=True, seed=SEED","نخلط التدريب بـ seed ثابت."],["shuffle=False","لا نخلط التحقق والاختبار، فتبقى النتائج قابلة للمقارنة."],["for images, labels in train_ds.take(1):","نأخذ دفعة واحدة لنتحقق من الأشكال: (32, 224, 224, 3) و (32,)."]],
+  run:S=>{S.need("SPLIT_DIR");S.need("SEED");if(!S.dir)throw {py:"NotFoundError: Could not find directory data_split/train",hint:"شغّل الخلية 3 ثم خطوات التقسيم."};
+    const cnt=k=>SP_CLS.reduce((a,c)=>a+S.dir[k][c].size,0);if(!cnt("train"))throw {py:"ValueError: No images found in directory data_split/train. Allowed formats: ('.bmp', '.gif', '.jpeg', '.jpg', '.png')",hint:"المجلدات فارغة. شغّل خلية النسخ (7) أولًا."};
+    ["tf","IMG_SIZE","BATCH_SIZE","train_ds","val_ds","test_ds"].forEach(v=>S.vars.add(v));
+    return {text:SP_SETS.map(k=>"Found "+cnt(k)+" files belonging to 2 classes.").join("\n")+"\nClass names: ['cats', 'dogs']\nTrain batch: (32, 224, 224, 3) (32,)"};}},
+ {h:"تجربة: كيف يكشف الفحص خطأ التسرّب؟",d:"خطأ شائع: صورة من التدريب تُنسخ إلى الاختبار. شغّل الخلية وراقب فحص التداخل، ثم أعد تشغيل الجلسة لتعود البيانات سليمة.",
+  code:'# تجربة: خطأ شائع — نسخ صورة تدريب إلى مجلد الاختبار\nleaked = splits["train"]["cats"][0]\nshutil.copy2(leaked, SPLIT_DIR / "test" / "cats" / leaked.name)\nleak_free = leakage_check(SPLIT_DIR, CLASS_NAMES)\nprint("Leak-free:", leak_free)',
+  x:[['leaked = splits["train"]["cats"][0]',"أول صورة قطة في التدريب."],['shutil.copy2(leaked, SPLIT_DIR / "test" / "cats" / leaked.name)',"ننسخها خطأً إلى الاختبار."],["leak_free = leakage_check(SPLIT_DIR, CLASS_NAMES)","نعيد الفحص."]],
+  run:S=>{S.need("splits");S.need("leakage_check");S.dir.test.cats.add(S.split.train.cats[0]);const r=spCheck(S);return {text:r.text.replace(/\nLeak-free: (True|False)$/,"")+"\nLeak-free: "+(r.ok?"True":"False"),hint:r.ok?"":"النموذج سيُختبر على صورة رآها في التدريب، فتبدو النتائج أفضل من الحقيقة. هذا ما يمنعه فحص التداخل قبل التدريب."};}}
+];
+makeNotebook({cells:S_CELLS,box:"#snbCells",vars:"#snbVars",all:"#snbAll",reset:"#snbReset",defs:{os:0,random:0,np:0,SEED:0,Path:1,SOURCE_DIR:1,SPLIT_DIR:1,TRAIN_RATIO:1,CLASS_NAMES:1,shutil:2,class_to_images:3,splits:5,leakage_check:7}});
+
 /* ================= RNN204 ================= */
 Object.assign(XL,{
  "r-prep":[["data = np.array([30, 32, 31, 33, 34, 32, 35])","السلسلة الأصلية: درجات الحرارة السبع بالترتيب."],
@@ -3361,20 +3984,29 @@ const QZ=[
  ["الأعمدة في balanced-reviews.txt مفصولة بـ:",["فاصلة ,","Tab \\t","مسافة واحدة","فاصلة منقوطة ;"],1,"لهذا نكتب sep=\"\\t\" في read_csv."],
  ["ماذا تفعل reviews.str.strip()؟",["تحذف كل المسافات بين الكلمات","تزيل الفراغات من بداية النص ونهايته فقط","تحذف الرموز","تحوّل النص إلى أحرف صغيرة"],1,"لا تلمس الكلمات نفسها ولا المسافات بينها."],
  ["لماذا لا نوحّد «ة» إلى «ه» في هذا الدرس؟",["لأنها نادرة","لأن تغييرها قد يغيّر المعنى","لأن re لا تدعمها","لأنها ليست حرفًا عربيًا"],1,"نوحّد أ إ آ إلى ا، و ى إلى ي فقط."],
- ["ماذا يُرجع re.findall(r\"\\w+\", text)؟",["قائمة الجمل","قائمة الكلمات والأرقام مع تجاهل الرموز والترقيم","عدد الكلمات","النص بعد حذف المسافات"],1,"لكنه لا يفصل الواو الملتصقة مثل «والغرفة»."]
+ ["ماذا يُرجع re.findall(r\"\\w+\", text)؟",["قائمة الجمل","قائمة الكلمات والأرقام مع تجاهل الرموز والترقيم","عدد الكلمات","النص بعد حذف المسافات"],1,"لكنه لا يفصل الواو الملتصقة مثل «والغرفة»."],
+ ["في CNN، من يستخرج الخصائص البصرية مثل الحواف والأشكال؟",["الإنسان يدويًا قبل التدريب","طبقات Convolution تلقائيًا أثناء التعلم","مكتبة PIL","طبقة Dense الأخيرة"],1,"لذلك هندسة الخصائص في CNN تحليلية تمهيدية وليست إنشاء خصائص يدوية."],
+ ["متى نفضّل تمثيل الصور بـ Grayscale؟",["حين يكون اللون أساس التمييز مثل إشارات المرور","حين لا يؤثّر اللون ويعتمد القرار على الشكل، مثل الأشعة الطبية والحروف","دائمًا لأنه أدق","حين تكون الصور كبيرة فقط"],1,"Grayscale يقلل التعقيد وعدد المعاملات ويسرّع التدريب."],
+ ["صورة نمطها mode = \"RGBA\". كم قناة فيها؟",["1","3","4","لا يمكن معرفته"],2,"L قناة واحدة، و RGB ثلاث، و RGBA أربع (الرابعة للشفافية)."],
+ ["ما الفرق الأساسي بين Feature Engineering و Preprocessing في CNN؟",["لا فرق بينهما","الأولى تحلّل التمثيل وتدعم القرارات، والثانية توحّد البيانات رقميًا لتصبح Tensors جاهزة","الأولى تحذف الصور والثانية تضيفها","الثانية تكون بعد التدريب"],1,"Preprocessing: نفس الحجم، ونفس عدد القنوات، ونفس نطاق القيم."],
+ ["أين يقع تقسيم البيانات في الـ ML Pipeline؟",["قبل تنظيف البيانات","بعد التنظيف وهندسة الخصائص والمعالجة المسبقة، وقبل التدريب","بعد التدريب","بعد التقييم النهائي"],1,"حتى تكون كل الصور موحّدة قبل التقسيم، وأي تعديل بعده قد يسبب تسرّبًا."],
+ ["أي مما يلي يسبب تسرّب البيانات (Data Leakage)؟",["Resize كل صورة إلى 224×224","حساب Normalization باستخدام كل البيانات قبل التقسيم","تثبيت SEED = 42","التقسيم داخل كل فئة"],1,"إحصاءات بيانات الاختبار تتسرّب بذلك إلى التدريب."],
+ ["ماذا يحدث عند تمرير بيانات Validation أثناء التدريب؟",["Forward Pass وحساب الخسارة فقط، بلا تحديث للأوزان","تحديث الأوزان مثل التدريب","لا يحدث شيء","تُحذف الصور الضعيفة"],0,"النموذج يرى بيانات التحقق لكنه لا يتعلم منها."],
+ ["فئة فيها 1005 صور، والنسب 70/15/15 مع int() كما في الكود. كم صورة اختبار؟",["150","151","152","153"],2,"int(703.5) = 703 و int(150.75) = 150، والباقي 1005 − 853 = 152."]
 ];
 let answered={};
 const quizPicks=()=>{try{return JSON.parse(store.get("cnn204-quiz")||"{}")}catch(e){return {}}};
-// quiz groups by course; answers stay keyed by their index in QZ
-const QG=[{id:"cnn",tag:"CNN204",title:"أسئلة الشبكات العصبية التلافيفية",from:0,to:10},{id:"ann",tag:"ANN202",title:"أسئلة الشبكات العصبية الاصطناعية",from:10,to:16},
-  {id:"rnn",tag:"RNN204",title:"أسئلة الشبكات العصبية المتكررة",from:16,to:22},{id:"nlp",tag:"NLP203",title:"أسئلة معالجة اللغة الطبيعية",from:22,to:28}];
-const inG=(g,i)=>+i>=g.from&&+i<g.to;
-function quizScore(g){const p=quizPicks(),ks=Object.keys(p).filter(i=>inG(g,i));return {done:ks.length,right:ks.filter(i=>QZ[i]&&p[i]===QZ[i][2]).length,n:g.to-g.from};}
+// quiz groups by course; answers stay keyed by their index in QZ, so new questions are appended and listed in their course's idx
+const rangeIdx=(a,b)=>[...Array(b-a).keys()].map(k=>a+k);
+const QG=[{id:"cnn",tag:"CNN204",title:"أسئلة الشبكات العصبية التلافيفية",idx:rangeIdx(0,10).concat(rangeIdx(28,36))},{id:"ann",tag:"ANN202",title:"أسئلة الشبكات العصبية الاصطناعية",idx:rangeIdx(10,16)},
+  {id:"rnn",tag:"RNN204",title:"أسئلة الشبكات العصبية المتكررة",idx:rangeIdx(16,22)},{id:"nlp",tag:"NLP203",title:"أسئلة معالجة اللغة الطبيعية",idx:rangeIdx(22,28)}];
+const inG=(g,i)=>g.idx.includes(+i);
+function quizScore(g){const p=quizPicks(),ks=Object.keys(p).filter(i=>inG(g,i));return {done:ks.length,right:ks.filter(i=>QZ[i]&&p[i]===QZ[i][2]).length,n:g.idx.length};}
 function renderQuiz(){const box=$("#quizbox");box.innerHTML="";answered={};const picks=quizPicks(),grids={};
-  const showScore=()=>QG.forEach(g=>{const a=Object.keys(answered).filter(i=>inG(g,i));$("#score-"+g.id).textContent=a.filter(i=>answered[i]).length+" / "+(g.to-g.from)+(a.length===g.to-g.from?" · انتهى":"");});
+  const showScore=()=>QG.forEach(g=>{const a=Object.keys(answered).filter(i=>inG(g,i));$("#score-"+g.id).textContent=a.filter(i=>answered[i]).length+" / "+g.idx.length+(a.length===g.idx.length?" · انتهى":"");});
   QG.forEach(g=>{const sec=el("div",{class:"quizgroup c-"+g.id},'<div class="qg-h"><span class="ctag">'+g.tag+'</span><h3>'+g.title+'</h3><span class="chip" id="score-'+g.id+'"></span></div>');
     grids[g.id]=el("div",{class:"quizgrid"});sec.appendChild(grids[g.id]);box.appendChild(sec);});
-  QZ.forEach((q,i)=>{const g=QG.find(x=>inG(x,i));const d=el("div",{class:"q"});d.appendChild(el("p",{class:"qq"},(i-g.from+1)+". "+esc(q[0])));const o=el("div",{class:"opts"});const fb=el("p",{class:"fb"});
+  QG.flatMap(g=>g.idx).forEach(i=>{const q=QZ[i],g=QG.find(x=>inG(x,i));const d=el("div",{class:"q"});d.appendChild(el("p",{class:"qq"},(g.idx.indexOf(i)+1)+". "+esc(q[0])));const o=el("div",{class:"opts"});const fb=el("p",{class:"fb"});
     const choose=(j,save)=>{if(i in answered)return;answered[i]=j===q[2];[...o.children].forEach((x,k)=>{x.disabled=true;if(k===q[2])x.classList.add("ok");else if(k===j)x.classList.add("no");});
       fb.textContent=(j===q[2]?"صحيح. ":"غير صحيح. ")+q[3];showScore();
       if(save){const p=quizPicks();p[i]=j;store.set("cnn204-quiz",JSON.stringify(p));refreshPanel();}};
